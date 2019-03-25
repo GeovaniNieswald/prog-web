@@ -12,23 +12,35 @@ body {
 	height: 100%;
 }
 
-.row {
-
-}
-
 .barra-top {
 	background-color: white;
 	border-bottom: 1px solid #d0d4d9;
 	box-shadow: 0px 1px 1px #d0d4d9;
+	padding: 11px 0 11px 0;
 }
 
-.logo {
-	margin-top: 11px;
-	margin-bottom: 11px;
+.has-search {
+	margin-bottom: 0px;
 }
 
-.imagem-login {
-	
+.has-search .form-control {
+	padding-left: 32px;
+	height: 32px;
+}
+
+.has-search .form-control-feedback {
+	background-image: url("../icones/search.png");
+	background-repeat: no-repeat;
+	background-position: center;
+    position: absolute;
+    z-index: 2;
+    display: block;
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    pointer-events: none;
+    color: #aaa;
 }
 
 .login-div {
