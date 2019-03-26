@@ -4,6 +4,7 @@ html {
 
 body {
 	height: 100%;
+	background-color: rgb(230, 236, 240);
 }
 
 .wrapper {
@@ -169,4 +170,16 @@ body {
 .rodape {
 	margin-top: 11px;
 	margin-bottom: 11px;
+}
+
+.conteudo-wrapper {
+	width: 1000px;
+	margin-top: 65px;
+}
+
+.sidebar-outer {
+    position: relative;
+}
+.fixed {
+    position: fixed;
 }
