@@ -13,27 +13,31 @@
     <div class="container-fluid"> 
         <navbar class="row fixed-top justify-content-center barra-top">
             <div class="row justify-content-center navbar-wrapper">
-                <div class="col-3 col-lg-1 text-center">
+                <div class="col col-lg-1 text-center">
                     <a href="home.html"><img src="recursos/icones/home.png"></a>
                 </div>
 
                 <div class="col-lg-4 d-none d-lg-block"></div>
 
-                <div class="col-lg-4 d-none d-lg-block">
+                <div class="col-lg-4 col-lx-5 d-none d-lg-block">
                     <div class="form-group has-search">
                         <span class="form-control-feedback"></span>
-                        <input type="text" class="form-control" placeholder="Buscar">
+                        <input type="text" class="form-control input-r20" placeholder="Buscar">
                     </div>
                 </div>
-                <div class="col-3 d-block d-lg-none text-center">
+                <div class="col d-block d-lg-none text-center">
                     <a href=""><img src="recursos/icones/search-32.png"></a>
                 </div>
 
-                <div class="col-6 col-lg-3 text-center">
+                <div class="col-lg-3 col-lx-2 d-none d-lg-block text-center">
                     <a href="perfil.html" class="navbar-user">
                         <img src="recursos/icones/user.png" class="navbar-user-icon">
                         Geovani
-                        <img src="recursos/icones/down-arrow.png" class="navbar-down-arrow">
+                    </a>
+                </div>
+                <div class="col d-block d-lg-none text-center">
+                    <a href="perfil.html" class="navbar-user">
+                        <img src="recursos/icones/user.png" class="navbar-user-icon">
                     </a>
                 </div>
             </div>				
@@ -48,10 +52,10 @@
 
                     <div class="row border-b">
                         <div class="col-2 d-flex">
-                            <img class="m-auto" src="recursos/icones/user-feed.png">
+                            <img class="m-auto link" src="recursos/icones/user-feed.png" onclick="redirecionarPerfil('')">
                         </div>
                         <div class="col-10 p-0">
-                            <input class="mt-3 mb-3 w-90" type="text" placeholder="Qual a notícia?">
+                            <div class="mt-3 mb-3 w-90 pt-2 pb-2 pl-3 input-r20">Qual a notícia?</div>
                         </div>                        
                     </div>
 
@@ -194,41 +198,41 @@
 
                                 <div class="row">
                                     <ul class="col m-0">
-                                        <li class="row border-b pt-2 pb-2">
+                                        <li class="row border-b pt-2 pb-2 link" onclick="redirecionarPerfil('joao')">
                                             <div class="col-4 text-center m-auto">
                                                 <img src="recursos/icones/user.png">
                                             </div>
                                             <div class="col-8">
-                                                <div class="row font-weight-bold">Pedro</div>
-                                                <div class="row font-s-11">@pedro</div>
+                                                <div class="row font-weight-bold">João</div>
+                                                <div class="row texto-secundario">@joao</div>
                                             </div>
                                         </li>
     
-                                        <li class="row border-b pt-2 pb-2">
+                                        <li class="row border-b pt-2 pb-2 link" onclick="redirecionarPerfil('carlos')">
                                             <div class="col-4 text-center m-auto">
                                                 <img src="recursos/icones/user.png">
                                             </div>
                                             <div class="col-8">
-                                                <div class="row font-weight-bold">Pedro</div>
-                                                <div class="row font-s-11">@pedro</div>
+                                                <div class="row font-weight-bold">Carlos</div>
+                                                <div class="row texto-secundario">@carlos</div>
                                             </div>
                                         </li>
     
-                                        <li class="row border-b pt-2 pb-2">
+                                        <li class="row border-b pt-2 pb-2 link" onclick="redirecionarPerfil('mateus')">
                                             <div class="col-4 text-center m-auto">
                                                 <img src="recursos/icones/user.png">
                                             </div>
                                             <div class="col-8">
-                                                <div class="row font-weight-bold">Pedro</div>
-                                                <div class="row font-s-11">@pedro</div>
+                                                <div class="row font-weight-bold">Mateus</div>
+                                                <div class="row texto-secundario">@mateus</div>
                                             </div>
                                         </li>
                                     </ul>
                                 </div>
 
-                                <div class="row pl-3 pt-2 pb-2 text-info">
+                                <a href="" class="row pl-3 pt-2 pb-2 link-azul">
                                     Mostrar mais
-                                </div>
+                                </a>
                             </div>
                         </div>
 
@@ -240,46 +244,42 @@
 
                                 <div class="row">
                                     <ul class="col m-0">
-                                        <li class="row border-b pt-2 pb-2">
+                                        <li class="row border-b pt-2 pb-2 link" onclick="redirecionarPerfil('julia')">
                                             <div class="col-4 text-center m-auto">
                                                 <img src="recursos/icones/user.png">
                                             </div>
                                             <div class="col-8">
-                                                <div class="row font-weight-bold">Pedro</div>
-                                                <div class="row font-s-11">@pedro</div>
+                                                <div class="row font-weight-bold">Julia</div>
+                                                <div class="row texto-secundario">@julia</div>
                                             </div>
                                         </li>
     
-                                        <li class="row border-b pt-2 pb-2">
+                                        <li class="row border-b pt-2 pb-2 link" onclick="redirecionarPerfil('thiago')">
                                             <div class="col-4 text-center m-auto">
                                                 <img src="recursos/icones/user.png">
                                             </div>
                                             <div class="col-8">
-                                                <div class="row font-weight-bold">Pedro</div>
-                                                <div class="row font-s-11">@pedro</div>
+                                                <div class="row font-weight-bold">Thiago</div>
+                                                <div class="row texto-secundario">@thiago</div>
                                             </div>
                                         </li>
     
-                                        <li class="row border-b pt-2 pb-2">
+                                        <li class="row border-b pt-2 pb-2 link" onclick="redirecionarPerfil('alex')">
                                             <div class="col-4 text-center m-auto">
                                                 <img src="recursos/icones/user.png">
                                             </div>
                                             <div class="col-8">
-                                                <div class="row font-weight-bold">Pedro</div>
-                                                <div class="row font-s-11">@pedro</div>
+                                                <div class="row font-weight-bold">Alex</div>
+                                                <div class="row texto-secundario">@alex</div>
                                             </div>
                                         </li>
                                     </ul>
                                 </div>
 
-                                <div class="row pl-3 pt-2 pb-2 text-info">
+                                <a href="" class="row pl-3 pt-2 pb-2 link-azul">
                                     Mostrar mais
-                                </div>
+                                </a>
                             </div>
-                        </div>
-
-                        <div class="row pl-2">
-                            @Copyright
                         </div>
                     </div>                    
                 </div>
@@ -289,5 +289,6 @@
 
 	<script type="text/javascript" src="recursos/js/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="recursos/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="recursos/js/script.js"></script>
 </body>
 </html>

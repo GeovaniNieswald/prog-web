@@ -162,6 +162,28 @@ body {
 	width: 90%;
 }
 
-.font-s-11 {
+.texto-secundario {
 	font-size: 11pt;
+	color: #657786;
+}
+
+.input-r20 {
+	background-color: #e6ecf0; 
+	color: #657786; 
+	border-radius: 20px;
+	border: none;
+}
+
+.link:hover {
+	cursor: pointer;
+	text-decoration: none;
+}
+
+.link-azul {
+	color: #007bff !important;
+}
+
+.link-azul:hover {
+	cursor: pointer;
+	text-decoration: none;
 }
