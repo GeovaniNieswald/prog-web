@@ -153,3 +153,15 @@ body {
 .fixed {
     position: fixed;
 }
+
+.border-b {
+	border-bottom: 1px solid #d0d4d9;
+}
+
+.w-90 {
+	width: 90%;
+}
+
+.font-s-11 {
+	font-size: 11pt;
+}
