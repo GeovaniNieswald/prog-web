@@ -1,41 +1,41 @@
 html {
-	height: 100%;
+    height: 100%;
 }
 
 body {
-	height: 100%;
+    height: 100%;
 }
 
 .wrapper {
-	display: flex;
-	align-items: center;
-	height: 100%;
+    display: flex;
+    align-items: center;
+    height: 100%;
 }
 
 .barra-top {
-	background-color: white;
-	border-bottom: 1px solid #d0d4d9;
-	box-shadow: 0px 1px 1px #d0d4d9;
-	padding: 11px 0 11px 0;
+    background-color: white;
+    border-bottom: 1px solid #d0d4d9;
+    box-shadow: 0px 1px 1px #d0d4d9;
+    padding: 11px 0 11px 0;
 }
 
 .navbar-wrapper {
-	width: 1000px;
+    width: 1000px;
 }
 
 .has-search {
-	margin-bottom: 0px;
+    margin-bottom: 0px;
 }
 
 .has-search .form-control {
-	padding-left: 32px;
-	height: 32px;
+    padding-left: 32px;
+    height: 32px;
 }
 
 .has-search .form-control-feedback {
-	background-image: url("../icones/search.png");
-	background-repeat: no-repeat;
-	background-position: center;
+    background-image: url("../icones/search.png");
+    background-repeat: no-repeat;
+    background-position: center;
     position: absolute;
     z-index: 2;
     display: block;
@@ -48,41 +48,40 @@ body {
 }
 
 .navbar-user {
-	color: black;
+    color: black;
     font-family: Open Sans, sans-serif;
     font-weight: 600;
 }
 
 .navbar-user:hover {
-	color: black;
-	text-decoration: none;
+    color: black;
+    text-decoration: none;
 }
 
 .navbar-user-icon {
-	margin-right: 10px;
+    margin-right: 10px;
 }
 
 .navbar-down-arrow {
-	margin-left: 10px;
+    margin-left: 10px;
 }
 
 .login-div {
-	display: flex;
-	align-items: center;
+    display: flex;
+    align-items: center;
 }
 
 .login-wrapper {
-	width: 100%;
-
+    width: 100%;
 }
 
 .login-top {
-	text-align: left;
-	padding-bottom: 15px;
+    text-align: left;
+    padding-bottom: 15px;
 }
 
 .login-titulo {
-	font-size: 25px;
+    font-size: 25px;
     line-height: 1;
     font-family: Open Sans, sans-serif;
     font-weight: 500;
@@ -95,56 +94,54 @@ body {
     font-weight: 400;
 }
 
-.login-bottom {
-
-}
+.login-bottom {}
 
 .login-form {
-	display: flex;
-	-webkit-box-orient: vertical;
-	-webkit-box-direction: normal;
-	-ms-flex-direction: column;
-	flex-direction: column;
-	margin-bottom: 18px;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    margin-bottom: 18px;
 }
 
 .login-dados {
-	font-size: 14px;
-	font-family: Open Sans, sans-serif;
-	font-weight: 400;
-	border-radius: 0;
-	padding-top: 8px;
-	padding-left: 18px;
-	height: 44px;
-	margin-bottom: 18px;
+    font-size: 14px;
+    font-family: Open Sans, sans-serif;
+    font-weight: 400;
+    border-radius: 0;
+    padding-top: 8px;
+    padding-left: 18px;
+    height: 44px;
+    margin-bottom: 18px;
 }
 
 .login-lembrar-texto {
-	text-align: left;
-	margin-bottom: 18px;
-	color: #637381;
-	font-size: 14px;
+    text-align: left;
+    margin-bottom: 18px;
+    color: #637381;
+    font-size: 14px;
     font-family: Open Sans, sans-serif;
     font-weight: 400;
     line-height: 1;
 }
 
 .login-lembrar-texto:hover {
-	cursor: pointer;
+    cursor: pointer;
 }
 
 .login-lembrar-check {
-	margin-right: 10px;
-	height: 14px;
+    margin-right: 10px;
+    height: 14px;
     width: 14px;
     vertical-align: middle;
 }
 
 .login-botao {
-	height: 44px;
+    height: 44px;
     background-color: #0061ff;
     background-image: none;
-    border-radius: 0;    
+    border-radius: 0;
     color: #fff;
     border: none;
     min-height: 32px;
@@ -152,21 +149,40 @@ body {
 }
 
 .login-botao:hover {
-	cursor: pointer;
-	background: #0070E0;
+    cursor: pointer;
+    background: #0070E0;
 }
 
 .login-ajuda {
-	text-align: left;
-	margin-top: 10px;
+    text-align: left;
+    margin-top: 10px;
 }
 
 .barra-bottom {
-	background-color: white;
-	border-top: 1px solid #d0d4d9;
+    background-color: white;
+    border-top: 1px solid #d0d4d9;
 }
 
 .rodape {
-	margin-top: 11px;
-	margin-bottom: 11px;
+    margin-top: 11px;
+    margin-bottom: 11px;
+}
+
+.tamanho {
+    max-width: 200px;
+    width: auto;
+}
+
+.centro {
+    align-items: center;
+    text-align: center;
+    -ms-grid-column-align: center;
+}
+
+.bold {
+    font: bolder;
+}
+
+.topo {
+    margin-top: 200px;
 }
