@@ -96,8 +96,7 @@ body {
     font-size: 11pt;
     font-weight: 400;
     border-radius: 0;
-    padding-top: 8px;
-    padding-left: 18px;
+    padding: 8px;
     height: 44px;
     margin-bottom: 18px;
 }
@@ -123,8 +122,9 @@ body {
 }
 
 .login-botao {
+    font-weight: bold;
     height: 44px;
-    background-color: #0061ff;
+    background-color: rgb(29, 161, 242);
     color: #fff;
     border: none;
     min-height: 32px;
@@ -133,7 +133,7 @@ body {
 
 .login-botao:hover {
     cursor: pointer;
-    background: #0070E0;
+    background: rgb(26, 145, 218);
 }
 
 .barra-bottom {
@@ -165,49 +165,116 @@ body {
     margin-top: 70px;
 }
 
-.conteudo-wrapper {
-    width: 1000px;
-    margin-top: 65px;
-}
-
 .sidebar-outer {
     position: relative;
-}
-
-.fixed {
-    position: fixed;
 }
 
 .border-b {
     border-bottom: 1px solid #d0d4d9;
 }
 
-.w-90 {
-    width: 90%;
+.espacamento {
+    max-width: 8px;
+    padding: 0px;
 }
 
 .texto-secundario {
     font-size: 11pt;
-    color: #657786;
+    color: #637381;
 }
 
 .input-r20 {
     background-color: #e6ecf0;
-    color: #657786;
+    color: #637381 !important;
     border-radius: 20px;
     border: none;
 }
 
+.link {
+    color: black;
+    text-decoration: none;
+}
+
 .link:hover {
+    color: black;
     cursor: pointer;
     text-decoration: none;
 }
 
 .link-azul {
-    color: #007bff !important;
+    color: rgb(27, 149, 224) !important;
 }
 
 .link-azul:hover {
     cursor: pointer;
     text-decoration: none;
 }
+
+.fundo-hover:hover {
+    background-color: rgb(245, 248, 250);
+}
+
+ul {
+    list-style-type: none;
+}
+
+.container-feed {
+    max-width: 1000px; 
+    margin: 60px auto 20px auto;
+}
+
+.container-direita {
+    max-width: 260px;
+}
+
+.line-height-normal {
+    line-height: normal;
+}
+
+.img-redonda {
+    border-radius: 50%; 
+    width: 48px; 
+    height: 48px;
+}
+
+.img-redonda-pequena {
+    border-radius: 50%; 
+    width: 32px; 
+    height: 32px;
+}
+
+.botao-fixo {
+    background-color: rgb(29, 161, 242); 
+    position: fixed; 
+    bottom:20px;
+    border-bottom-left-radius: 9999px; 
+    border-bottom-right-radius: 9999px; 
+    border-top-left-radius: 9999px;
+    border-top-right-radius: 9999px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.22) 0px 3px 6px;
+}
+
+.botao-fixo:hover {
+    cursor: pointer;
+    background-color: rgb(26, 145, 218);
+}
+
+.icone-32 {
+    width: 32px;
+    height: 32px;
+}
+
+.icone-24 {
+    width: 24px;
+    height: 24px;
+}
+
+.cor-cinza {
+    color: #637381;
+}
+
+.cor-vermelha {
+    color: #E81919;
+}
+
+/* azul primário = 1b95e0     cinza primário = 637381    vermelho = E81919   compartilhar = 17bf63 */
