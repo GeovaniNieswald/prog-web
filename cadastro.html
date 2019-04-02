@@ -1,101 +1,117 @@
-
-
 <!DOCTYPE html>
+<html lang="pt-br">
 <head>
- <link rel="stylesheet" type="text/css" href="recursos/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="recursos/css/cadastro.css">
-    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" type="text/css" href="recursos/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="recursos/css/estilo.css">
+
+	<title>Cadastro - nome_site</title>
 </head>
 <body>
+	<div class="wrapper">
+		<div class="container-fluid m-auto"> 
+			<navbar class="row fixed-top justify-content-center barra-top">
+				<div class="col text-center">
+					<img src="recursos/icones/logo.png">
+				</div>
+			</navbar>
+	
+			<div class="row justify-content-center pl-1 pr-1 container-cadastro">
+				<div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 bg-white p-4">		
+                    <div class="row text-left m-0">
+                        <p class="login-titulo m-0">Crie sua Conta do nome_site</p>
+                    </div>
+                    <div class="row text-left  ml-0 mr-0 mb-3">
+                        <p class="login-link m-0">ou volte para a tela de <a class="link-azul" href="index.html">login</a></p>
+                    </div>
+                    <div class="row m-0">
+                        <form class="col p-0" method="POST" action="home.html">
+                            <p class="m-0">
+                                <input class="login-dados" type="text" autofocus name="nome" placeholder="Nome">
+                                <input class="login-dados" type="text" name="sobrenome" placeholder="Sobrenome">
+                            </p>
 
-<form class="form-horizontal">
-<fieldset>
-<div class="panel panel-primary">
-    <div class="panel-heading">Cadastro Usuário</div>
-    
-    <div class="panel-body">
-<div class="form-group">
-<div class="col-md-11 control-label">
-        <p class="help-block"><h11>*</h11> Campo obrigatório </p>
-</div>
-</div>
-</div>
+                            <p class="m-0">
+                                <input class="login-dados w-100" type="email" name="email" placeholder="E-mail">
+                            </p>
+                            
+                            <p class="m-0">
+                                @
+                                <input class="login-dados" type="text" name="usuario" placeholder="usuario">                                    
+                            </p>
 
-  <p><img class="img" src="recursos/icones/login-log.png"" alt="logo" /></a></p>
+                            <p class="m-0">
+                                <input class="login-dados" type="password" name="senha" placeholder="Senha">
+                                <input class="login-dados" type="password" name="confirmar" placeholder="Confirmar">
+                            </p>
+                            
+                            <button class="login-botao" type="submit">Cadastrar</button>								
+                        </form>						
+                    </div>					
+                </div>
 
-<!-- Cadastro nome-->
-<div class="form-group">
-  <label class="col-md-2 control-label" for="Nome">Nome <h11>*</h11></label>  
-  <div class="col-md-5">
-  <input id="Nome" name="Nome" placeholder="Nome completo" class="form-control input-md" required="" type="text">
-  </div>
-</div>
+                <div class="d-none d-xl-block col-xl-1 text-center"></div>	
+                
+                <div class="d-none d-xl-flex col-xl-3 text-center">
+                    <img class="m-auto" src="recursos/icones/login-log.png">
+                </div>	
+            </div>
 
-<!-- Cadastro cpf-->
-<div class="form-group">
-  <label class="col-md-2 control-label" for="Nome">CPF <h11>*</h11></label>  
-  <div class="col-md-2">
-  <input id="cpf" name="cpf" placeholder="Apenas números" class="form-control input-md" required="" type="text" maxlength="11" pattern="[0-9]+$">
-  </div>
-  
-  <!-- Cadastro Nascimento-->
-  <label class="col-md-1 control-label" for="Nome">Nascimento<h11>*</h11></label>  
-  <div class="col-md-2">
-  <input id="dtnasc" name="dtnasc" placeholder="DD/MM/AAAA" class="form-control input-md" required="" type="text" maxlength="10" OnKeyPress="formatar('##/##/####', this)" onBlur="showhide()">
-</div>
 
-<!-- Cadastro sexo -->
-  <label class="col-md-1 control-label" for="radios">Sexo <h11>*</h11></label>
-  <div class="col-md-4"> 
-    <label required="" class="radio-inline" for="radios-0" >
-      <input name="sexo" id="sexo" value="feminino" type="radio" required>
-      Feminino
-    </label> 
-    <label class="radio-inline" for="radios-1">
-      <input name="sexo" id="sexo" value="masculino" type="radio">
-      Masculino
-    </label>
-  </div>
-</div>
+            <!--
 
-<!-- Cadsatro telefone-->
-<div class="form-group">
-  <label class="col-md-2 control-label" for="prependedtext">Telefone <h11>*</h11></label>
-  <div class="col-md-2">
-    <div class="input-group">
-      <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
-      <input id="prependedtext" name="prependedtext" class="form-control" placeholder="XX XXXXX-XXXX" required="" type="text" maxlength="13" pattern="\[0-9]{2}\ [0-9]{4,6}-[0-9]{3,4}$"
-      OnKeyPress="formatar('## #####-####', this)">
-    </div>
-  </div>
- </div> 
+            <div class="row align-self justify-content-center pl-1 pr-1 container-cadastro">
+                <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 text-center bg-white p-4">		
+                    <div class="text-left pb-3">
+                        <div class="login-titulo">Crie sua Conta do nome_site</div>
+                        <div class="login-link">ou volte para a tela de <a class="link-azul" href="index.html">login</a></div>
+                    </div>
+                    <div>
+                        <form class="login-form mb-0" method="POST" action="home.html">
+                            <p class="m-0">
+                                <input class="login-dados" type="text" autofocus name="nome" placeholder="Nome">
+                                <input class="login-dados" type="text" name="sobrenome" placeholder="Sobrenome">
+                            </p>
 
-<!-- Cadastro email-->
-<div class="form-group">
-  <label class="col-md-2 control-label" for="prependedtext">Email <h11>*</h11></label>
-  <div class="col-md-5">
-    <div class="input-group">
-      <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-      <input id="prependedtext" name="prependedtext" class="form-control" placeholder="email@email.com" required="" type="text" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" >
-    </div>
-  </div>
-</div>
+                            <p class="m-0">
+                                <input class="login-dados w-100" type="email" name="email" placeholder="E-mail">
+                            </p>
+                            
+                            <p class="m-0">
+                                @
+                                <input class="login-dados" type="text" name="usuario" placeholder="usuario">                                    
+                            </p>
 
- <!-- Cadastro Senha-->
- <div class="form-group">
-   <label class="col-md-2 control-label" for="prependedtext">Senha<h11>*</h11></label>
-    <div class="col-md-5">
-    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Senha">
-  </div>
+                            <p class="m-0">
+                                <input class="login-dados" type="password" name="senha" placeholder="Senha">
+                                <input class="login-dados" type="password" name="confirmar" placeholder="Confirmar">
+                            </p>
+                            
+                            <button class="login-botao" type="submit">Cadastrar</button>								
+                        </form>						
+                    </div>					
+                </div>
 
-<!-- Botão --> 
-  <label class="col-md-2 control-label" for="Cadastrar"></label>
-  <div class="col-md-8"  method="POST" action="home.html">
-   <button id="Cadastrar" name="Cadastrar" class="Cadastro_botao" type="Submit">Cadastrar</button>
-    <button id="Cancelar" name="Cancelar" class="Cancelar_botao" type="Reset">Cancelar</button>
-</div>
+                <div class="d-none d-xl-block col-xl-1 text-center"></div>	
+                
+                <div class="d-none d-xl-flex col-xl-3 text-center">
+                    <img class="m-auto" src="recursos/icones/login-log.png">
+                </div>	
+            </div>
 
-</fieldset>
-</form>
+            -->
+            
+            <footer class="row fixed-bottom justify-content-center barra-bottom">
+                <div class="col text-center">
+                    <p class="p-0 m-0">@Copyright</p>
+                </div>
+            </footer>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="recursos/js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="recursos/js/bootstrap.min.js"></script>
 </body>
 </html>
