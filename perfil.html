@@ -8,16 +8,16 @@
     <link rel="stylesheet" type="text/css" href="recursos/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="recursos/css/estilo.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    
     <title>Usuário - nome_site</title>
 </head>
 
 <body>
-    <!-- <div class="wrapper"> -->
     <div class="container-fluid">
         <navbar class="row fixed-top justify-content-center barra-top">
             <div class="row justify-content-center navbar-wrapper">
                 <div class="col col-lg-1 text-center">
-                    <a href="home.html"><img src="recursos/icones/home.png"></a>
+                    <a href="home.html"><img class="icone-32" src="recursos/icones/home.svg"></a>
                 </div>
 
                 <div class="col-lg-4 d-none d-lg-block"></div>
@@ -29,54 +29,259 @@
                     </div>
                 </div>
                 <div class="col d-block d-lg-none text-center">
-                    <a href=""><img src="recursos/icones/search-32.png"></a>
+                    <a href=""><img class="icone-32" src="recursos/icones/search-off.svg"></a>
                 </div>
 
                 <div class="col-lg-3 col-lx-2 d-none d-lg-block text-center">
                     <a href="perfil.html" class="navbar-user">
-                        <img src="recursos/icones/user.png" class="navbar-user-icon"> Geovani
+                        <img src="recursos/imagens/dallas.jpg" class="navbar-user-icon img-redonda-pequena">
+                        Geovani
                     </a>
                 </div>
                 <div class="col d-block d-lg-none text-center">
                     <a href="perfil.html" class="navbar-user">
-                        <img src="recursos/icones/user.png" class="navbar-user-icon">
+                        <img src="recursos/imagens/dallas.jpg" class="navbar-user-icon img-redonda-pequena">
                     </a>
                 </div>
-            </div>
+            </div>				
         </navbar>
 
-        <div class="centro topo">
-            <div class="col-md-8 d-inline-block ">
-                <div class="jumbotron centro ">
-                    <div>
-                        <img src="./recursos/icones/zuera.jpg " class="tamanho rounded-circle img-fluid img-thumbnail " alt=" imagem perfil ">
-                    </div>
+        <div class="row justify-content-center container-feed">
+            <div class="col-12 col-lg bg-white">
+                <div class="mx-auto d-block">
+                    <img src="./recursos/icones/zuera.jpg" class="tamanho  rounded-circle p-2 " alt="imagem perfil">
                     <br/>
-                    <b>Gaúcho Zuera Fumando</b>
-                    <br/>
-                    <div>
-                        <p><i class="fa fa-address-book " aria-hidden="true "></i> Bio:</p>
-                        <p><i class="fa fa-map " aria-hidden="true "></i> Localidade:</p>
-                    </div>
+                    <h4 class="p-2"><b>Gaúcho Zuera Fumando</b></h4>
+                </div>
+
+                <div class="d-inline-block p-2">
+                    <p><i class="fas fa-calendar-alt"></i>: 01/01/2001</p>
+                    <p><i class="fas fa-venus-mars"></i>: Male</p>
+                    <p><i class="fas fa-mobile-alt"></i>: 99 99999-9999</p>
+                    <p><i class="fas fa-envelope"></i>: zuera@zuera.com</p>
+                    <p><i class="fa fa-map "></i>: Santa Rosa - RS</p>
+                    <p><i class="fa fa-address-book"></i>: Minha Biografia Minha Biografia Minha Biografia</p>
                 </div>
             </div>
-            <div class=" col-md-3 d-inline-block ">
-                <div class="jumbotron centro ">
-                    <b>seguidores e outras coisa</b>
-                    <br>
+
+            <div class="col-lg d-none d-lg-block espacamento"></div>
+
+            <div class="col-lg d-none d-lg-block container-direita">
+                <div class="row bg-white mb-2">
+                    <div class="col">
+                        <div class="row border-b p-3 font-weight-bold">
+                            Seguidores
+                        </div>
+
+                        <div class="row">
+                            <ul class="col m-0">
+                                <li>
+                                    <a class="row border-b pt-2 pb-2 link fundo-hover" href="perfil.html/joao">
+                                        <div class="col-4 text-center m-auto">
+                                            <img class="img-redonda-pequena" src="recursos/imagens/joao.jpg">
+                                        </div>
+                                        <div class="col-8 line-height-normal">
+                                            <div class="row font-weight-bold">João</div>
+                                            <div class="row texto-secundario">@joao</div>
+                                        </div>
+                                    </a>                                            
+                                </li>
+
+                                <li>
+                                    <a class="row border-b pt-2 pb-2 link fundo-hover" href="perfil.html/carlos">
+                                        <div class="col-4 text-center m-auto">
+                                            <img class="img-redonda-pequena" src="recursos/imagens/carlos.jpg">
+                                        </div>
+                                        <div class="col-8 line-height-normal">
+                                            <div class="row font-weight-bold">Carlos</div>
+                                            <div class="row texto-secundario">@carlos</div>
+                                        </div>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a class="row border-b pt-2 pb-2 link fundo-hover" href="perfil.html/mateus">
+                                        <div class="col-4 text-center m-auto">
+                                            <img class="img-redonda-pequena" src="recursos/imagens/mateus.jpg">
+                                        </div>
+                                        <div class="col-8 line-height-normal">
+                                            <div class="row font-weight-bold">Mateus</div>
+                                            <div class="row texto-secundario">@mateus</div>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <a href="" class="row pl-3 pt-2 pb-2 link-azul fundo-hover">
+                            Mostrar mais
+                        </a>
+                    </div>
                 </div>
+
+                <div class="row bg-white mb-3">
+                    <div class="col">
+                        <div class="row border-b p-3 font-weight-bold">
+                            Seguindo
+                        </div>
+
+                        <div class="row">
+                            <ul class="col m-0">
+                                <li>
+                                    <a class="row border-b pt-2 pb-2 link fundo-hover" href="perfil.html/julia">
+                                        <div class="col-4 text-center m-auto">
+                                            <img class="img-redonda-pequena" src="recursos/imagens/julia.jpg">
+                                        </div>
+                                        <div class="col-8 line-height-normal">
+                                            <div class="row font-weight-bold">Julia</div>
+                                            <div class="row texto-secundario">@julia</div>
+                                        </div>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a class="row border-b pt-2 pb-2 link fundo-hover" href="perfil.html/thiago">
+                                        <div class="col-4 text-center m-auto">
+                                            <img class="img-redonda-pequena" src="recursos/imagens/thiago.jpg">
+                                        </div>
+                                        <div class="col-8 line-height-normal">
+                                            <div class="row font-weight-bold">Thiago</div>
+                                            <div class="row texto-secundario">@thiago</div>
+                                        </div>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a class="row border-b pt-2 pb-2 link fundo-hover" href="perfil.html/alex">
+                                        <div class="col-4 text-center m-auto">
+                                            <img class="img-redonda-pequena" src="recursos/imagens/alex.jpg">
+                                        </div>
+                                        <div class="col-8 line-height-normal">
+                                            <div class="row font-weight-bold">Alex</div>
+                                            <div class="row texto-secundario">@alex</div>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <a href="" class="row pl-3 pt-2 pb-2 link-azul fundo-hover">
+                            Mostrar mais
+                        </a>
+                    </div>
+                </div>             
             </div>
-            <div class=" col-md-8 d-inline-block ">
-                <div class="jumbotron centro ">
-                    <b>minhas publicações</b>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col col-11 col-sm-11 col-md-11 col-lg-11 col-xl-11 bg-white p-4  ">
+                <div class="text-center">
+                    <h3><b>Minhas Publicações</b></h3>
                 </div>
+
+                <!--------------- ↓↓↓↓ conteudo das publicações ↓↓↓↓ ------------------->
+                <div class="row justify-content-center ">
+                    <!-- ↓ uma publicação inicia aqui ↓ -->
+                    <table>
+                        <table class="col col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 p-3 border-top">
+                            <tr class="p-3">
+                                <td class="p-3"><img src="./recursos/icones/zuera.jpg" class="rounded-circle tamfoto p-1" alt=" imagem perfil ">
+                                    <a class=" text-center p-3" href="#"><b>Gaúcho Zuera Fumando</b></a>
+                                </td>
+                            </tr>
+                        </table>
+                        <table class="col col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 p-3 centro">
+                            <tr>
+                                <td>
+                                    Texto da Minha Publicação
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <img class=" col-4 col-md-4 col-lg-4 publicafoto img-fluid rounded p-2" src="./recursos/icones/zuera.jpg" alt="foto indisponivel">
+                                </td>
+                            </tr>
+                        </table>
+                    </table>
+                    <!-- ↑ uma publicação termina aqui ↑ -->
+
+                    <!-- ↓ uma publicação inicia aqui ↓ -->
+                    <table>
+                        <table class=" col col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 p-3 border-top">
+                            <tr class=" p-3  ">
+                                <td class="p-3"><img src="./recursos/icones/zuera.jpg " class="rounded-circle tamfoto p-1" alt=" imagem perfil ">
+                                    <a class=" text-center p-3" href="#"><b>Gaúcho Zuera Fumando</b></a>
+                                </td>
+                            </tr>
+                        </table>
+                        <table class=" col col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 p-3 centro">
+                            <tr>
+                                <td>
+                                    Texto da Minha Publicação Texto da Minha Publicação Texto da Minha Publicação Texto da Minha Publicação Texto da Minha Publicação Texto da Minha Publicação Texto da Minha Publicação Texto da Minha Publicação Texto da Minha Publicação Texto da Minha Publicação
+                                    Texto da Minha Publicação Texto da Minha Publicação Texto da Minha Publicação Texto da Minha Publicação Texto da Minha Publicação Texto da Minha Publicação Texto da Minha Publicação Texto da Minha Publicação Texto da
+                                    Minha Publicação Texto da Minha Publicação Texto da Minha Publicação Texto da Minha Publicação
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <img class=" col-4 col-md-4 col-lg-4 publicafoto img-fluid rounded 
+                                    p-2" src="./recursos/icones/zuera.jpg" alt="foto indisponivel">
+                                </td>
+                            </tr>
+                        </table>
+                    </table>
+                    <!-- ↑ uma publicação termina aqui ↑ -->
+
+                    <!-- ↓ uma publicação inicia aqui ↓ -->
+                    <table>
+                        <table class=" col col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 p-3 border-top">
+                            <tr class=" p-3  ">
+                                <td class="p-3"><img src="./recursos/icones/zuera.jpg " class="rounded-circle tamfoto p-1" alt=" imagem perfil ">
+                                    <a class=" text-center p-3" href="#"><b>Gaúcho Zuera Fumando</b></a>
+                                </td>
+                            </tr>
+                        </table>
+                        <table class=" col col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 p-3 centro">
+                            <tr>
+                                <td>
+                                    Texto da Minha Publicação SEM IMAGEM Texto da Minha Publicação Texto da Minha Publicação Texto da Minha Publicação Texto da Minha Publicação Texto da Minha Publicação Texto da Minha Publicação Texto da Minha Publicação Texto da Minha Publicação Texto
+                                    da Minha Publicação Texto da Minha Publicação Texto da Minha Publicação Texto da Minha Publicação Texto da Minha Publicação Texto da Minha Publicação Texto da Minha Publicação Texto da Minha Publicação Texto da Minha
+                                    Publicação Texto da Minha Publicação Texto da Minha Publicação Texto da Minha Publicação Texto da Minha Publicação
+                                </td>
+                            </tr>
+                        </table>
+                    </table>
+                    <!-- ↑ uma publicação termina aqui ↑ -->
+
+                    <!-- ↓ uma publicação inicia aqui ↓ -->
+                    <table>
+                        <table class=" col col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 p-3 border-top">
+                            <tr class=" p-3  ">
+                                <td class="p-3"><img src="./recursos/icones/zuera.jpg " class="rounded-circle tamfoto p-1" alt=" imagem perfil ">
+                                    <a class=" text-center p-3" href="#"><b>Gaúcho Zuera Fumando</b></a>
+                                </td>
+                            </tr>
+                        </table>
+                        <table class=" col col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 p-3 centro">
+                            <tr>
+                                <td>
+                                    <img class=" col-4 col-md-4 col-lg-4 publicafoto img-fluid rounded p-2" src="./recursos/icones/zuera2.webp" alt="foto indisponivel">
+                                </td>
+                            </tr>
+                        </table>
+                    </table>
+                    <!-- ↑ uma publicação termina aqui ↑ -->
+
+                    <!-- fim de todas as publicações -->
+                </div>
+                <!--------------- ↑↑↑↑ conteudo das publicações ↑↑↑↑ ------------------->
             </div>
         </div>
     </div>
-    <!-- </div> -->
 
-    <script type="text/javascript " src="recursos/js/jquery-3.3.1.min.js "></script>
-    <script type="text/javascript " src="recursos/js/bootstrap.min.js "></script>
+    <script type="text/javascript" src="recursos/js/jquery-3.3.1.min.js "></script>
+    <script type="text/javascript" src="recursos/js/bootstrap.min.js "></script>
 </body>
-
 </html>
