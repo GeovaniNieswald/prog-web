@@ -145,29 +145,6 @@ body {
     margin-bottom: 11px;
 }
 
-.tamanho {
-    max-width: 200px;
-    width: auto;
-}
-
-.centro {
-    align-items: center;
-    text-align: center;
-    -ms-grid-column-align: center;
-}
-
-.bold {
-    font: bolder;
-}
-
-.topo {
-    margin-top: 70px;
-}
-
-.sidebar-outer {
-    position: relative;
-}
-
 .border-b {
     border-bottom: 1px solid #d0d4d9;
 }
@@ -220,6 +197,11 @@ ul {
 .container-feed {
     max-width: 1000px; 
     margin: 60px auto 20px auto;
+}
+
+.container-publi {
+    max-width: 1000px; 
+    margin: 0 auto 0 auto;
 }
 
 .container-direita {
@@ -279,6 +261,10 @@ ul {
 .container-cadastro {
     margin-top: 59px;
     margin-bottom: 51px;
+}
+
+.w-35 {
+    width: 35%;
 }
 
 /* azul primário = 1b95e0     cinza primário = 637381    vermelho = E81919   compartilhar = 17bf63 */
