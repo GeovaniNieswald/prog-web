@@ -47,7 +47,6 @@ body {
     display: block;
     width: 32px;
     height: 32px;
-    line-height: 32px;
     text-align: center;
     pointer-events: none;
     color: #aaa;
@@ -65,10 +64,6 @@ body {
 
 .navbar-user-icon {
     margin-right: 10px;
-}
-
-.navbar-down-arrow {
-    margin-left: 10px;
 }
 
 .login-titulo {
