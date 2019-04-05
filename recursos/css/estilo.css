@@ -270,4 +270,9 @@ ul {
     width: calc(100% - 32px);
 }
 
+.borda-left-right {
+    border-left-style: solid !important;
+    border-right-style: solid !important;
+}
+
 /* azul primário = 1b95e0     cinza primário = 637381    vermelho = E81919   compartilhar = 17bf63 */
