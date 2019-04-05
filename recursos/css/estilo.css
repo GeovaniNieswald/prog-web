@@ -267,4 +267,12 @@ ul {
     width: 35%;
 }
 
+.cad-w-c-50 {
+    width: calc(50% - 2px);
+}
+
+.cad-w-c-100 {
+    width: calc(100% - 32px);
+}
+
 /* azul primário = 1b95e0     cinza primário = 637381    vermelho = E81919   compartilhar = 17bf63 */
