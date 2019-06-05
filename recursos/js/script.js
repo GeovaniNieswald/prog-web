@@ -50,3 +50,40 @@ function hoverOut(tipo, id) {
         img.src = 'recursos/icones/compartilhar-off.svg';
     }
 }
+
+//Retorno do root
+function getRoot() {
+    var root = "http://"+document.location.hostname+"/prog-web/";
+    return root;
+}
+
+//https://youtu.be/qTDVv3Ddu7s?t=648 máscaras
+
+//Ajax do formulário de cadastro
+$("#formCadastro").on("submit", function(event) {
+    event.preventDefault();
+
+    var dados = $(this).serialize();
+
+    $.ajax({
+        url: getRoot()+'controller/controllerCadastro',
+        type: 'POST',
+        dataType: 'json',
+        data: dados,
+        success: function (response) {
+            if (response.retorno == 'erro') {
+                var msg = "";
+
+                $.each(response.erros, function(key, value) {
+                    msg += value + '\n';
+                });
+
+                msg = msg.substr(0, (msg.length - 1));
+
+                alert(msg);
+            } else {
+                alert("Cadastro realizado com sucesso!");
+            }
+        }
+    });
+});

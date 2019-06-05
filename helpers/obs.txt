@@ -1,0 +1,17 @@
+Casso o redirecionamento de páginas não funcione, é necessário realizar algumas configurações no servidor apache:
+
+LINUX:
+
+1º Habilitar o modulo de rewrite: 
+    sudo a2enmod rewrite
+
+2º Editar o arquivo de configuração global do servidor apache:
+    sudo nano /etc/apache2/sites-available/000-default.conf
+
+    Adicionando após a linha "DocumentRoot /var/www/html":
+        <Directory "/var/www/html">
+            AllowOverride All
+        </Directory>
+
+3º Salvar a alteração e reiniciar o servidor:
+    sudo service apache2 restart

@@ -1,0 +1,20 @@
+{
+    "name": "poligno-news/geovani",
+    "description": "Trabalho de Programação Web.",
+    "authors": [
+        {
+            "name": "Geovani Nieswald",
+            "email": "geovaninieswald@gmail.com"
+        }
+    ],
+    "require": {
+        "bjeavons/zxcvbn-php": "^0.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Classes\\":"../classes/",
+            "Model\\":"../model/",
+            "Traits\\":"../traits/"
+        }
+    }
+}

@@ -40,11 +40,45 @@ CREATE TABLE usuario (
     nascimento DATE,
     sexo VARCHAR(1),
     celular VARCHAR(20),
+    imagem VARCHAR(255),
     id_cidade INT, 
-    bio MEDIUMTEXT,
+    bio MEDIUMTEXT, 
+    ativo TINYINT NOT NULL,
     
     PRIMARY KEY (id), 
     CONSTRAINT fk_cidade_usuario FOREIGN KEY (id_cidade) REFERENCES cidade(id)
+);
+
+CREATE TABLE permissao (
+	codigo INT NOT NULL, 
+    nome VARCHAR(255) NOT NULL, 
+    
+	PRIMARY KEY (codigo)
+);
+
+CREATE TABLE permissoes (
+	id_usuario INT NOT NULL,
+    codigo_permissao INT NOT NULL, 
+    
+    PRIMARY KEY (id_usuario, codigo_permissao),
+	CONSTRAINT fk_usuario_usuario FOREIGN KEY (id_usuario) REFERENCES usuario(id),
+    CONSTRAINT fk_usuario_permissao FOREIGN KEY (codigo_permissao) REFERENCES permissao(codigo)
+);
+
+CREATE TABLE attempt (
+	id INT AUTO_INCREMENT NOT NULL,
+    ip VARCHAR(255) NOT NULL, 
+    data_hora DATETIME NOT NULL, 
+    
+	PRIMARY KEY (id)
+);
+
+CREATE TABLE confirmation (
+	id INT AUTO_INCREMENT NOT NULL,
+    email VARCHAR(255) NOT NULL, 
+    token TEXT NOT NULL, 
+    
+	PRIMARY KEY (id)
 );
 
 CREATE TABLE relacionamento (
@@ -66,4 +100,17 @@ CREATE TABLE publicacao (
     
     PRIMARY KEY (id),
     CONSTRAINT fk_usuario_publicacao FOREIGN KEY (id_usuario) REFERENCES usuario(id)
-    );
+);
+
+CREATE TABLE compartilhamento (
+	id INT AUTO_INCREMENT,
+    id_usuario INT NOT NULL, 
+    id_criador INT NOT NULL, 
+    id_publicacao INT NOT NULL,
+    data_hora DATETIME NOT NULL,
+    
+    PRIMARY KEY (id),
+    CONSTRAINT fk_usuario_compartilhamento FOREIGN KEY (id_usuario) REFERENCES usuario(id),
+    CONSTRAINT fk_criador_compartilhamento FOREIGN KEY (id_criador) REFERENCES usuario(id),
+    CONSTRAINT fk_publicacao_compartilhamento FOREIGN KEY (id_publicacao) REFERENCES publicacao(id)
+);
