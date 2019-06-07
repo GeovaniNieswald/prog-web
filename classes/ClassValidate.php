@@ -171,7 +171,7 @@ class ClassValidate {
         }
     }
 
-    #Método de validação de confirmação de email
+    #Metodo de validação de confirmação de email
     public function validateUserActive($email) {
         $user = $this->login->getDataUser($email);
 
@@ -183,13 +183,27 @@ class ClassValidate {
         }
     }
 
-    #Validaçãi final do login
+    #Validação final do login
     public function validateFinalLogin($email) {
         if (count($this->getErro()) > 0) {
             $this->login->insertAttempt();
+           
+            $arrResponse = [
+                "retorno"=>"erro",
+                "erros"=>$this->getErro(),
+                "tentativas"=>$this->tentativas
+            ];
         } else {
             $this->login->deleteAttempt();
             $this->session->setSessions($email);
+
+            $arrResponse = [
+                "retorno"=>"success",
+                "page"=>'home',
+                "tentativas"=>$this->tentativas
+            ];
         }
+
+        return json_encode($arrResponse);
     }
 }

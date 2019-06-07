@@ -8,4 +8,5 @@ $validate->validateIssetEmail($email, 'login');
 $validate->validateSenha($email, $senha);
 $validate->validateUserActive($email);
 $validate->validateAttemptLogin();
-$validate->validateFinalLogin($email);
+
+echo $validate->validateFinalLogin($email);

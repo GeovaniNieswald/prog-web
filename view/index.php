@@ -22,7 +22,7 @@
 						<div class="login-link">sua conta Poligno News ou <a class="link-azul" href="<?php echo DIRPAGE.'cadastro'; ?>">crie uma nova conta</a></div>
 					</div>
 					<div>
-						<form class="login-form" method="POST" action="<?php echo DIRPAGE.'controller/controllerLogin'; ?>">
+						<form id="formLogin" class="login-form" method="POST" action="<?php echo DIRPAGE.'controller/controllerLogin'; ?>">
 							<input class="login-dados mb-3" type="email" autofocus name="email" placeholder="E-mail">
 							<input class="login-dados mb-3" type="password" name="senha" placeholder="Senha">
 							<label class="login-lembrar-texto">

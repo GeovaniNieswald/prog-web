@@ -87,3 +87,36 @@ $("#formCadastro").on("submit", function(event) {
         }
     });
 });
+
+//Ajax do formulário de login
+$("#formLogin").on("submit", function(event) {
+    event.preventDefault();
+
+    var dados = $(this).serialize();
+
+    $.ajax({
+        url: getRoot()+'controller/controllerLogin',
+        type: 'POST',
+        dataType: 'json',
+        data: dados,
+        success: function (response) {
+            if (response.retorno == 'success') {
+                window.location.href = response.page;
+            } else {
+                if (response.tentativas == true) {
+                    $('#formLogin').hide();
+                }
+
+                var msg = "";
+
+                $.each(response.erros, function(key, value) {
+                    msg += value + '\n';
+                });
+
+                msg = msg.substr(0, (msg.length - 1));
+
+                alert(msg);
+            }
+        }
+    });
+});
