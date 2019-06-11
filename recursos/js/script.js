@@ -120,3 +120,57 @@ $("#formLogin").on("submit", function(event) {
         }
     });
 });
+
+//Ajax do formulário de solicitação de nova senha
+$("#formSenha").on("submit", function(event) {
+    event.preventDefault();
+
+    var dados = $(this).serialize();
+
+    $.ajax({
+        url: getRoot()+'controller/controllerSenha',
+        type: 'POST',
+        dataType: 'json',
+        data: dados,
+        success: function (response) {
+            if (response.retorno == 'erro') {
+                var msg = "";
+
+                $.each(response.erros, function(key, value) {
+                    msg += value + '\n';
+                });
+
+                msg = msg.substr(0, (msg.length - 1));
+
+                alert(msg);
+            } else {
+                alert("Redefinição de senha enviada com sucesso!");
+            }
+        }
+    });
+});
+
+//Ajax do formulário de Redefinição de nova senha
+$("#formRedSenha").on("submit", function(event) {
+    event.preventDefault();
+
+    var dados = $(this).serialize();
+
+    $.ajax({
+        url: getRoot()+'controller/controllerConfirmacaoSenha',
+        type: 'POST',
+        dataType: 'json',
+        data: dados,
+        success: function (response) {
+            if (response.retorno == 'erro') {
+                alert(response.erro);
+                if (response.fatal == true) {
+                    window.location.href = getRoot()+'esqueci-senha';
+                }
+            } else {
+                alert("Senha redefinida com sucesso!");
+                window.location.href = getRoot()+'index';
+            }
+        }
+    });
+});

@@ -7,6 +7,7 @@ use Model\ClassLogin;
 use ZxcvbnPhp\Zxcvbn;
 use Classes\ClassPassword;
 use Classes\ClassSessions;
+use Classes\ClassMail;
 
 class ClassValidate {
 
@@ -16,12 +17,14 @@ class ClassValidate {
     private $login;
     private $tentativas;
     private $session;
+    private $mail;
 
     public function __construct() {
         $this->cadastro = new ClassCadastro();
         $this->password = new ClassPassword();
         $this->login    = new ClassLogin();
         $this->session  = new ClassSessions();
+        $this->mail     = new ClassMail();
     }
 
     public function getErro() {
@@ -149,10 +152,22 @@ class ClassValidate {
                 "erros"=>$this->getErro()
             ];
         } else {
+            $this->mail->sendMail(
+                $arrVar['email'], 
+                $arrVar['nome'], 
+                $arrVar['token'], 
+                "Confirmação de Cadastro", 
+                "
+                <strong>Cadastro Poligno News</strong><br>
+                Confirme seu email <a href='".DIRPAGE."controller/controllerConfirmacao/{$arrVar['email']}/{$arrVar['token']}'>clicando aqui</a>
+                "
+            );
+
             $arrResponse = [
                 "retorno"=>"success",
                 "erros"=>null
             ];
+
             $this->cadastro->insertCad($arrVar);
         }
 
@@ -202,6 +217,35 @@ class ClassValidate {
                 "page"=>'home',
                 "tentativas"=>$this->tentativas
             ];
+        }
+
+        return json_encode($arrResponse);
+    }
+
+    public function validateFinalSen($arrVar) {
+        if (count($this->getErro()) > 0) {
+            $arrResponse = [
+                "retorno"=>"erro",
+                "erros"=>$this->getErro()
+            ];
+        } else {
+            $this->mail->sendMail(
+                $arrVar['email'], 
+                $arrVar['nome'], 
+                $arrVar['token'], 
+                "Link para Redefinição de Senha", 
+                "
+                <strong>Redefinição de Senha Poligno News</strong><br>
+                Redefina sua senha <a href='".DIRPAGE."redefinicao-senha/{$arrVar['email']}/{$arrVar['token']}'>clicando aqui</a>
+                "
+            );
+
+            $arrResponse = [
+                "retorno"=>"success",
+                "erros"=>null
+            ];
+
+            $this->cadastro->insertConfirmation($arrVar);
         }
 
         return json_encode($arrResponse);

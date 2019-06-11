@@ -29,6 +29,11 @@ class ClassCadastro extends ClassCrud {
             )
         );
 
+        $this->insertConfirmation($arrVar);
+    }
+
+    #Inserção de confirmação
+    public function insertConfirmation($arrVar) {
         $this->insertDB(
             "confirmation",
             "email, token",
@@ -62,5 +67,83 @@ class ClassCadastro extends ClassCrud {
         );
 
         return $b->rowCount();
+    }
+
+    # Verificar a confirmação de cadastro pelo email
+    public function confirmationCad($email, $token) {
+        $b = $this->selectDB(
+            "*",
+            "confirmation",
+            "WHERE email = ? AND token = ?",
+            array(
+                $email,
+                $token
+            )
+        );
+
+        $r = $b->rowCount();
+
+        if ($r > 0) {
+            $this->deleteDB(
+                "confirmation",
+                "email = ?",
+                array(
+                    $email
+                )
+            );
+
+            $this->updateDB(
+                "usuario",
+                "ativo = ?",
+                "email = ?",
+                array(
+                    1,
+                    $email
+                )
+            );
+
+            return true;
+        } else {
+            return false;
+        }        
+    }
+
+    # Verificar a confirmação de redefinição de senha pelo email
+    public function confirmationSen($email, $token, $hashSenha) {
+        $b = $this->selectDB(
+            "*",
+            "confirmation",
+            "WHERE email = ? AND token = ?",
+            array(
+                $email,
+                $token
+            )
+        );
+
+        $r = $b->rowCount();
+
+        if ($r > 0) {
+            $this->deleteDB(
+                "confirmation",
+                "email = ?",
+                array(
+                    $email
+                )
+            );
+
+            $this->updateDB(
+                "usuario",
+                "senha = ?",
+                "email = ?",
+                array(
+                    $hashSenha,
+                    $email
+                )
+            );
+
+            return true;
+        } else {
+            return false;
+        }        
     }
 }

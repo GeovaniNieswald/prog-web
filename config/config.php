@@ -21,5 +21,11 @@ define('DB', "poligno_news");
 define('USER', "root");
 define('PASS', "Gy9=(.h");
 
+# Informações do servidor de email
+define("HOSTMAIL", "smtp.gmail.com");
+define("USERMAIL", "");
+define("PASSMAIL", "");
+define("PORTMAIL", 465);
+
 # Outras informações
 define('DOMAIN', $_SERVER["HTTP_HOST"]);

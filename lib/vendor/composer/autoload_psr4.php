@@ -8,6 +8,7 @@ $baseDir = dirname($vendorDir);
 return array(
     'ZxcvbnPhp\\' => array($vendorDir . '/bjeavons/zxcvbn-php/src'),
     'Traits\\' => array($baseDir . '/../traits'),
+    'PHPMailer\\PHPMailer\\' => array($vendorDir . '/phpmailer/phpmailer/src'),
     'Model\\' => array($baseDir . '/../model'),
     'Classes\\' => array($baseDir . '/../classes'),
 );
