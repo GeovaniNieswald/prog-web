@@ -4,7 +4,12 @@ namespace Classes;
 
 class ClassLayout {
 
-    public static function setHeadRestrito(Type $var = null) {
+    public static function setHeadRestrito($permition) {
+        $session = new ClassSessions();
+        $session->verifyInsideSession($permition);
+    }
+
+    public static function setHeadInicial() {
         $session = new ClassSessions();
         $session->verifyInsideSession();
     }

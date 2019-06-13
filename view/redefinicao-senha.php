@@ -1,4 +1,7 @@
-<?php \Classes\ClassLayout::setHead('Redefinição de Senha - Poligno News', 'Redefina sua senha'); ?>
+<?php 
+	\Classes\ClassLayout::setHeadInicial();
+	\Classes\ClassLayout::setHead('Redefinição de Senha - Poligno News', 'Redefina sua senha'); 
+?>
 
 <div class="wrapper">
 	<div class="container-fluid"> 

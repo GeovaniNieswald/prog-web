@@ -9,4 +9,4 @@ $validate->validateSenha($email, $senha);
 $validate->validateUserActive($email);
 $validate->validateAttemptLogin();
 
-echo $validate->validateFinalLogin($email);
+echo $validate->validateFinalLogin($email, $lembrar);

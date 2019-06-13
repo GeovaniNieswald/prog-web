@@ -1,5 +1,5 @@
 <?php 
-    \Classes\ClassLayout::setHeadRestrito();
+    \Classes\ClassLayout::setHeadRestrito('user');
     \Classes\ClassLayout::setHead('Feed - Poligno News', 'Página de feed', FALSE, TRUE); 
 ?>
 

@@ -9,6 +9,8 @@ $email     = (isset($_POST['email'])) ? filter_input(INPUT_POST, 'email', FILTER
 $senhaConf = (isset($_POST['senhaConf'])) ? $_POST['senhaConf'] : null;
 $token     = (isset($_POST['token'])) ? $_POST['token'] : bin2hex(random_bytes(64));
 
+$lembrar   = (isset($_POST['lembrar'])) ? filter_input(INPUT_POST, 'lembrar') : null;
+
 if (isset($_POST['senha'])) {
     $senha = $_POST['senha']; 
     $hashSenha = $objPass->passwordHash($senha);

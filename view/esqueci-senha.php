@@ -1,4 +1,7 @@
-<?php \Classes\ClassLayout::setHead('Esqueci Minha Senha - Poligno News', 'Recuperar senha'); ?>
+<?php 
+	\Classes\ClassLayout::setHeadInicial();
+	\Classes\ClassLayout::setHead('Esqueci Minha Senha - Poligno News', 'Recuperar senha'); 
+?>
 
 <div class="wrapper">
 	<div class="container-fluid"> 

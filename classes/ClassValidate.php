@@ -199,7 +199,7 @@ class ClassValidate {
     }
 
     #Validação final do login
-    public function validateFinalLogin($email) {
+    public function validateFinalLogin($email, $lembrar) {
         if (count($this->getErro()) > 0) {
             $this->login->insertAttempt();
            
@@ -210,7 +210,8 @@ class ClassValidate {
             ];
         } else {
             $this->login->deleteAttempt();
-            $this->session->setSessions($email);
+
+            $this->session->setSessions($email, $lembrar);
 
             $arrResponse = [
                 "retorno"=>"success",

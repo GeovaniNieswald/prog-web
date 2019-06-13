@@ -1,4 +1,7 @@
-<?php \Classes\ClassLayout::setHead('Cadastro - Poligno News', 'Página de cadastro'); ?>
+<?php 
+    \Classes\ClassLayout::setHeadInicial();
+    \Classes\ClassLayout::setHead('Cadastro - Poligno News', 'Página de cadastro'); 
+?>
 
 <div class="wrapper">
     <div class="container-fluid m-auto"> 

@@ -17,7 +17,7 @@ class ClassLogin extends ClassCrud {
     #Retorna dados do usuário
     public function getDataUser($email) {
         $b = $this->selectDB(
-            "CONCAT(U.nome, ' ', U.sobrenome) AS nome, U.email, U.ativo, U.senha, IF((SELECT id_usuario FROM permissoes WHERE id_usuario = U.id AND codigo_permissao = 1) IS NOT NULL, TRUE, FALSE) AS p_user, IF((SELECT id_usuario FROM permissoes WHERE id_usuario = U.id AND codigo_permissao = 2) IS NOT NULL, TRUE, FALSE) AS p_adm", 
+            "CONCAT(U.nome, ' ', U.sobrenome) AS nome, U.email, U.ativo, U.senha, IF((SELECT id_usuario FROM permissoes WHERE id_usuario = U.id AND codigo_permissao = 2) IS NOT NULL, TRUE, FALSE) AS p_user, IF((SELECT id_usuario FROM permissoes WHERE id_usuario = U.id AND codigo_permissao = 1) IS NOT NULL, TRUE, FALSE) AS p_adm", 
             "usuario AS U", 
             "WHERE U.email = ?", 
             array(

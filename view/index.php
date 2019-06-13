@@ -1,4 +1,7 @@
-<?php \Classes\ClassLayout::setHead('Login - Poligno News', 'Página de login'); ?>
+<?php 
+	\Classes\ClassLayout::setHeadInicial();
+	\Classes\ClassLayout::setHead('Login - Poligno News', 'Página de login'); 
+?>
 
 <div class="wrapper">
 	<div class="container-fluid"> 
@@ -26,7 +29,7 @@
 							<input class="login-dados mb-3" type="email" autofocus name="email" placeholder="E-mail">
 							<input class="login-dados mb-3" type="password" name="senha" placeholder="Senha">
 							<label class="login-lembrar-texto">
-								<input class="login-lembrar-check" type="checkbox" name="lembrar" value="true">Lembrar meus dados
+								<input class="login-lembrar-check" type="checkbox" name="lembrar" checked value="true">Lembrar meus dados
 							</label>
 							<button class="login-botao" type="submit">Acessar conta</button>								
 						</form>

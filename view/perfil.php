@@ -1,5 +1,5 @@
 <?php 
-    \Classes\ClassLayout::setHeadRestrito();
+    \Classes\ClassLayout::setHeadRestrito('user');
     \Classes\ClassLayout::setHead('Geovani (@dallas) - Poligno News', 'Página de perfil', TRUE, FALSE); 
 ?>
 
