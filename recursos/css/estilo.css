@@ -245,6 +245,11 @@ ul {
     height: 24px;
 }
 
+.icone-19 {
+    width: 19px;
+    height: 19px;
+}
+
 .cor-cinza {
     color: #637381;
 }
@@ -274,5 +279,71 @@ ul {
     border-left-style: solid !important;
     border-right-style: solid !important;
 }
+
+/* --------- ↓↓menu perfil e sair↓↓ ----------- */
+.menu a {
+    display: block;
+}
+
+.menu ul {
+    list-style: none;
+    position: relative;
+    padding: 0px;
+    margin-bottom: 0px;
+}
+
+#subMenu {
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    visibility: hidden;
+    background-color: white;
+    border-radius: 4px;
+    width: 90%;
+    margin-top: 13px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.25);
+    opacity: 0;
+    height: 0px;
+    transition: opacity 500ms;
+}
+
+#subMenuP {
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    visibility: hidden;
+    background-color: white;
+    border-radius: 4px;
+    width: 90%;
+    margin-top: 13px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.25);
+    opacity: 0;
+    height: 0px;
+    transition: opacity 500ms;
+}
+
+.subMenuVisible {
+    visibility: visible !important;
+    height: auto !important;
+    opacity: 1 !important;    
+}
+
+.menu ul ul li a {
+    text-align: left;
+    padding: 10px 10px 10px 20px;
+    color: #14171a;
+    font-weight: normal;
+}
+
+.menu ul li ul li a:hover {
+    background-color: black;
+    border-radius: 4px;
+    color: white !important;
+}
+/* ---------↑↑ menu perfil e sair ↑↑----------- */
 
 /* azul primário = 1b95e0     cinza primário = 637381    vermelho = E81919   compartilhar = 17bf63 */

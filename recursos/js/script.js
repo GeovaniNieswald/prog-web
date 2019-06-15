@@ -26,30 +26,65 @@ function posicionarBotaoFixo() {
 }
 
 function hover(tipo, id) {
-    var img = document.getElementById('img-' + tipo + '-publi-' + id);
-    var p = document.getElementById('p-' + tipo + '-publi-' + id);
+    if (tipo == 'perfil' || tipo == 'sair') {
+        var icon = document.getElementById('icon-' + tipo);
+        var icon_p = document.getElementById('icon-p-' + tipo);
 
-    if (tipo == 'like') {
-        p.style.color = '#E81919';
-        img.src = 'recursos/icones/curtir-hover.svg';
-    } else if (tipo == 'share') {
-        p.style.color = '#17bf63';
-        img.src = 'recursos/icones/compartilhar.svg';
+        icon.src = 'recursos/icones/' + tipo + '-on.svg';
+        icon_p.src = 'recursos/icones/' + tipo + '-on.svg';
+    } else {
+        var img = document.getElementById('img-' + tipo + '-publi-' + id);
+        var p = document.getElementById('p-' + tipo + '-publi-' + id);
+    
+        if (tipo == 'like') {
+            p.style.color = '#E81919';
+            img.src = 'recursos/icones/curtir-hover.svg';
+        } else if (tipo == 'share') {
+            p.style.color = '#17bf63';
+            img.src = 'recursos/icones/compartilhar.svg';
+        }
     }
 }
 
 function hoverOut(tipo, id) {
-    var img = document.getElementById('img-' + tipo + '-publi-' + id);
-    var p = document.getElementById('p-' + tipo + '-publi-' + id);
+    if (tipo == 'perfil' || tipo == 'sair') {
+        var icon = document.getElementById('icon-' + tipo);
+        var icon_p = document.getElementById('icon-p-' + tipo);
 
-    if (tipo == 'like') {
-        p.style.color = '';
-        img.src = 'recursos/icones/curtir-off.svg';
-    } else if (tipo == 'share') {
-        p.style.color = '';
-        img.src = 'recursos/icones/compartilhar-off.svg';
+        icon.src = 'recursos/icones/' + tipo + '-off.svg';
+        icon_p.src = 'recursos/icones/' + tipo + '-off.svg';
+    } else {
+        var img = document.getElementById('img-' + tipo + '-publi-' + id);
+        var p = document.getElementById('p-' + tipo + '-publi-' + id);
+
+        if (tipo == 'like') {
+            p.style.color = '';
+            img.src = 'recursos/icones/curtir-off.svg';
+        } else if (tipo == 'share') {
+            p.style.color = '';
+            img.src = 'recursos/icones/compartilhar-off.svg';
+        }
     }
 }
+
+var subMenu = document.getElementById("subMenu");
+var subMenuP = document.getElementById("subMenuP");
+
+// Detect all clicks on the document
+document.addEventListener("click", function(event) {
+    if (event.target.closest('#abrirSubMenu') != null || event.target.closest('#abrirSubMenuP') != null) {
+        if (!subMenu.classList.contains('subMenuVisible') || !subMenuP.classList.contains('subMenuVisible')) {
+            subMenu.classList.add('subMenuVisible');
+            subMenuP.classList.add('subMenuVisible');
+        } else {
+            subMenu.classList.remove('subMenuVisible');
+            subMenuP.classList.remove('subMenuVisible');            
+        }
+    } else {
+        subMenu.classList.remove('subMenuVisible');
+        subMenuP.classList.remove('subMenuVisible');            
+    }   
+});
 
 //Retorno do root
 function getRoot() {

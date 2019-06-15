@@ -22,16 +22,55 @@
                 <a href=""><img class="icone-32" src="<?php echo DIRICONE.'search-off.svg'; ?>" alt="Buscar"></a>
             </div>
 
-            <div class="col-lg-3 col-lx-2 d-none d-lg-block text-center">
-                <a href="<?php echo DIRPAGE.'perfil'; ?>" class="navbar-user">
-                    <img src="<?php echo DIRIMG.'dallas.jpg'; ?>" class="navbar-user-icon img-redonda-pequena" alt="Imagem de perfil">
-                    Geovani
-                </a>
+            <div id="abrirSubMenu" class="col-lg-3 col-lx-2 d-none d-lg-block text-center">
+                <nav class="menu">  
+                    <ul>  
+                        <li> 
+                            <a href="#" class="navbar-user">
+                                <img src="<?php echo DIRIMG.'dallas.jpg'; ?>" class="navbar-user-icon img-redonda-pequena" alt="Imagem de perfil">
+                                Geovani
+                            </a>
+                            <ul id="subMenu">
+                                <li onmouseover="hover('perfil', 0)" onmouseout="hoverOut('perfil', 0)">
+                                    <a href="<?php echo DIRPAGE.'perfil'; ?>" class="navbar-user">
+                                        <img id="icon-perfil" class="icone-19 mr-3" src="<?php echo DIRICONE.'perfil-off.svg'; ?>" alt="Perfil">
+                                        Perfil
+                                    </a>
+                                </li>
+                                <li onmouseover="hover('sair', 0)" onmouseout="hoverOut('sair', 0)">
+                                    <a href="<?php echo DIRPAGE.'controller/controllerLogout'; ?>" class="navbar-user">
+                                        <img id="icon-sair" class="icone-19 mr-3" src="<?php echo DIRICONE.'sair-off.svg'; ?>" alt="Sair">
+                                        Sair
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
             </div>
-            <div class="col d-block d-lg-none text-center">
-                <a href="<?php echo DIRPAGE.'perfil'; ?>" class="navbar-user">
-                    <img src="<?php echo DIRIMG.'dallas.jpg'; ?>" class="navbar-user-icon img-redonda-pequena" alt="Imagem de perfil">
-                </a>
+
+            <div id="abrirSubMenuP" class="col d-block d-lg-none text-center">
+                <nav class="menu">  
+                    <ul>  
+                        <li>
+                            <a href="#" class="navbar-user"><img src="<?php echo DIRIMG.'dallas.jpg'; ?>" class="navbar-user-icon img-redonda-pequena" alt="Imagem de perfil"></a>
+                            <ul id="subMenuP">
+                                <li onmouseover="hover('perfil', 0)" onmouseout="hoverOut('perfil', 0)">
+                                    <a href="<?php echo DIRPAGE.'perfil'; ?>" class="navbar-user">
+                                        <img id="icon-p-perfil" class="icone-19 mr-3" src="<?php echo DIRICONE.'perfil-off.svg'; ?>" alt="Perfil">
+                                        Perfil
+                                    </a>
+                                </li>
+                                <li onmouseover="hover('sair', 0)" onmouseout="hoverOut('sair', 0)">
+                                    <a href="<?php echo DIRPAGE.'controller/controllerLogout'; ?>" class="navbar-user">
+                                        <img id="icon-p-sair" class="icone-19 mr-3" src="<?php echo DIRICONE.'sair-off.svg'; ?>" alt="Sair">
+                                        Sair
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
             </div>
         </div>				
     </navbar>
