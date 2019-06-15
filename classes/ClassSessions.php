@@ -38,14 +38,15 @@ class ClassSessions {
             if (isset($_COOKIE['sessao'])) {    
                 $cookie = json_decode($_COOKIE['sessao'], true);
 
-                $_SESSION["canary"]  = $cookie['canary'];
-                $_SESSION["login"]   = $cookie['login'];
-                $_SESSION["time"]    = $cookie['time'];
-                $_SESSION["name"]    = $cookie['name'];
-                $_SESSION["email"]   = $cookie['email'];
-                $_SESSION["user"]    = $cookie['user'];
-                $_SESSION["adm"]     = $cookie['adm'];
-                $_SESSION["lembrar"] = $cookie['lembrar'];
+                $_SESSION["canary"]    = $cookie['canary'];
+                $_SESSION["login"]     = $cookie['login'];
+                $_SESSION["time"]      = $cookie['time'];
+                $_SESSION["nome"]      = $cookie['nome'];
+                $_SESSION["sobrenome"] = $cookie['sobrenome'];
+                $_SESSION["email"]     = $cookie['email'];
+                $_SESSION["user"]      = $cookie['user'];
+                $_SESSION["adm"]       = $cookie['adm'];
+                $_SESSION["lembrar"]   = $cookie['lembrar'];
             }
         }
 
@@ -56,13 +57,18 @@ class ClassSessions {
     public function setSessions($email, $lembrar) {
         $this->verifyIdSessions();
 
-        $_SESSION["login"]   = true;
-        $_SESSION["time"]    = time();
-        $_SESSION["name"]    = $this->usuarioDB->getDataUser($email)['data']['nome'];
-        $_SESSION["email"]   = $this->usuarioDB->getDataUser($email)['data']['email'];
-        $_SESSION["user"]    = $this->usuarioDB->getDataUser($email)['data']['p_user'];
-        $_SESSION["adm"]     = $this->usuarioDB->getDataUser($email)['data']['p_adm'];
-        $_SESSION["lembrar"] = $lembrar;
+        $usuario   = $this->usuarioDB->consultarUsuarioPorEmail($email);
+        $ehUsuario = $this->usuarioDB->consultarPermissaoPorIdUsuario($usuario->getId(), 2);
+        $ehAdm     = $this->usuarioDB->consultarPermissaoPorIdUsuario($usuario->getId(), 1);
+
+        $_SESSION["login"]     = true;
+        $_SESSION["time"]      = time();
+        $_SESSION["nome"]      = $usuario->getNome();
+        $_SESSION["sobrenome"] = $usuario->getSobrenome();
+        $_SESSION["email"]     = $usuario->getEmail();
+        $_SESSION["user"]      = $ehUsuario;
+        $_SESSION["adm"]       = $ehAdm;
+        $_SESSION["lembrar"]   = $lembrar;
 
         if ($lembrar) {
             $this->setCookie();
@@ -71,14 +77,15 @@ class ClassSessions {
 
     private function setCookie() {
         $cookie = [
-            "login"   => $_SESSION["login"],
-            "time"    => $_SESSION["time"],
-            "name"    => $_SESSION["name"],
-            "email"   => $_SESSION["email"],
-            "user"    => $_SESSION["user"],
-            "adm"     => $_SESSION["adm"],
-            "canary"  => $_SESSION["canary"],
-            "lembrar" => $_SESSION["lembrar"]
+            "login"     => $_SESSION["login"],
+            "time"      => $_SESSION["time"],
+            "nome"      => $_SESSION["nome"],
+            "sobrenome" => $_SESSION["sobrenome"],
+            "email"     => $_SESSION["email"],
+            "user"      => $_SESSION["user"],
+            "adm"       => $_SESSION["adm"],
+            "canary"    => $_SESSION["canary"],
+            "lembrar"   => $_SESSION["lembrar"]
         ];
 
         setcookie('sessao', json_encode($cookie), (time() + $this->timeSession), "/");
@@ -144,7 +151,7 @@ class ClassSessions {
                         </script>
                     ";
                 } else {
-                    if ($_SESSION['user'] == FALSE) {
+                    if ($_SESSION["user"] == false) {
                         $this->destructSessions();
     
                         echo "
@@ -154,7 +161,7 @@ class ClassSessions {
                             </script>
                         ";
                     } else {
-                        if ($permition == 'adm' && $_SESSION["adm"] == FALSE) {
+                        if ($permition == 'adm' && $_SESSION["adm"] == false) {
                             echo "
                                 <script>
                                     alert('Você não tem acesso a este conteúdo!');

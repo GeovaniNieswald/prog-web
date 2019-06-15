@@ -19,7 +19,8 @@ class ClassPassword {
 
     #Verificar se o hash da senha está correto
     public function verifyHash($email, $senha) {
-        $hashDb = $this->usuarioDB->getDataUser($email);
-        return password_verify($senha, $hashDb["data"]["senha"]);
+        $usuario = $this->usuarioDB->consultarUsuarioPorEmail($email);
+        
+        return password_verify($senha, $usuario->getSenha());
     }
 }

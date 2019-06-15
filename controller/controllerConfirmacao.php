@@ -6,7 +6,7 @@ $confirmation->setToken(\Traits\TraitParseUrl::parseUrl(3));
 
 $usuarioDB = new \Model\UsuarioDAO();
 
-if ($usuarioDB->confirmationCad($confirmation)) {
+if ($usuarioDB->confirmarCadastro($confirmation)) {
     echo "
     <script>
         alert('Dados confirmados com sucesso!');

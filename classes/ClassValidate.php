@@ -64,17 +64,17 @@ class ClassValidate {
 
     #Validar se o email existe no banco de dados (action null para cadastro)
     public function validateIssetEmail($email, $action = null) {
-        $b = $this->usuarioDB->getIssetEmail($email);
+        $emailExiste = $this->usuarioDB->emailExiste($email);
 
         if ($action == null) {
-            if ($b > 0) {
+            if ($emailExiste) {
                 $this->setErro("Email já cadastrado!");
                 return false;
             } else {
                 return true;
             }
         } else {
-            if ($b > 0) {
+            if ($emailExiste) {
                 return true;
             } else {
                 $this->setErro("Email não cadastrado!");
@@ -85,17 +85,17 @@ class ClassValidate {
 
     #Validar se o usuario existe no banco de dados (action null para cadastro)
     public function validateIssetUsuario($usuario, $action = null) {
-        $b = $this->usuarioDB->getIssetUsuario($usuario);
+        $usuarioExiste = $this->usuarioDB->usuarioExiste($usuario);
 
         if ($action == null) {
-            if ($b > 0) {
+            if ($usuarioExiste) {
                 $this->setErro("@ já está em uso!");
                 return false;
             } else {
                 return true;
             }
         } else {
-            if ($b > 0) {
+            if ($usuarioExiste) {
                 return true;
             } else {
                 $this->setErro("Usuário não cadastrado!");
@@ -176,7 +176,7 @@ class ClassValidate {
             $confirmation->setEmail($arrVar['email']);
             $confirmation->setToken($arrVar['token']);
 
-            $this->usuarioDB->insertCad($usuario, $confirmation);
+            $this->usuarioDB->inserirUsuario($usuario, $confirmation);
         }
 
         return json_encode($arrResponse);
@@ -196,9 +196,9 @@ class ClassValidate {
 
     #Metodo de validação de confirmação de email
     public function validateUserActive($email) {
-        $user = $this->usuarioDB->getDataUser($email);
+        $usuario = $this->usuarioDB->consultarUsuarioPorEmail($email);
 
-        if ($user["data"]["ativo"] == 0) {
+        if ($usuario->isAtivo() == 0) {
             $this->setErro("Usuário não está ativo!");
             return false;
         } else {
@@ -209,7 +209,7 @@ class ClassValidate {
     #Validação final do login
     public function validateFinalLogin($email, $lembrar) {
         if (count($this->getErro()) > 0) {
-            $this->usuarioDB->insertAttempt();
+            $this->usuarioDB->inserirAttempt();
            
             $arrResponse = [
                 "retorno"=>"erro",
@@ -217,7 +217,7 @@ class ClassValidate {
                 "tentativas"=>$this->tentativas
             ];
         } else {
-            $this->usuarioDB->deleteAttempt();
+            $this->usuarioDB->removerAttempt();
 
             $this->session->setSessions($email, $lembrar);
 
@@ -258,7 +258,7 @@ class ClassValidate {
             $confirmation->setEmail($arrVar['email']);
             $confirmation->setToken($arrVar['token']);
 
-            $this->usuarioDB->insertConfirmation($confirmation);
+            $this->usuarioDB->inserirConfirmation($confirmation);
         }
 
         return json_encode($arrResponse);

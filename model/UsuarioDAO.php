@@ -7,16 +7,16 @@ use Traits\TraitGetIp;
 class UsuarioDAO extends ClassConexao {
 
     private $db;
-    private $trait;
+    private $ip;
     private $dateNow;
 
     public function __construct() {
         $this->db = $this->conectaDB();
-        $this->trait = TraitGetIp::getUserIp();
+        $this->ip = TraitGetIp::getUserIp();
         $this->dateNow = date("Y-m-d H:i:s");
     }
 
-    public function insertCad(Usuario $usuario, Confirmation $confirmation) {
+    public function inserirUsuario(Usuario $usuario, Confirmation $confirmation) {
         $sql = "INSERT INTO usuario(nome, sobrenome, email, usuario, senha, ativo) VALUES(:nome, :sobrenome, :email, :usuario, :senha, 0)";
 
         $prepare = $this->db->prepare($sql);
@@ -40,49 +40,55 @@ class UsuarioDAO extends ClassConexao {
 
         $prepare->execute();
 
-        $this->insertConfirmation($confirmation);
+        $this->inserirConfirmation($confirmation);
     }
 
-    public function ativarUsuario($email) {
-        $sql = "UPDATE usuario SET ativo = 1 WHERE email = :email";
+    public function consultarUsuarioPorEmail($email) {
+        $sql = "SELECT * FROM usuario WHERE email = :email";
 
         $prepare = $this->db->prepare($sql);
 
         $prepare->bindValue(':email', $email);
 
-        $prepare->execute();
+        if ($prepare->execute()) {
+            while ($dados = $prepare->fetch(\PDO::FETCH_OBJ)) {
+                $usuario = new Usuario();
+                
+                $usuario->setId($dados->id);       
+                $usuario->setNome($dados->nome);
+                $usuario->setSobrenome($dados->sobrenome);
+                $usuario->setEmail($dados->email);
+                $usuario->setUsuario($dados->usuario);
+                $usuario->setSenha($dados->senha);
+                $usuario->setNascimento($dados->nascimento);                
+                $usuario->setSexo($dados->sexo);
+                $usuario->setCelular($dados->celular);
+                $usuario->setImagem($dados->imagem);
+                $usuario->setIdCidade($dados->cidade);
+                $usuario->setBio($dados->bio);
+                $usuario->setAtivo($dados->ativo);
+
+                return $usuario;
+            }
+        }
     }
 
-    public function alterarSenhaUsuario($email, $senha) {
-        $sql = "UPDATE usuario SET senha = :senha WHERE email = :email";
+    public function consultarPermissaoPorIdUsuario($id, $cod_permissao) {
+        $sql = "SELECT codigo_permissao FROM permissoes WHERE id_usuario = :id AND codigo_permissao = :cod_permissao";
 
         $prepare = $this->db->prepare($sql);
 
-        $prepare->bindValue(':senha', $senha);
-        $prepare->bindValue(':email', $email);
+        $prepare->bindValue(':id', $id);
+        $prepare->bindValue(':cod_permissao', $cod_permissao);
 
-        $prepare->execute();
+        if ($prepare->execute()) {
+           return true;
+        } else {
+            return false;
+        }
     }
 
-    public function getDataUser($email) {
-        $sql = "SELECT CONCAT(U.nome, ' ', U.sobrenome) AS nome, U.email, U.ativo, U.senha, IF((SELECT id_usuario FROM permissoes WHERE id_usuario = U.id AND codigo_permissao = 2) IS NOT NULL, TRUE, FALSE) AS p_user, IF((SELECT id_usuario FROM permissoes WHERE id_usuario = U.id AND codigo_permissao = 1) IS NOT NULL, TRUE, FALSE) AS p_adm FROM usuario AS U WHERE U.email = :email";
-
-        $prepare = $this->db->prepare($sql);
-
-        $prepare->bindValue(':email', $email);
-
-        $prepare->execute();
-
-        $f = $prepare->fetch(\PDO::FETCH_ASSOC);
-        $r = $prepare->rowCount();
-
-        return $arrData = [
-            "data"=>$f,
-            "rows"=>$r
-        ];
-    }
-    
-    public function getIssetEmail($email) {
+    public function emailExiste($email) {
         $sql = "SELECT id FROM usuario WHERE email = :email";
 
         $prepare = $this->db->prepare($sql);
@@ -91,10 +97,10 @@ class UsuarioDAO extends ClassConexao {
 
         $prepare->execute();
 
-        return $prepare->rowCount();
+        return ($prepare->rowCount() > 0);
     }
 
-    public function getIssetUsuario($usuario) {
+    public function usuarioExiste($usuario) {
         $sql = "SELECT id FROM usuario WHERE usuario = :usuario";
 
         $prepare = $this->db->prepare($sql);
@@ -103,10 +109,10 @@ class UsuarioDAO extends ClassConexao {
 
         $prepare->execute();
 
-        return $prepare->rowCount();
+        return ($prepare->rowCount() > 0);
     }
 
-    public function insertConfirmation(Confirmation $confirmation) {
+    public function inserirConfirmation(Confirmation $confirmation) {
         $sql = "INSERT INTO confirmation(email, token) VALUES(:email, :token)";
 
         $prepare = $this->db->prepare($sql);
@@ -117,34 +123,11 @@ class UsuarioDAO extends ClassConexao {
         $prepare->execute();
     }
 
-    public function deleteConfirmation($email) {
-        $sql = "DELETE FROM confirmation WHERE email = :email";
+    public function confirmarCadastro(Confirmation $confirmation) {
+        $confirmationExiste = $this->confirmationExiste($confirmation);
 
-        $prepare = $this->db->prepare($sql);
-
-        $prepare->bindValue(':email', $email);
-
-        $prepare->execute();
-    }
-
-    public function getIssetConfirmation(Confirmation $confirmation){
-        $sql = "SELECT id FROM confirmation WHERE email = :email AND token = :token";
-
-        $prepare = $this->db->prepare($sql);
-
-        $prepare->bindValue(':email', $confirmation->getEmail());
-        $prepare->bindValue(':token', $confirmation->getToken());
-
-        $prepare->execute();
-
-        return $prepare->rowCount();
-    }
-
-    public function confirmationCad(Confirmation $confirmation) {
-        $r = $this->getIssetConfirmation($confirmation);
-
-        if ($r > 0) {
-            $this->deleteConfirmation($confirmation->getEmail());
+        if ($confirmationExiste) {
+            $this->removerConfirmation($confirmation->getEmail());
             $this->ativarUsuario($confirmation->getEmail());
 
             return true;
@@ -153,11 +136,11 @@ class UsuarioDAO extends ClassConexao {
         }        
     }
 
-    public function confirmationSen(Confirmation $confirmation, $hashSenha) {
-        $r = $this->getIssetConfirmation($confirmation);
+    public function confirmarTrocaDeSenha(Confirmation $confirmation, $hashSenha) {
+        $confirmationExiste = $this->confirmationExiste($confirmation);
         
-        if ($r > 0) {
-            $this->deleteConfirmation($confirmation->getEmail());
+        if ($confirmationExiste) {
+            $this->removerConfirmation($confirmation->getEmail());
             $this->alterarSenhaUsuario($confirmation->getEmail(), $hashSenha);
            
             return true;
@@ -166,13 +149,13 @@ class UsuarioDAO extends ClassConexao {
         }        
     }
 
-    public function insertAttempt() {
+    public function inserirAttempt() {
         if ($this->countAttempt() < 5) {
             $sql = "INSERT INTO attempt(ip, data_hora) VALUES(:ip, :data_hora)";
 
             $prepare = $this->db->prepare($sql);
 
-            $prepare->bindValue(':ip', $this->trait);
+            $prepare->bindValue(':ip', $this->ip);
             $prepare->bindValue(':data_hora', $this->dateNow);
 
             $prepare->execute();
@@ -184,7 +167,7 @@ class UsuarioDAO extends ClassConexao {
 
         $prepare = $this->db->prepare($sql);
 
-        $prepare->bindValue(':ip', $this->trait);
+        $prepare->bindValue(':ip', $this->ip);
 
         $prepare->execute();
 
@@ -199,13 +182,57 @@ class UsuarioDAO extends ClassConexao {
         return $r;
     }
 
-    public function deleteAttempt() {
+    public function removerAttempt() {
         $sql = "DELETE FROM attempt WHERE ip = :ip";
 
         $prepare = $this->db->prepare($sql);
 
-        $prepare->bindValue(':ip', $this->trait);
+        $prepare->bindValue(':ip', $this->ip);
 
         $prepare->execute();
+    }
+
+    private function ativarUsuario($email) {
+        $sql = "UPDATE usuario SET ativo = 1 WHERE email = :email";
+
+        $prepare = $this->db->prepare($sql);
+
+        $prepare->bindValue(':email', $email);
+
+        $prepare->execute();
+    }
+
+    private function alterarSenhaUsuario($email, $senha) {
+        $sql = "UPDATE usuario SET senha = :senha WHERE email = :email";
+
+        $prepare = $this->db->prepare($sql);
+
+        $prepare->bindValue(':senha', $senha);
+        $prepare->bindValue(':email', $email);
+
+        $prepare->execute();
+    }
+
+    private function removerConfirmation($email) {
+        $sql = "DELETE FROM confirmation WHERE email = :email";
+
+        $prepare = $this->db->prepare($sql);
+
+        $prepare->bindValue(':email', $email);
+
+        $prepare->execute();
+    }
+
+    private function confirmationExiste(Confirmation $confirmation){
+        $sql = "SELECT id FROM confirmation WHERE email = :email AND token = :token";
+
+        $prepare = $this->db->prepare($sql);
+
+        $prepare->bindValue(':email', $confirmation->getEmail());
+        $prepare->bindValue(':token', $confirmation->getToken());
+
+        $prepare->execute();
+
+        return ($prepare->rowCount() > 0);
     }
 }

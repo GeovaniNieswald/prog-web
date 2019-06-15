@@ -9,7 +9,7 @@ $confirmation->setToken($token);
 
 if ($validate->validateConfSenha($senha, $senhaConf)){
     if ($validate->validateStrongSenha($senha)){
-        if ($usuarioDB->confirmationSen($confirmation, $hashSenha)) {
+        if ($usuarioDB->confirmarTrocaDeSenha($confirmation, $hashSenha)) {
             $arrResponse = [
                 "retorno"=>"success",
                 "erro"=>null
