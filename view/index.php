@@ -42,7 +42,7 @@
 
 		<footer class="row fixed-bottom justify-content-center barra-bottom">
 			<div class="col text-center">
-				<p class="p-0 m-0 texto-secundario">Copyright &copy; 2019 Poligno News - Todos os direitos reservados</p>
+				<p class="p-0 m-0 texto-secundario">Copyright &copy; 2019 Poligno News</p>
 			</div>
 		</footer>
 	</div>

@@ -318,6 +318,7 @@ ul {
     visibility: hidden;
     background-color: white;
     border-radius: 4px;
+    min-width: 120px;
     width: 90%;
     margin-top: 13px;
     box-shadow: 0 1px 4px rgba(0,0,0,0.25);

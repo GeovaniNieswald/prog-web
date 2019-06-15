@@ -1,10 +1,12 @@
 <?php
 
-$email = \Traits\TraitParseUrl::parseUrl(2);
-$token = \Traits\TraitParseUrl::parseUrl(3);
-$confirmation = new \Model\ClassCadastro();
+$confirmation = new \Model\Confirmation();
+$confirmation->setEmail(\Traits\TraitParseUrl::parseUrl(2));
+$confirmation->setToken(\Traits\TraitParseUrl::parseUrl(3));
 
-if ($confirmation->confirmationCad($email, $token)) {
+$usuarioDB = new \Model\UsuarioDAO();
+
+if ($usuarioDB->confirmationCad($confirmation)) {
     echo "
     <script>
         alert('Dados confirmados com sucesso!');

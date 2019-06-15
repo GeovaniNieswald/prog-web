@@ -2,14 +2,14 @@
 
 namespace Classes;
 
-use Model\ClassLogin;
+use Model\UsuarioDAO;
 
 class ClassPassword {
 
-    private $db;
+    private $usuarioDB;
 
     public function __construct() {
-        $this->db = new ClassLogin();
+        $this->usuarioDB = new UsuarioDAO();
     }
 
     #Criar o hash da senha para salvar no banco de dados
@@ -19,7 +19,7 @@ class ClassPassword {
 
     #Verificar se o hash da senha está correto
     public function verifyHash($email, $senha) {
-        $hashDb = $this->db->getDataUser($email);
+        $hashDb = $this->usuarioDB->getDataUser($email);
         return password_verify($senha, $hashDb["data"]["senha"]);
     }
 }

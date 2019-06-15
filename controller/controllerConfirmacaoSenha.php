@@ -1,11 +1,15 @@
 <?php
 
 $validate = new \Classes\ClassValidate();
-$confirmation = new \Model\ClassCadastro();
+$usuarioDB = new \Model\UsuarioDAO();
+
+$confirmation = new \Model\Confirmation();
+$confirmation->setEmail($email);
+$confirmation->setToken($token);
 
 if ($validate->validateConfSenha($senha, $senhaConf)){
     if ($validate->validateStrongSenha($senha)){
-        if ($confirmation->confirmationSen($email, $token, $hashSenha)) {
+        if ($usuarioDB->confirmationSen($confirmation, $hashSenha)) {
             $arrResponse = [
                 "retorno"=>"success",
                 "erro"=>null

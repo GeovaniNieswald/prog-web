@@ -17,7 +17,7 @@ class ClassLayout {
     # Setar as tags do head
     public static function setHead($title, $description, $faPag = FALSE, $froalaPag = FALSE) {
         $bootstrap = DIRCSS.'bootstrap.min.css';
-        $favicon   = DIRICONE.'favicon.png';
+        $favicon   = DIRICONE.'favicon/';
         $estilo    = DIRCSS.'estilo.css';
         $froala    = DIRTEMA.'froala-editor-custom-theme.css';
 
@@ -30,7 +30,15 @@ class ClassLayout {
         $html .= "  <meta name='format-detection' content='telephone=no'>\n";
         $html .= "  <meta name='description' content='$description'>\n\n";
 
-        $html .= "  <link rel='icon' href='$favicon'>\n\n";
+        $html .= "  <link rel='apple-touch-icon' sizes='180x180' href='".$favicon."apple-touch-icon.png'>\n";
+        $html .= "  <link rel='icon' type='image/png' sizes='32x32' href='".$favicon."favicon-32x32.png'>\n";
+        $html .= "  <link rel='icon' type='image/png' sizes='16x16' href='".$favicon."favicon-16x16.png'>\n";
+        $html .= "  <link rel='manifest' href='".$favicon."site.webmanifest'>\n";
+        $html .= "  <link rel='mask-icon' href='".$favicon."safari-pinned-tab.svg' color='#5bbad5'>\n";
+        $html .= "  <link rel='shortcut icon' href='".$favicon."favicon.ico'>\n";
+        $html .= "  <meta name='msapplication-TileColor' content='#1b95e0'>\n";
+        $html .= "  <meta name='msapplication-config' content='".$favicon."browserconfig.xml'>\n";
+        $html .= "  <meta name='theme-color' content='#ffffff'>\n\n";
 
         $html .= "  <link rel='stylesheet' type='text/css' href='$bootstrap'>\n";   
         $html .= "  <link rel='stylesheet' type='text/css' href='$estilo'>\n";

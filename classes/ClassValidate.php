@@ -2,8 +2,9 @@
 
 namespace Classes;
 
-use Model\ClassCadastro;
-use Model\ClassLogin;
+use Model\UsuarioDAO;
+use Model\Usuario;
+use Model\Confirmation;
 use ZxcvbnPhp\Zxcvbn;
 use Classes\ClassPassword;
 use Classes\ClassSessions;
@@ -12,19 +13,17 @@ use Classes\ClassMail;
 class ClassValidate {
 
     private $erro = [];
-    private $cadastro;
+    private $usuarioDB;
     private $password;
-    private $login;
     private $tentativas;
     private $session;
     private $mail;
 
     public function __construct() {
-        $this->cadastro = new ClassCadastro();
-        $this->password = new ClassPassword();
-        $this->login    = new ClassLogin();
-        $this->session  = new ClassSessions();
-        $this->mail     = new ClassMail();
+        $this->usuarioDB = new UsuarioDAO();
+        $this->password  = new ClassPassword();
+        $this->session   = new ClassSessions();
+        $this->mail      = new ClassMail();
     }
 
     public function getErro() {
@@ -65,7 +64,7 @@ class ClassValidate {
 
     #Validar se o email existe no banco de dados (action null para cadastro)
     public function validateIssetEmail($email, $action = null) {
-        $b = $this->cadastro->getIssetEmail($email);
+        $b = $this->usuarioDB->getIssetEmail($email);
 
         if ($action == null) {
             if ($b > 0) {
@@ -86,7 +85,7 @@ class ClassValidate {
 
     #Validar se o usuario existe no banco de dados (action null para cadastro)
     public function validateIssetUsuario($usuario, $action = null) {
-        $b = $this->cadastro->getIssetUsuario($usuario);
+        $b = $this->usuarioDB->getIssetUsuario($usuario);
 
         if ($action == null) {
             if ($b > 0) {
@@ -129,9 +128,7 @@ class ClassValidate {
                 $this->setErro("Utilize uma senha mais forte!");
                 return false;
             }
-        } else {
-            # login
-        }
+        } 
     }
 
     #Verificação da senha digitada com o hash no banco de dados
@@ -168,7 +165,18 @@ class ClassValidate {
                 "erros"=>null
             ];
 
-            $this->cadastro->insertCad($arrVar);
+            $usuario = new Usuario();
+            $usuario->setNome($arrVar['nome']);
+            $usuario->setSobrenome($arrVar['sobrenome']);
+            $usuario->setEmail($arrVar['email']);
+            $usuario->setUsuario($arrVar['usuario']);
+            $usuario->setSenha($arrVar['hashSenha']);
+
+            $confirmation = new Confirmation();
+            $confirmation->setEmail($arrVar['email']);
+            $confirmation->setToken($arrVar['token']);
+
+            $this->usuarioDB->insertCad($usuario, $confirmation);
         }
 
         return json_encode($arrResponse);
@@ -176,7 +184,7 @@ class ClassValidate {
 
     #Validação das tentativas
     public function validateAttemptLogin() {
-        if ($this->login->countAttempt() >= 5) {
+        if ($this->usuarioDB->countAttempt() >= 5) {
             $this->setErro("Você realizou mais de 5 tentativas!");
             $this->tentativas = true;
             return false;
@@ -188,7 +196,7 @@ class ClassValidate {
 
     #Metodo de validação de confirmação de email
     public function validateUserActive($email) {
-        $user = $this->login->getDataUser($email);
+        $user = $this->usuarioDB->getDataUser($email);
 
         if ($user["data"]["ativo"] == 0) {
             $this->setErro("Usuário não está ativo!");
@@ -201,7 +209,7 @@ class ClassValidate {
     #Validação final do login
     public function validateFinalLogin($email, $lembrar) {
         if (count($this->getErro()) > 0) {
-            $this->login->insertAttempt();
+            $this->usuarioDB->insertAttempt();
            
             $arrResponse = [
                 "retorno"=>"erro",
@@ -209,7 +217,7 @@ class ClassValidate {
                 "tentativas"=>$this->tentativas
             ];
         } else {
-            $this->login->deleteAttempt();
+            $this->usuarioDB->deleteAttempt();
 
             $this->session->setSessions($email, $lembrar);
 
@@ -245,8 +253,12 @@ class ClassValidate {
                 "retorno"=>"success",
                 "erros"=>null
             ];
+            
+            $confirmation = new Confirmation();
+            $confirmation->setEmail($arrVar['email']);
+            $confirmation->setToken($arrVar['token']);
 
-            $this->cadastro->insertConfirmation($arrVar);
+            $this->usuarioDB->insertConfirmation($confirmation);
         }
 
         return json_encode($arrResponse);

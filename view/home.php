@@ -33,14 +33,12 @@
                             <ul id="subMenu">
                                 <li onmouseover="hover('perfil', 0)" onmouseout="hoverOut('perfil', 0)">
                                     <a href="<?php echo DIRPAGE.'perfil'; ?>" class="navbar-user">
-                                        <img id="icon-perfil" class="icone-19 mr-3" src="<?php echo DIRICONE.'perfil-off.svg'; ?>" alt="Perfil">
-                                        Perfil
+                                        <img id="icon-perfil" class="icone-19 mr-3" src="<?php echo DIRICONE.'perfil-off.svg'; ?>" alt="Perfil">Perfil
                                     </a>
                                 </li>
                                 <li onmouseover="hover('sair', 0)" onmouseout="hoverOut('sair', 0)">
                                     <a href="<?php echo DIRPAGE.'controller/controllerLogout'; ?>" class="navbar-user">
-                                        <img id="icon-sair" class="icone-19 mr-3" src="<?php echo DIRICONE.'sair-off.svg'; ?>" alt="Sair">
-                                        Sair
+                                        <img id="icon-sair" class="icone-19 mr-3" src="<?php echo DIRICONE.'sair-off.svg'; ?>" alt="Sair">Sair
                                     </a>
                                 </li>
                             </ul>
@@ -57,14 +55,12 @@
                             <ul id="subMenuP">
                                 <li onmouseover="hover('perfil', 0)" onmouseout="hoverOut('perfil', 0)">
                                     <a href="<?php echo DIRPAGE.'perfil'; ?>" class="navbar-user">
-                                        <img id="icon-p-perfil" class="icone-19 mr-3" src="<?php echo DIRICONE.'perfil-off.svg'; ?>" alt="Perfil">
-                                        Perfil
+                                        <img id="icon-p-perfil" class="icone-19 mr-3" src="<?php echo DIRICONE.'perfil-off.svg'; ?>" alt="Perfil">Perfil
                                     </a>
                                 </li>
                                 <li onmouseover="hover('sair', 0)" onmouseout="hoverOut('sair', 0)">
                                     <a href="<?php echo DIRPAGE.'controller/controllerLogout'; ?>" class="navbar-user">
-                                        <img id="icon-p-sair" class="icone-19 mr-3" src="<?php echo DIRICONE.'sair-off.svg'; ?>" alt="Sair">
-                                        Sair
+                                        <img id="icon-p-sair" class="icone-19 mr-3" src="<?php echo DIRICONE.'sair-off.svg'; ?>" alt="Sair">Sair
                                     </a>
                                 </li>
                             </ul>

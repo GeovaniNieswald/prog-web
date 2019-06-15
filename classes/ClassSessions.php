@@ -7,7 +7,7 @@ use Traits\TraitGetIp;
 
 class ClassSessions {
 
-    private $login;
+    private $usuarioDB;
     private $timeSession;
     private $timeCanary;
 
@@ -49,7 +49,7 @@ class ClassSessions {
             }
         }
 
-        $this->login = new Model\ClassLogin();
+        $this->usuarioDB = new Model\UsuarioDAO();
     }
 
     #Setar as sessões do nosso sistema
@@ -58,10 +58,10 @@ class ClassSessions {
 
         $_SESSION["login"]   = true;
         $_SESSION["time"]    = time();
-        $_SESSION["name"]    = $this->login->getDataUser($email)['data']['nome'];
-        $_SESSION["email"]   = $this->login->getDataUser($email)['data']['email'];
-        $_SESSION["user"]    = $this->login->getDataUser($email)['data']['p_user'];
-        $_SESSION["adm"]     = $this->login->getDataUser($email)['data']['p_adm'];
+        $_SESSION["name"]    = $this->usuarioDB->getDataUser($email)['data']['nome'];
+        $_SESSION["email"]   = $this->usuarioDB->getDataUser($email)['data']['email'];
+        $_SESSION["user"]    = $this->usuarioDB->getDataUser($email)['data']['p_user'];
+        $_SESSION["adm"]     = $this->usuarioDB->getDataUser($email)['data']['p_adm'];
         $_SESSION["lembrar"] = $lembrar;
 
         if ($lembrar) {
