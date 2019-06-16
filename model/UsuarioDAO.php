@@ -43,34 +43,12 @@ class UsuarioDAO extends ClassConexao {
         $this->inserirConfirmation($confirmation);
     }
 
+    public function consultarUsuarioPorId($id) {
+        return $this->consultarUsuario($id);
+    }
+    
     public function consultarUsuarioPorEmail($email) {
-        $sql = "SELECT * FROM usuario WHERE email = :email";
-
-        $prepare = $this->db->prepare($sql);
-
-        $prepare->bindValue(':email', $email);
-
-        if ($prepare->execute()) {
-            while ($dados = $prepare->fetch(\PDO::FETCH_OBJ)) {
-                $usuario = new Usuario();
-                
-                $usuario->setId($dados->id);       
-                $usuario->setNome($dados->nome);
-                $usuario->setSobrenome($dados->sobrenome);
-                $usuario->setEmail($dados->email);
-                $usuario->setUsuario($dados->usuario);
-                $usuario->setSenha($dados->senha);
-                $usuario->setNascimento($dados->nascimento);                
-                $usuario->setSexo($dados->sexo);
-                $usuario->setCelular($dados->celular);
-                $usuario->setImagem($dados->imagem);
-                $usuario->setIdCidade($dados->cidade);
-                $usuario->setBio($dados->bio);
-                $usuario->setAtivo($dados->ativo);
-
-                return $usuario;
-            }
-        }
+        return $this->consultarUsuario($email, false);
     }
 
     public function consultarPermissaoPorIdUsuario($id, $cod_permissao) {
@@ -234,5 +212,35 @@ class UsuarioDAO extends ClassConexao {
         $prepare->execute();
 
         return ($prepare->rowCount() > 0);
+    }
+
+    private function consultarUsuario($campo, $id = true) {
+        $sql = ($id) ? "SELECT * FROM usuario WHERE id = :campo" : "SELECT * FROM usuario WHERE email = :campo" ;
+
+        $prepare = $this->db->prepare($sql);
+
+        $prepare->bindValue(':campo', $campo);
+
+        if ($prepare->execute()) {
+            while ($dados = $prepare->fetch(\PDO::FETCH_OBJ)) {
+                $usuario = new Usuario();
+                
+                $usuario->setId($dados->id);       
+                $usuario->setNome($dados->nome);
+                $usuario->setSobrenome($dados->sobrenome);
+                $usuario->setEmail($dados->email);
+                $usuario->setUsuario($dados->usuario);
+                $usuario->setSenha($dados->senha);
+                $usuario->setNascimento($dados->nascimento);                
+                $usuario->setSexo($dados->sexo);
+                $usuario->setCelular($dados->celular);
+                $usuario->setImagem($dados->imagem);
+                $usuario->setIdCidade($dados->cidade);
+                $usuario->setBio($dados->bio);
+                $usuario->setAtivo($dados->ativo);
+
+                return $usuario;
+            }
+        }
     }
 }

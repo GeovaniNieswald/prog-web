@@ -38,15 +38,15 @@ class ClassSessions {
             if (isset($_COOKIE['sessao'])) {    
                 $cookie = json_decode($_COOKIE['sessao'], true);
 
-                $_SESSION["canary"]    = $cookie['canary'];
-                $_SESSION["login"]     = $cookie['login'];
-                $_SESSION["time"]      = $cookie['time'];
-                $_SESSION["nome"]      = $cookie['nome'];
-                $_SESSION["sobrenome"] = $cookie['sobrenome'];
-                $_SESSION["email"]     = $cookie['email'];
-                $_SESSION["user"]      = $cookie['user'];
-                $_SESSION["adm"]       = $cookie['adm'];
-                $_SESSION["lembrar"]   = $cookie['lembrar'];
+                $_SESSION["canary"]  = $cookie['canary'];
+                $_SESSION["login"]   = $cookie['login'];
+                $_SESSION["time"]    = $cookie['time'];
+                $_SESSION["id"]      = $cookie['id'];
+                $_SESSION["nome"]    = $cookie['nome'];
+                $_SESSION["imagem"]  = $cookie['imagem'];
+                $_SESSION["user"]    = $cookie['user'];
+                $_SESSION["adm"]     = $cookie['adm'];
+                $_SESSION["lembrar"] = $cookie['lembrar'];
             }
         }
 
@@ -61,14 +61,14 @@ class ClassSessions {
         $ehUsuario = $this->usuarioDB->consultarPermissaoPorIdUsuario($usuario->getId(), 2);
         $ehAdm     = $this->usuarioDB->consultarPermissaoPorIdUsuario($usuario->getId(), 1);
 
-        $_SESSION["login"]     = true;
-        $_SESSION["time"]      = time();
-        $_SESSION["nome"]      = $usuario->getNome();
-        $_SESSION["sobrenome"] = $usuario->getSobrenome();
-        $_SESSION["email"]     = $usuario->getEmail();
-        $_SESSION["user"]      = $ehUsuario;
-        $_SESSION["adm"]       = $ehAdm;
-        $_SESSION["lembrar"]   = $lembrar;
+        $_SESSION["login"]   = true;
+        $_SESSION["time"]    = time();
+        $_SESSION["id"]      = $usuario->getId();
+        $_SESSION["nome"]    = $usuario->getNome();
+        $_SESSION["imagem"]  = $usuario->getImagem();
+        $_SESSION["user"]    = $ehUsuario;
+        $_SESSION["adm"]     = $ehAdm;
+        $_SESSION["lembrar"] = $lembrar;
 
         if ($lembrar) {
             $this->setCookie();
@@ -79,9 +79,9 @@ class ClassSessions {
         $cookie = [
             "login"     => $_SESSION["login"],
             "time"      => $_SESSION["time"],
+            "id"        => $_SESSION["id"],
             "nome"      => $_SESSION["nome"],
-            "sobrenome" => $_SESSION["sobrenome"],
-            "email"     => $_SESSION["email"],
+            "imagem"    => $_SESSION["imagem"],
             "user"      => $_SESSION["user"],
             "adm"       => $_SESSION["adm"],
             "canary"    => $_SESSION["canary"],

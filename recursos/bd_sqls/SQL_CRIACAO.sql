@@ -94,8 +94,6 @@ CREATE TABLE publicacao (
 	id INT AUTO_INCREMENT,
     id_usuario INT NOT NULL,
     data_hora DATETIME NOT NULL,
-    num_likes INT NOT NULL,
-    num_compartilhamentos INT NOT NULL,
     conteudo MEDIUMTEXT,
     
     PRIMARY KEY (id),
@@ -113,4 +111,14 @@ CREATE TABLE compartilhamento (
     CONSTRAINT fk_usuario_compartilhamento FOREIGN KEY (id_usuario) REFERENCES usuario(id),
     CONSTRAINT fk_criador_compartilhamento FOREIGN KEY (id_criador) REFERENCES usuario(id),
     CONSTRAINT fk_publicacao_compartilhamento FOREIGN KEY (id_publicacao) REFERENCES publicacao(id)
+);
+
+CREATE TABLE curtida (
+	id INT AUTO_INCREMENT,
+    id_usuario INT NOT NULL, 
+    id_publicacao INT NOT NULL,
+    
+    PRIMARY KEY (id),
+    CONSTRAINT fk_usuario_curtida FOREIGN KEY (id_usuario) REFERENCES usuario(id),
+    CONSTRAINT fk_publicacao_curtida FOREIGN KEY (id_publicacao) REFERENCES publicacao(id)
 );

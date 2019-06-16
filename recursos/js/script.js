@@ -6,8 +6,17 @@ function compartilhar() {
 
 }
 
-function curtir() {
-    
+function curtir(id, curtiu, idPublicacao) {
+    var img = document.getElementById('img-like-publi-' + id);
+    var p = document.getElementById('p-like-publi-' + id);
+
+    if (curtiu == 1) {
+        p.classList.add('cor-cinza');
+        p.classList.remove('cor-vermelha');
+    } else {
+        p.classList.add('cor-vermelha');
+        p.classList.remove('cor-cinza');
+    }
 }
 
 function posicionarBotaoFixo() {
@@ -37,10 +46,14 @@ function hover(tipo, id) {
         var p = document.getElementById('p-' + tipo + '-publi-' + id);
     
         if (tipo == 'like') {
-            p.style.color = '#E81919';
+            p.classList.add('cor-vermelha');
+            p.classList.remove('cor-cinza');
+
             img.src = 'recursos/icones/curtir-hover.svg';
         } else if (tipo == 'share') {
-            p.style.color = '#17bf63';
+            p.classList.add('cor-verde');
+            p.classList.remove('cor-cinza');
+
             img.src = 'recursos/icones/compartilhar.svg';
         }
     }
@@ -58,10 +71,14 @@ function hoverOut(tipo, id) {
         var p = document.getElementById('p-' + tipo + '-publi-' + id);
 
         if (tipo == 'like') {
-            p.style.color = '';
+            p.classList.add('cor-cinza');
+            p.classList.remove('cor-vermelha');
+
             img.src = 'recursos/icones/curtir-off.svg';
         } else if (tipo == 'share') {
-            p.style.color = '';
+            p.classList.add('cor-cinza');
+            p.classList.remove('cor-verde');
+
             img.src = 'recursos/icones/compartilhar-off.svg';
         }
     }

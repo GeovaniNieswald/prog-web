@@ -27,8 +27,8 @@
                     <ul>  
                         <li> 
                             <a href="#" class="navbar-user">
-                                <img src="<?php echo DIRIMG.'dallas.jpg'; ?>" class="navbar-user-icon img-redonda-pequena" alt="Imagem de perfil">
-                                Geovani
+                                <img src="<?php echo ($_SESSION['imagem'] != null) ? DIRIMG.$_SESSION['imagem'].'.jpg' : DIRIMG.'user.svg'; ?>" class="navbar-user-icon img-redonda-pequena" alt="Imagem de perfil">
+                                <?php echo $_SESSION['nome'] ?>
                             </a>
                             <ul id="subMenu">
                                 <li onmouseover="hover('perfil', 0)" onmouseout="hoverOut('perfil', 0)">
@@ -51,7 +51,7 @@
                 <nav class="menu">  
                     <ul>  
                         <li>
-                            <a href="#" class="navbar-user"><img src="<?php echo DIRIMG.'dallas.jpg'; ?>" class="navbar-user-icon img-redonda-pequena" alt="Imagem de perfil"></a>
+                            <a href="#" class="navbar-user"><img src="<?php echo ($_SESSION['imagem'] != null) ? DIRIMG.$_SESSION['imagem'].'.jpg' : DIRIMG.'user.svg'; ?>" class="navbar-user-icon img-redonda-pequena" alt="Imagem de perfil"></a>
                             <ul id="subMenuP">
                                 <li onmouseover="hover('perfil', 0)" onmouseout="hoverOut('perfil', 0)">
                                     <a href="<?php echo DIRPAGE.'perfil'; ?>" class="navbar-user">
@@ -79,7 +79,7 @@
 
             <div class="row border-b">
                 <div class="col-sm-2 d-none d-sm-flex ">
-                    <a href="<?php echo DIRPAGE.'perfil'; ?>" class="m-auto link"><img class="img-redonda" src="<?php echo DIRIMG.'dallas.jpg'; ?>" alt="Imagem de perfil"></a>
+                    <a href="<?php echo DIRPAGE.'perfil'; ?>" class="m-auto link"><img class="img-redonda" src="<?php echo ($_SESSION['imagem'] != null) ? DIRIMG.$_SESSION['imagem'].'.jpg' : DIRIMG.'user.svg'; ?>" alt="Imagem de perfil"></a>
                 </div>
                 <div class="col-sm-10 d-none d-sm-inline p-0">
                     <div class="mt-3 mb-3 mr-3 pt-2 pb-2 pl-3 link input-r20" data-toggle="modal" data-target="#myModal">Qual a notícia?</div>
@@ -88,36 +88,7 @@
 
             <div class="row">
                 <ul class="col-12 mb-0">
-                    <li class="row border-b fundo-hover">
-                        <div class="col-2 text-center p-0">
-                            <a href="<?php echo DIRPAGE.'perfil/gustavo'; ?>" class="link"><img class="mt-3 img-redonda" src="<?php echo DIRIMG.'gustavo.jpg'; ?>" alt="Imagem de perfil"></a>
-                        </div>
-
-                        <div class="col-10 pl-0 pt-3 pb-3 pr-4">
-                            <div class="row m-0 d-inline-block w-100">
-                                <a class="float-left link" href="<?php echo DIRPAGE.'perfil/gustavo'; ?>"><p class="d-inline mr-2 font-weight-bold">Gustavo</p><p class="d-inline texto-secundario">@gustavo</p></a><p class="float-right mb-0">21/03/19 14:32</p>
-                            </div>
-
-                            <div class="row m-0 fr-view">
-                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                            </div>
-
-                            <div class="row mt-2 mb-0 ml-0 mr-0 justify-content-center">
-                                <div class="col text-center">
-                                    <div class="d-inline-block align-middle link" onmouseover="hover('share', 451)" onmouseout="hoverOut('share', 451)" onclick="compartilhar()">
-                                        <img id="img-share-publi-451" class="icone-24" src="<?php echo DIRICONE.'compartilhar-off.svg'; ?>" alt="Compartilhar">
-                                        <p id="p-share-publi-451" class="d-inline align-middle ml-2 cor-cinza">356</p>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="d-inline-block align-middle link" onmouseover="hover('like', 451)" onmouseout="hoverOut('like', 451)" onclick="curtir()">
-                                        <img id="img-like-publi-451" class="icone-24" src="<?php echo DIRICONE.'curtir-off.svg'; ?>" alt="Curtir">
-                                        <p id="p-like-publi-451" class="d-inline align-middle ml-2 cor-cinza">15</p>                                        
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
+                    <?php \Classes\ClassFeed::setFeed($_SESSION['id']); ?>
                 </ul>                        
             </div>
         </div>
@@ -133,17 +104,7 @@
 
                     <div class="row">
                         <ul class="col m-0">
-                            <li>
-                                <a class="row border-b pt-2 pb-2 link fundo-hover" href="<?php echo DIRPAGE.'perfil/joao'; ?>">
-                                    <div class="col-4 text-center m-auto">
-                                        <img class="img-redonda-pequena" src="<?php echo DIRIMG.'joao.jpg'; ?>" alt="Imagem de perfil">
-                                    </div>
-                                    <div class="col-8 line-height-normal">
-                                        <div class="row font-weight-bold">João</div>
-                                        <div class="row texto-secundario">@joao</div>
-                                    </div>
-                                </a>                                            
-                            </li>
+                            <?php \Classes\ClassRelacionamento::setSeguidores($_SESSION['id']); ?>
                         </ul>
                     </div>
 
@@ -161,17 +122,7 @@
 
                     <div class="row">
                         <ul class="col m-0">
-                            <li>
-                                <a class="row border-b pt-2 pb-2 link fundo-hover" href="<?php echo DIRPAGE.'perfil/julia'; ?>">
-                                    <div class="col-4 text-center m-auto">
-                                        <img class="img-redonda-pequena" src="<?php echo DIRIMG.'julia.jpg'; ?>" alt="Imagem de perfil">
-                                    </div>
-                                    <div class="col-8 line-height-normal">
-                                        <div class="row font-weight-bold">Julia</div>
-                                        <div class="row texto-secundario">@julia</div>
-                                    </div>
-                                </a>
-                            </li>
+                            <?php \Classes\ClassRelacionamento::setSeguindo($_SESSION['id']); ?>
                         </ul>
                     </div>
 

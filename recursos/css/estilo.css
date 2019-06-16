@@ -250,12 +250,21 @@ ul {
     height: 19px;
 }
 
+.icone-17 {
+    width: 17px;
+    height: 17px;
+}
+
 .cor-cinza {
     color: #637381;
 }
 
 .cor-vermelha {
     color: #E81919;
+}
+
+.cor-verde {
+    color: #17bf63;
 }
 
 .container-cadastro {
