@@ -15,11 +15,11 @@ class ClassLayout {
     }
 
     # Setar as tags do head
-    public static function setHead($title, $description, $faPag = FALSE, $froalaPag = FALSE) {
+    public static function setHead($title, $description, $faPag = FALSE, $editor = FALSE) {
         $bootstrap = DIRCSS.'bootstrap.min.css';
         $favicon   = DIRICONE.'favicon/';
         $estilo    = DIRCSS.'estilo.css';
-        $froala    = DIRCSS.'froala/';
+        $editorCss = DIRJS.'trumbowyg/ui/';
 
         $html  = "<!DOCTYPE html>\n";
         $html .= "<html lang='pt-br'>\n";
@@ -47,9 +47,8 @@ class ClassLayout {
             $html .= "\n  <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.8.1/css/all.css' integrity='sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf' crossorigin='anonymous'>\n";
         }
 
-        if ($froalaPag) {            
-            $html .= "  <link href='".$froala."froala_editor.pkgd.min.css' rel='stylesheet' type='text/css' />\n";
-            $html .= "  <link href='".$froala."froala_style.min.css' rel='stylesheet' type='text/css' />\n";
+        if ($editor) {   
+            $html .= "  <link rel='stylesheet' href='".$editorCss."trumbowyg.min.css'>\n";
         }
 
         $html .= "\n";
@@ -57,7 +56,7 @@ class ClassLayout {
         $html .= "  <title>$title</title>\n";
         $html .= "</head>\n";
 
-        if ($froalaPag) {
+        if ($editor) {
             $html .= "<body class='p-0' onload='posicionarBotaoFixo()' onresize='posicionarBotaoFixo()'>\n";
         } else {
             $html .= "<body>\n";
@@ -67,27 +66,23 @@ class ClassLayout {
     }
 
     # Setar as tags do footer
-    public static function setFooter($froalaPag = FALSE) {
+    public static function setFooter($editor = FALSE) {
         $jquery        = DIRJS.'jquery-3.4.1.min.js';
         $bootstrap     = DIRJS.'bootstrap.min.js';
         $vanillaMasker = DIRJS.'vanilla-masker.min.js';
         $script        = DIRJS.'script.js';
-        $froala        = DIRJS.'froala/';
+        $editorJS      = DIRJS.'trumbowyg/';
 
         $html  = "<script type='text/javascript' src='$jquery'></script>\n";
         $html .= "<script type='text/javascript' src='$bootstrap'></script>\n";
         $html .= "<script type='text/javascript' src='$vanillaMasker'></script>\n";
         $html .= "<script type='text/javascript' src='$script'></script>\n\n";
 
-        if ($froalaPag) {
-            $html .= "<script type='text/javascript' src='".$froala."froala_editor.pkgd.min.js'></script>\n";
-            $html .= "<script type='text/javascript' src='".$froala."languages/pt_br.js'></script>\n";
-            $html .= "<script> $(function() { var editor = new FroalaEditor('#froala-editor') });</script>\n";
-            $html .= "<script> $(function() { $('div#froala-editor').froalaEditor({ language: 'pt_br' }) }); </script>\n";
+        if ($editor) {
+            $html .= "<script src='".$editorJS."trumbowyg.min.js'></script>\n";
+            $html .= "<script type='text/javascript' src='".$editorJS."langs/pt_br.min.js'></script>\n";
+            $html .= "<script> $('#editor').trumbowyg({lang: 'pt_br'}); </script>\n";
         }
-
-        // $html .= "<script> $.getScript('".$froala."froala_editor.pkgd.min.js', function () { $('div#froala-editor').froalaEditor({ language: 'pt_br' }); }); </script>\n";
-        // $html .= "<script> $(function() { $('div#froala-editor').froalaEditor({ language: 'pt_br' }) }); </script>\n";
         
         $html .= "\n";
 

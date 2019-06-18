@@ -1,5 +1,5 @@
 function publicar(idUsuario) {
-    
+    alert($('#editor').trumbowyg('html'));
 }
 
 function compartilhar(id, idPublicacao) {
