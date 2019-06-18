@@ -1,21 +1,88 @@
-function publicar() {
-
+function publicar(idUsuario) {
+    
 }
 
-function compartilhar() {
+function compartilhar(id, idPublicacao) {
+    var img = document.getElementById('img-share-publi-' + id);
+    var p = document.getElementById('p-share-publi-' + id);
 
+    if (p.classList.contains('compartilhou')) {
+        p.classList.add('cor-cinza');
+        p.classList.remove('cor-verde');
+        img.src = 'recursos/icones/compartilhar-off.svg';
+
+        //deseja mesmo descompartilhar, se sim apagar
+
+        var numComps = 0; // buscar o numero de compartilhamentos da publi
+
+        p.innerHTML = numComps;
+
+        p.classList.remove('compartilhou');
+    } else {
+        p.classList.add('cor-verde');
+        p.classList.remove('cor-cinza');
+        img.src = 'recursos/icones/compartilhar.svg';
+
+        //compartilhar
+
+        var numComps = 1; // buscar o numero de compartilhamentos da publi
+
+        p.innerHTML = numComps;
+
+        p.classList.add('compartilhou');
+    }
 }
 
-function curtir(id, curtiu, idPublicacao) {
+function curtir(id, idPublicacao, idUsuario) {
     var img = document.getElementById('img-like-publi-' + id);
     var p = document.getElementById('p-like-publi-' + id);
 
-    if (curtiu == 1) {
-        p.classList.add('cor-cinza');
-        p.classList.remove('cor-vermelha');
+    if (p.classList.contains('curtiu')) {
+        var dados = {};
+        dados.tipo = 'descurtir';
+        dados.idPublicacao = idPublicacao;
+        dados.idUsuario = idUsuario;
+
+        $.ajax({
+            url: getRoot()+'controller/controllerFeed',
+            type: 'POST',
+            dataType: 'json',
+            data: dados,
+            success: function (response) {
+                if (response.retorno == 'success') {
+                    p.classList.add('cor-cinza');
+                    p.classList.remove('cor-vermelha');
+                    img.src = 'recursos/icones/curtir-off.svg';
+            
+                    p.innerHTML = response.numCurtidas;
+            
+                    p.classList.remove('curtiu');
+                }
+            }
+        });
     } else {
-        p.classList.add('cor-vermelha');
-        p.classList.remove('cor-cinza');
+        var dados = {};
+        dados.tipo = 'curtir';
+        dados.idPublicacao = idPublicacao;
+        dados.idUsuario = idUsuario;
+
+        $.ajax({
+            url: getRoot()+'controller/controllerFeed',
+            type: 'POST',
+            dataType: 'json',
+            data: dados,
+            success: function (response) {
+                if (response.retorno == 'success') {
+                    p.classList.add('cor-vermelha');
+                    p.classList.remove('cor-cinza');
+                    img.src = 'recursos/icones/curtir.svg';
+
+                    p.innerHTML = response.numCurtidas;
+
+                    p.classList.add('curtiu');
+                }
+            }
+        });
     }
 }
 
@@ -46,15 +113,19 @@ function hover(tipo, id) {
         var p = document.getElementById('p-' + tipo + '-publi-' + id);
     
         if (tipo == 'like') {
-            p.classList.add('cor-vermelha');
-            p.classList.remove('cor-cinza');
-
-            img.src = 'recursos/icones/curtir-hover.svg';
+            if (!p.classList.contains('curtiu')) {
+                p.classList.add('cor-vermelha');
+                p.classList.remove('cor-cinza');
+    
+                img.src = 'recursos/icones/curtir-hover.svg';
+            }
         } else if (tipo == 'share') {
-            p.classList.add('cor-verde');
-            p.classList.remove('cor-cinza');
-
-            img.src = 'recursos/icones/compartilhar.svg';
+            if (!p.classList.contains('compartilhou')) {
+                p.classList.add('cor-verde');
+                p.classList.remove('cor-cinza');
+    
+                img.src = 'recursos/icones/compartilhar.svg';
+            }
         }
     }
 }
@@ -71,15 +142,19 @@ function hoverOut(tipo, id) {
         var p = document.getElementById('p-' + tipo + '-publi-' + id);
 
         if (tipo == 'like') {
-            p.classList.add('cor-cinza');
-            p.classList.remove('cor-vermelha');
-
-            img.src = 'recursos/icones/curtir-off.svg';
+            if (!p.classList.contains('curtiu')) {
+                p.classList.add('cor-cinza');
+                p.classList.remove('cor-vermelha');
+    
+                img.src = 'recursos/icones/curtir-off.svg';
+            }
         } else if (tipo == 'share') {
-            p.classList.add('cor-cinza');
-            p.classList.remove('cor-verde');
-
-            img.src = 'recursos/icones/compartilhar-off.svg';
+            if (!p.classList.contains('compartilhou')) {
+                p.classList.add('cor-cinza');
+                p.classList.remove('cor-verde');
+    
+                img.src = 'recursos/icones/compartilhar-off.svg';
+            }
         }
     }
 }

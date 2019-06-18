@@ -88,4 +88,46 @@ class FeedItemDAO extends ClassConexao {
         
         return $lista;
     }
+
+    public function curtir($idPublicacao, $idUsuario) {
+        $sql = "INSERT INTO curtida(id_usuario, id_publicacao) VALUES(:idUser, :idPubli)";
+
+        $prepare = $this->db->prepare($sql);
+
+        $prepare->bindValue(':idUser', $idUsuario);
+        $prepare->bindValue(':idPubli', $idPublicacao);
+
+        $prepare->execute();
+
+        return $this->numCurtidas($idPublicacao);
+    }
+
+    public function descurtir($idPublicacao, $idUsuario) {
+        $sql = "DELETE FROM curtida WHERE id_usuario = :idUser AND id_publicacao = :idPubli";
+
+        $prepare = $this->db->prepare($sql);
+
+        $prepare->bindValue(':idUser', $idUsuario);
+        $prepare->bindValue(':idPubli', $idPublicacao);
+
+        $prepare->execute();
+
+        return $this->numCurtidas($idPublicacao);
+    }
+
+    private function numCurtidas($idPublicacao) {
+        $sql = "SELECT COUNT(id) AS num_curtidas FROM curtida WHERE id_publicacao = :idPubli";
+
+        $prepare = $this->db->prepare($sql);
+
+        $prepare->bindValue(':idPubli', $idPublicacao);
+
+        if ($prepare->execute()) {
+            while ($dados = $prepare->fetch(\PDO::FETCH_OBJ)) {
+                return $dados->num_curtidas;
+            }
+        } else {
+            return -1;
+        }
+    }
 }

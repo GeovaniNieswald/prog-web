@@ -19,7 +19,7 @@ class ClassLayout {
         $bootstrap = DIRCSS.'bootstrap.min.css';
         $favicon   = DIRICONE.'favicon/';
         $estilo    = DIRCSS.'estilo.css';
-        $froala    = DIRTEMA.'froala-editor-custom-theme.css';
+        $froala    = DIRCSS.'froala/';
 
         $html  = "<!DOCTYPE html>\n";
         $html .= "<html lang='pt-br'>\n";
@@ -47,15 +47,9 @@ class ClassLayout {
             $html .= "\n  <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.8.1/css/all.css' integrity='sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf' crossorigin='anonymous'>\n";
         }
 
-        if ($froalaPag) {
-            $html .= "\n  <!-- Include external CSS - Froala Editor. -->\n";
-            $html .= "  <link rel='stylesheet' type='text/css' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css'>\n";
-            $html .= "  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.css'>\n\n";
-
-            $html .= "  <!-- Include Editor style - Froala Editor. -->\n";
-            $html .= "  <link rel='stylesheet' type='text/css' href='https://cdn.jsdelivr.net/npm/froala-editor@2.9.3/css/froala_editor.pkgd.min.css'>\n";
-            $html .= "  <link rel='stylesheet' type='text/css' href='https://cdn.jsdelivr.net/npm/froala-editor@2.9.3/css/froala_style.min.css'>\n";
-            $html .= "  <link rel='stylesheet' type='text/css' href='$froala'>\n";
+        if ($froalaPag) {            
+            $html .= "  <link href='".$froala."froala_editor.pkgd.min.css' rel='stylesheet' type='text/css' />\n";
+            $html .= "  <link href='".$froala."froala_style.min.css' rel='stylesheet' type='text/css' />\n";
         }
 
         $html .= "\n";
@@ -74,11 +68,11 @@ class ClassLayout {
 
     # Setar as tags do footer
     public static function setFooter($froalaPag = FALSE) {
-        $jquery        = DIRJS.'jquery-3.3.1.min.js';
+        $jquery        = DIRJS.'jquery-3.4.1.min.js';
         $bootstrap     = DIRJS.'bootstrap.min.js';
         $vanillaMasker = DIRJS.'vanilla-masker.min.js';
         $script        = DIRJS.'script.js';
-        $lingua        = DIRLIN.'froala-editor-pt_br.js';
+        $froala        = DIRJS.'froala/';
 
         $html  = "<script type='text/javascript' src='$jquery'></script>\n";
         $html .= "<script type='text/javascript' src='$bootstrap'></script>\n";
@@ -86,19 +80,14 @@ class ClassLayout {
         $html .= "<script type='text/javascript' src='$script'></script>\n\n";
 
         if ($froalaPag) {
-            $html .= "<!-- Include external JS libs - Froala Editor. -->\n";
-            $html .= "<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.js'></script>\n";
-            $html .= "<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/mode/xml/xml.min.js'></script>\n\n";
-       
-            $html .= "<!-- Include Editor JS files - Froala Editor. -->\n";
-            $html .= "<script type='text/javascript' src='https://cdn.jsdelivr.net/npm/froala-editor@2.9.3/js/froala_editor.pkgd.min.js'></script>\n\n";
-
-            $html .= "<!-- Include language file - Froala Editor. -->\n";
-            $html .= "<script src='$lingua'></script>\n\n";
-
-            $html .= "<!-- Initialize the editor, and set language to pt_BR - Froala Editor. -->\n";
-            $html .= "<script>$(function() { $('textarea').froalaEditor({ theme: 'custom', language: 'pt_br' }) });</script>\n";
+            $html .= "<script type='text/javascript' src='".$froala."froala_editor.pkgd.min.js'></script>\n";
+            $html .= "<script type='text/javascript' src='".$froala."languages/pt_br.js'></script>\n";
+            $html .= "<script> $(function() { var editor = new FroalaEditor('#froala-editor') });</script>\n";
+            $html .= "<script> $(function() { $('div#froala-editor').froalaEditor({ language: 'pt_br' }) }); </script>\n";
         }
+
+        // $html .= "<script> $.getScript('".$froala."froala_editor.pkgd.min.js', function () { $('div#froala-editor').froalaEditor({ language: 'pt_br' }); }); </script>\n";
+        // $html .= "<script> $(function() { $('div#froala-editor').froalaEditor({ language: 'pt_br' }) }); </script>\n";
         
         $html .= "\n";
 

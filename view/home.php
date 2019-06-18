@@ -154,10 +154,10 @@
                 <h5 class="modal-title mt-auto mb-auto">Qual a notícia?</h4>
             </div>
             <div class="modal-body">
-                <textarea></textarea>
+                <div id="froala-editor"></div>
             </div>
                 <div class="modal-footer">
-                    <button type="button" class="login-botao">Publicar</button>
+                    <button  onclick="publicar(<?php echo $_SESSION['id']; ?>)" type="button" class="login-botao">Publicar</button>
                 </div>
             </div>
         </div>
