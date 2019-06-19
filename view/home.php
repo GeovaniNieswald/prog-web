@@ -32,7 +32,7 @@
                             </a>
                             <ul id="subMenu">
                                 <li onmouseover="hover('perfil', 0)" onmouseout="hoverOut('perfil', 0)">
-                                    <a href="<?php echo DIRPAGE.'perfil'; ?>" class="navbar-user">
+                                    <a href="<?php echo DIRPAGE.'perfil/'.$_SESSION['usuario']; ?>" class="navbar-user">
                                         <img id="icon-perfil" class="icone-19 mr-3" src="<?php echo DIRICONE.'perfil-off.svg'; ?>" alt="Perfil">Perfil
                                     </a>
                                 </li>
@@ -54,7 +54,7 @@
                             <a href="#" class="navbar-user"><img src="<?php echo ($_SESSION['imagem'] != null) ? DIRIMG.$_SESSION['imagem'].'.jpg' : DIRIMG.'user.svg'; ?>" class="navbar-user-icon img-redonda-pequena" alt="Imagem de perfil"></a>
                             <ul id="subMenuP">
                                 <li onmouseover="hover('perfil', 0)" onmouseout="hoverOut('perfil', 0)">
-                                    <a href="<?php echo DIRPAGE.'perfil'; ?>" class="navbar-user">
+                                    <a href="<?php echo DIRPAGE.'perfil/'.$_SESSION['usuario']; ?>" class="navbar-user">
                                         <img id="icon-p-perfil" class="icone-19 mr-3" src="<?php echo DIRICONE.'perfil-off.svg'; ?>" alt="Perfil">Perfil
                                     </a>
                                 </li>
@@ -79,7 +79,7 @@
 
             <div class="row border-b">
                 <div class="col-sm-2 d-none d-sm-flex ">
-                    <a href="<?php echo DIRPAGE.'perfil'; ?>" class="m-auto link"><img class="img-redonda" src="<?php echo ($_SESSION['imagem'] != null) ? DIRIMG.$_SESSION['imagem'].'.jpg' : DIRIMG.'user.svg'; ?>" alt="Imagem de perfil"></a>
+                    <a href="<?php echo DIRPAGE.'perfil/'.$_SESSION['usuario']; ?>" class="m-auto link"><img class="img-redonda" src="<?php echo ($_SESSION['imagem'] != null) ? DIRIMG.$_SESSION['imagem'].'.jpg' : DIRIMG.'user.svg'; ?>" alt="Imagem de perfil"></a>
                 </div>
                 <div class="col-sm-10 d-none d-sm-inline p-0">
                     <div class="mt-3 mb-3 mr-3 pt-2 pb-2 pl-3 link input-r20" data-toggle="modal" data-target="#myModal">Qual a notícia?</div>

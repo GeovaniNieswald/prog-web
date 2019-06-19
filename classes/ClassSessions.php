@@ -43,6 +43,7 @@ class ClassSessions {
                 $_SESSION["time"]    = $cookie['time'];
                 $_SESSION["id"]      = $cookie['id'];
                 $_SESSION["nome"]    = $cookie['nome'];
+                $_SESSION["usuario"] = $cookie['usuario'];
                 $_SESSION["imagem"]  = $cookie['imagem'];
                 $_SESSION["user"]    = $cookie['user'];
                 $_SESSION["adm"]     = $cookie['adm'];
@@ -65,6 +66,7 @@ class ClassSessions {
         $_SESSION["time"]    = time();
         $_SESSION["id"]      = $usuario->getId();
         $_SESSION["nome"]    = $usuario->getNome();
+        $_SESSION["usuario"] = $usuario->getUsuario();
         $_SESSION["imagem"]  = $usuario->getImagem();
         $_SESSION["user"]    = $ehUsuario;
         $_SESSION["adm"]     = $ehAdm;
@@ -81,6 +83,7 @@ class ClassSessions {
             "time"      => $_SESSION["time"],
             "id"        => $_SESSION["id"],
             "nome"      => $_SESSION["nome"],
+            "usuario"   => $_SESSION["usuario"],
             "imagem"    => $_SESSION["imagem"],
             "user"      => $_SESSION["user"],
             "adm"       => $_SESSION["adm"],

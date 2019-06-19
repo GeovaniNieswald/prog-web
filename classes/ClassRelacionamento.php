@@ -6,7 +6,7 @@ use Model;
 
 class ClassRelacionamento {
 
-    public static function setSeguidores($id) {
+    public static function setSeguidores($id, $pagPerfil = FALSE) {
         $perfil = DIRPAGE.'perfil/';
 
         $html  = "";
@@ -34,10 +34,12 @@ class ClassRelacionamento {
                 $html .= "</li>\n";
             }
         } else {
+            $txt = ($pagPerfil) ? "Essa pessoa" : "Você";
+
             $html .= "<li>\n";
             $html .= "  <div class='row border-b pt-2 pb-2 fundo-hover'>\n";
             $html .= "      <div class='col-12 line-height-normal'>\n";
-            $html .= "          <div class='row p-3 texto-secundario'>Você não tem nenhum seguidor!</div>\n";
+            $html .= "          <div class='row p-3 texto-secundario'>".$txt." não tem nenhum seguidor!</div>\n";
             $html .= "      </div>\n";
             $html .= "  </div>\n";
             $html .= "</li>\n";
@@ -46,7 +48,7 @@ class ClassRelacionamento {
         echo $html;
     }
 
-    public static function setSeguindo($id) {
+    public static function setSeguindo($id, $pagPerfil = FALSE) {
         $perfil = DIRPAGE.'perfil/';
 
         $html  = "";
@@ -74,10 +76,12 @@ class ClassRelacionamento {
                 $html .= "</li>\n";
             }
         } else {
+            $txt = ($pagPerfil) ? "Essa pessoa" : "Você";
+
             $html .= "<li>\n";
             $html .= "  <div class='row border-b pt-2 pb-2 fundo-hover'>\n";
             $html .= "      <div class='col-12 line-height-normal'>\n";
-            $html .= "          <div class='row p-3 texto-secundario'>Você não segue ninguém!</div>\n";
+            $html .= "          <div class='row p-3 texto-secundario'>".$txt." não segue ninguém!</div>\n";
             $html .= "      </div>\n";
             $html .= "  </div>\n";
             $html .= "</li>\n";

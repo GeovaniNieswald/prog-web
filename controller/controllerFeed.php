@@ -2,12 +2,58 @@
 
 $feedItemDB = new Model\FeedItemDAO();
 
-$tipo         = $_POST['tipo'];
-$idPublicacao = $_POST['idPublicacao'];
-$idUsuario    = $_POST['idUsuario'];
+$tipo         = (isset($_POST['tipo'])) ? $_POST['tipo'] : null;
+$idPublicacao = (isset($_POST['idPublicacao'])) ? $_POST['idPublicacao'] : null;
+$idUsuario    = (isset($_POST['idUsuario'])) ? $_POST['idUsuario'] : null;
+$conteudo     = (isset($_POST['conteudo'])) ? $_POST['conteudo'] : null;
+$idCriador    = (isset($_POST['idCriador'])) ? $_POST['idCriador'] : null;
 
 if ($tipo != null) {
     switch ($tipo) {
+        case "publicar":
+            $resultado = $feedItemDB->publicar($conteudo, $idUsuario);
+        
+            if ($resultado) {
+                $arrResponse = [
+                    "retorno"=>"success"
+                ];
+            } else {
+                $arrResponse = [
+                    "retorno"=>"erro"
+                ];
+            }
+            
+            break;
+        case "compartilhar":
+            $numComps = $feedItemDB->compartilhar($idPublicacao, $idCriador, $idUsuario);
+
+            if ($numComps != 0) {
+                $arrResponse = [
+                    "retorno"=>"success",
+                    "numComps"=>$numComps
+                ];
+            } else {
+                $arrResponse = [
+                    "retorno"=>"erro"
+                ];
+            }
+    
+            break;
+        case "descompartilhar":
+            $numComps = $feedItemDB->descompartilhar($idPublicacao, $idCriador, $idUsuario);
+
+            if ($numComps != -1) {
+                $arrResponse = [
+                    "retorno"=>"success",
+                    "numComps"=>$numComps
+                ];
+            } else {
+                $arrResponse = [
+                    "retorno"=>"erro"
+                ];
+            }
+    
+            break;
         case "curtir":
             $numCurtidas = $feedItemDB->curtir($idPublicacao, $idUsuario);
 
@@ -21,8 +67,6 @@ if ($tipo != null) {
                     "retorno"=>"erro"
                 ];
             }
-            
-            echo json_encode($arrResponse);
 
             break;
         case "descurtir":
@@ -38,16 +82,9 @@ if ($tipo != null) {
                     "retorno"=>"erro"
                 ];
             }
-            
-            echo json_encode($arrResponse);
-
-            break;
-        case "compartilhar":
-           
-        
-
-
 
             break;
     }
+
+    echo json_encode($arrResponse);
 }

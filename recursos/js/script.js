@@ -1,35 +1,88 @@
 function publicar(idUsuario) {
-    alert($('#editor').trumbowyg('html'));
+    var conteudo = $('#editor').trumbowyg('html');
+    
+    if (conteudo == '') {
+        alert("Você deve escrever alguma coisa");
+    } else {
+        var dados = {};
+        dados.tipo = 'publicar';
+        dados.idUsuario = idUsuario;
+        dados.conteudo = conteudo;
+
+        $.ajax({
+            url: getRoot()+'controller/controllerFeed',
+            type: 'POST',
+            dataType: 'json',
+            data: dados,
+            success: function (response) {
+                if (response.retorno == 'success') {
+                    window.location.reload();
+                } 
+            }
+        });
+    }
 }
 
-function compartilhar(id, idPublicacao) {
+function compartilhar(id, idPublicacao, idUsuario, idCriador) {
     var img = document.getElementById('img-share-publi-' + id);
     var p = document.getElementById('p-share-publi-' + id);
 
     if (p.classList.contains('compartilhou')) {
-        p.classList.add('cor-cinza');
-        p.classList.remove('cor-verde');
-        img.src = 'recursos/icones/compartilhar-off.svg';
+        var r = confirm("Deseja mesmo descompartilhar a publicação?");
 
-        //deseja mesmo descompartilhar, se sim apagar
+        if (r) {
+            var dados = {};
+            dados.tipo = 'descompartilhar';
+            dados.idPublicacao = idPublicacao;
+            dados.idUsuario = idUsuario;
+            dados.idCriador = idCriador;
 
-        var numComps = 0; // buscar o numero de compartilhamentos da publi
+            $.ajax({
+                url: getRoot()+'controller/controllerFeed',
+                type: 'POST',
+                dataType: 'json',
+                data: dados,
+                success: function (response) {
+                    if (response.retorno == 'success') {
+                        p.classList.add('cor-cinza');
+                        p.classList.remove('cor-verde');
+                        img.src = 'recursos/icones/compartilhar-off.svg';
 
-        p.innerHTML = numComps;
+                        p.innerHTML = response.numComps;
 
-        p.classList.remove('compartilhou');
+                        p.classList.remove('compartilhou');
+                        window.location.reload();
+                    } else {
+                        alert("batata");
+                    }
+                }
+            });            
+        }        
     } else {
-        p.classList.add('cor-verde');
-        p.classList.remove('cor-cinza');
-        img.src = 'recursos/icones/compartilhar.svg';
+        var dados = {};
+        dados.tipo = 'compartilhar';
+        dados.idPublicacao = idPublicacao;
+        dados.idUsuario = idUsuario;
+        dados.idCriador = idCriador;
 
-        //compartilhar
+        $.ajax({
+            url: getRoot()+'controller/controllerFeed',
+            type: 'POST',
+            dataType: 'json',
+            data: dados,
+            success: function (response) {
+                if (response.retorno == 'success') {
+                    p.classList.add('cor-verde');
+                    p.classList.remove('cor-cinza');
+                    img.src = 'recursos/icones/compartilhar.svg';
 
-        var numComps = 1; // buscar o numero de compartilhamentos da publi
+                    p.innerHTML = response.numComps;
 
-        p.innerHTML = numComps;
-
-        p.classList.add('compartilhou');
+                    p.classList.add('compartilhou');
+                    window.location.reload();
+                }
+            }
+        });        
     }
 }
 
@@ -106,8 +159,17 @@ function hover(tipo, id) {
         var icon = document.getElementById('icon-' + tipo);
         var icon_p = document.getElementById('icon-p-' + tipo);
 
-        icon.src = 'recursos/icones/' + tipo + '-on.svg';
-        icon_p.src = 'recursos/icones/' + tipo + '-on.svg';
+        var img = document.createElement('img');
+        img.src = 'recursos/icones/' + tipo + '-on.svg';
+
+        img.onload = function(e){
+            icon.src   = 'recursos/icones/' + tipo + '-on.svg';
+            icon_p.src = 'recursos/icones/' + tipo + '-on.svg';
+        };
+        img.onerror = function(e) {
+            icon.src   = '../recursos/icones/' + tipo + '-on.svg';
+            icon_p.src = '../recursos/icones/' + tipo + '-on.svg';
+        };
     } else {
         var img = document.getElementById('img-' + tipo + '-publi-' + id);
         var p = document.getElementById('p-' + tipo + '-publi-' + id);
@@ -135,8 +197,17 @@ function hoverOut(tipo, id) {
         var icon = document.getElementById('icon-' + tipo);
         var icon_p = document.getElementById('icon-p-' + tipo);
 
-        icon.src = 'recursos/icones/' + tipo + '-off.svg';
-        icon_p.src = 'recursos/icones/' + tipo + '-off.svg';
+        var img = document.createElement('img');
+        img.src = 'recursos/icones/' + tipo + '-off.svg';
+
+        img.onload = function(e){
+            icon.src   = 'recursos/icones/' + tipo + '-off.svg';
+            icon_p.src = 'recursos/icones/' + tipo + '-off.svg';
+        };
+        img.onerror = function(e) {
+            icon.src   = '../recursos/icones/' + tipo + '-off.svg';
+            icon_p.src = '../recursos/icones/' + tipo + '-off.svg';
+        };
     } else {
         var img = document.getElementById('img-' + tipo + '-publi-' + id);
         var p = document.getElementById('p-' + tipo + '-publi-' + id);

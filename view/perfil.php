@@ -1,6 +1,15 @@
 <?php 
     \Classes\ClassLayout::setHeadRestrito('user');
-    \Classes\ClassLayout::setHead('Geovani (@dallas) - Poligno News', 'Página de perfil', TRUE, FALSE); 
+
+    $usuarioParam = \Traits\TraitParseUrl::parseUrl(1);
+
+    if ($usuarioParam == null) {
+        echo "<script> (function() { window.location.href = '".DIRPAGE."404' }()); </script>";
+    }
+
+    // buscar usuario 
+
+    \Classes\ClassLayout::setHead($_SESSION["nome"]." (@".$_SESSION["usuario"].") - Poligno News", 'Página de perfil', TRUE, FALSE); 
 ?>
 
 <div class="container-fluid">
@@ -27,12 +36,12 @@
                     <ul>  
                         <li> 
                             <a href="#" class="navbar-user">
-                                <img src="<?php echo DIRIMG.'dallas.jpg'; ?>" class="navbar-user-icon img-redonda-pequena" alt="Imagem de perfil">
-                                Geovani
+                                <img src="<?php echo ($_SESSION['imagem'] != null) ? DIRIMG.$_SESSION['imagem'].'.jpg' : DIRIMG.'user.svg'; ?>" class="navbar-user-icon img-redonda-pequena" alt="Imagem de perfil">
+                                <?php echo $_SESSION['nome'] ?>
                             </a>
                             <ul id="subMenu">
                                 <li onmouseover="hover('perfil', 0)" onmouseout="hoverOut('perfil', 0)">
-                                    <a href="<?php echo DIRPAGE.'perfil'; ?>" class="navbar-user">
+                                    <a href="<?php echo DIRPAGE.'perfil/'.$_SESSION['usuario']; ?>" class="navbar-user">
                                         <img id="icon-perfil" class="icone-19 mr-3" src="<?php echo DIRICONE.'perfil-off.svg'; ?>" alt="Perfil">Perfil
                                     </a>
                                 </li>
@@ -51,10 +60,10 @@
                 <nav class="menu">  
                     <ul>  
                         <li>
-                            <a href="#" class="navbar-user"><img src="<?php echo DIRIMG.'dallas.jpg'; ?>" class="navbar-user-icon img-redonda-pequena" alt="Imagem de perfil"></a>
+                            <a href="#" class="navbar-user"><img src="<?php echo ($_SESSION['imagem'] != null) ? DIRIMG.$_SESSION['imagem'].'.jpg' : DIRIMG.'user.svg'; ?>" class="navbar-user-icon img-redonda-pequena" alt="Imagem de perfil"></a>
                             <ul id="subMenuP">
                                 <li onmouseover="hover('perfil', 0)" onmouseout="hoverOut('perfil', 0)">
-                                    <a href="<?php echo DIRPAGE.'perfil'; ?>" class="navbar-user">
+                                    <a href="<?php echo DIRPAGE.'perfil/'.$_SESSION['usuario']; ?>" class="navbar-user">
                                         <img id="icon-p-perfil" class="icone-19 mr-3" src="<?php echo DIRICONE.'perfil-off.svg'; ?>" alt="Perfil">Perfil
                                     </a>
                                 </li>
@@ -99,17 +108,7 @@
 
                     <div class="row">
                         <ul class="col m-0">
-                            <li>
-                                <a class="row border-b pt-2 pb-2 link fundo-hover" href="<?php echo DIRPAGE.'perfil/joao'; ?>">
-                                    <div class="col-4 text-center m-auto">
-                                        <img class="img-redonda-pequena" src="<?php echo DIRIMG.'joao.jpg'; ?>" alt="Imagem de perfil">
-                                    </div>
-                                    <div class="col-8 line-height-normal">
-                                        <div class="row font-weight-bold">João</div>
-                                        <div class="row texto-secundario">@joao</div>
-                                    </div>
-                                </a>                                            
-                            </li>
+                            <?php \Classes\ClassRelacionamento::setSeguidores(0, TRUE); ?>
                         </ul>
                     </div>
 
@@ -127,17 +126,7 @@
 
                     <div class="row">
                         <ul class="col m-0">
-                            <li>
-                                <a class="row border-b pt-2 pb-2 link fundo-hover" href="<?php echo DIRPAGE.'perfil/julia'; ?>">
-                                    <div class="col-4 text-center m-auto">
-                                        <img class="img-redonda-pequena" src="<?php echo DIRIMG.'julia.jpg'; ?>" alt="Imagem de perfil">
-                                    </div>
-                                    <div class="col-8 line-height-normal">
-                                        <div class="row font-weight-bold">Julia</div>
-                                        <div class="row texto-secundario">@julia</div>
-                                    </div>
-                                </a>
-                            </li>
+                            <?php \Classes\ClassRelacionamento::setSeguindo(0, TRUE); ?>
                         </ul>
                     </div>
 

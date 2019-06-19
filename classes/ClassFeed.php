@@ -42,6 +42,7 @@ class ClassFeed {
                 $acaoHoverOutCurtiu = "onmouseout=\"hoverOut('like', ".$id.")\"";
 
                 $acaoClickCurtir    = "onclick=\"curtir('".$id."', ".$idPublicacao.", ".$idUsuarioSistema.")\"";
+                $acaoClickComp      = "onclick=\"compartilhar('".$id."', ".$idPublicacao.", ".$idUsuarioSistema.", ".$idCriador.")\"";
 
                 $iconeCompartilhou  = ($compartilhou) ? DIRICONE."compartilhar.svg" : DIRICONE."compartilhar-off.svg";
                 $iconeCurtiu        = ($curtiu) ? DIRICONE."curtir.svg" : DIRICONE."curtir-off.svg";
@@ -61,7 +62,7 @@ class ClassFeed {
                     $html .= "      <div class='row m-0 fr-view'>".$conteudo."</div>\n";
                     $html .= "      <div class='row mt-2 mb-0 ml-0 mr-0 justify-content-center'>\n";
                     $html .= "          <div class='col text-center'>\n";
-                    $html .= "              <div class='d-inline-block align-middle link' ".$acaoHoverComp." ".$acaoHoverOutComp." onclick=\"compartilhar('".$id."', ".$idPublicacao.")\">\n";
+                    $html .= "              <div class='d-inline-block align-middle link' ".$acaoHoverComp." ".$acaoHoverOutComp." ".$acaoClickComp.">\n";
                     $html .= "                  <img id='img-share-publi-".$id."' class='icone-24' src='".$iconeCompartilhou."' alt='Compartilhar'>\n";
                     $html .= "                  <p id='p-share-publi-".$id."' class='d-inline align-middle ml-2 ".$corCompartilhou."'>".$numCompartilhamentos."</p>\n";
                     $html .= "              </div>\n";
@@ -92,7 +93,7 @@ class ClassFeed {
                     $html .= "              <div class='row m-0 fr-view'>".$conteudo."</div>\n";
                     $html .= "              <div class='row mt-2 mb-0 ml-0 mr-0 justify-content-center'>\n";
                     $html .= "                  <div class='col text-center'>\n";
-                    $html .= "                      <div class='d-inline-block align-middle link' ".$acaoHoverComp." ".$acaoHoverOutComp." onclick=\"compartilhar('".$id."', ".$idPublicacao.")\">\n";
+                    $html .= "                      <div class='d-inline-block align-middle link' ".$acaoHoverComp." ".$acaoHoverOutComp." ".$acaoClickComp.">\n";
                     $html .= "                          <img id='img-share-publi-".$id."' class='icone-24' src='".$iconeCompartilhou."' alt='Compartilhar'>\n";
                     $html .= "                          <p id='p-share-publi-".$id."' class='d-inline align-middle ml-2 ".$corCompartilhou."'>".$numCompartilhamentos."</p>\n";
                     $html .= "                      </div>\n";

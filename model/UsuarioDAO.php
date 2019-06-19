@@ -235,7 +235,7 @@ class UsuarioDAO extends ClassConexao {
                 $usuario->setSexo($dados->sexo);
                 $usuario->setCelular($dados->celular);
                 $usuario->setImagem($dados->imagem);
-                $usuario->setIdCidade($dados->cidade);
+                $usuario->setIdCidade($dados->id_cidade);
                 $usuario->setBio($dados->bio);
                 $usuario->setAtivo($dados->ativo);
 
