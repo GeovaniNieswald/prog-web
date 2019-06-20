@@ -138,6 +138,36 @@ body {
     background: rgb(26, 145, 218);
 }
 
+.seguir-botao {
+    font-weight: bold;
+    height: 44px;
+    background-color: rgb(153, 182, 200);
+    color: #fff;
+    border: none;
+    min-height: 32px;
+    padding: 0 16px;
+}
+
+.seguir-botao-hover {
+    cursor: pointer !important;
+    background-color: rgb(29, 161, 242) !important;
+}
+
+.seguindo-botao {
+    font-weight: bold;
+    height: 44px;
+    background-color: rgb(29, 161, 242);
+    color: #fff;
+    border: none;
+    min-height: 32px;
+    padding: 0 16px;
+}
+
+.seguindo-botao-hover {
+    cursor: pointer !important;
+    background: rgb(197, 17, 17) !important;
+}
+
 .barra-bottom {
     background-color: white;
     border-top: 1px solid #d0d4d9;

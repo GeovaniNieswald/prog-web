@@ -52,8 +52,6 @@ function compartilhar(id, idPublicacao, idUsuario, idCriador) {
 
                         p.classList.remove('compartilhou');
                         window.location.reload();
-                    } else {
-                        alert("batata");
                     }
                 }
             });            
@@ -195,6 +193,88 @@ function editarP(id) {
         });        
     }
 }
+
+$("#seguir").on("click", function(event) {
+    event.preventDefault();
+
+    var seguir = document.getElementById("seguir");
+
+    if (seguir.classList.contains('seguir-botao')) {
+        var dados = {};
+        dados.tipo = 'seguir';
+        dados.idAlvo = document.getElementById("idAlvo").value;
+        dados.idUsuario = document.getElementById("idUsuario").value;
+
+        $.ajax({
+            url: getRoot()+'controller/controllerRelacionamento',
+            type: 'POST',
+            dataType: 'json',
+            data: dados,
+            success: function (response) {
+                if (response.retorno == 'success') {
+                    seguir.classList.add('seguindo-botao');
+                    seguir.classList.remove('seguir-botao');
+                    seguir.classList.remove('seguir-botao-hover');
+                    seguir.innerHTML = 'Seguindo';
+                    window.location.reload();
+                } else {
+                    window.location.reload();
+                }
+            }
+        });
+    } else {
+        var dados = {};
+        dados.tipo = 'pararSeguir';
+        dados.idAlvo = document.getElementById("idAlvo").value;
+        dados.idUsuario = document.getElementById("idUsuario").value;
+
+        $.ajax({
+            url: getRoot()+'controller/controllerRelacionamento',
+            type: 'POST',
+            dataType: 'json',
+            data: dados,
+            success: function (response) {
+                if (response.retorno == 'success') {
+                    seguir.classList.add('seguir-botao');
+                    seguir.classList.remove('seguindo-botao');
+                    seguir.classList.remove('seguindo-botao-hover');
+                    seguir.innerHTML = 'Seguir';
+                    window.location.reload();
+                } else {
+                    window.location.reload();
+                }
+            }
+        });
+    }
+});
+
+$("#seguir").on("mouseover", function(event) {
+    event.preventDefault();
+
+    var seguir = document.getElementById("seguir");
+
+    if (seguir.classList.contains('seguir-botao')) {
+        seguir.classList.add('seguir-botao-hover');
+        
+    } else {
+        seguir.classList.add('seguindo-botao-hover');
+        seguir.innerHTML = 'Deixar de seguir';
+    }   
+});
+
+$("#seguir").on("mouseout", function(event) {
+    event.preventDefault();
+
+    var seguir = document.getElementById("seguir");
+
+    if (seguir.classList.contains('seguir-botao')) {
+        seguir.classList.remove('seguir-botao-hover');
+        
+    } else {
+        seguir.classList.remove('seguindo-botao-hover');
+        seguir.innerHTML = 'Seguindo';
+    }   
+});
 
 function posicionarBotaoFixo() {
     var divFixa = document.getElementById('botao-fixo');

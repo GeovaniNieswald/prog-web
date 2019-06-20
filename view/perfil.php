@@ -17,6 +17,11 @@
         echo "<script> (function() { window.location.href = '".DIRPAGE."404' }()); </script>";
     }
 
+    use Model\RelacionamentoDAO;
+
+    $relacionamentoDB = new RelacionamentoDAO();
+
+    $voceSegue       = $relacionamentoDB->voceSegue($usuario->getId(), $_SESSION['id']);
     $ehPerfilProprio = ($_SESSION['id'] == $usuario->getId());
 
     \Classes\ClassLayout::setHead($usuario->getNome()." (@".$usuario->getUsuario().") - Poligno News", 'Página de perfil', TRUE, 2); 
@@ -93,18 +98,27 @@
     <div class="row justify-content-center container-feed">
         <div class="col-12 col-lg p-2 bg-white text-center">
             <div class="mx-auto d-block">
-                <img src="<?php echo DIRIMG.'dallas400x400.jpg'; ?>" class="rounded-circle p-2 w-35" alt="Imagem de perfil">
-                <h4 class="p-2 font-weight-bold">Geovani Alex Nieswald</h4>
+                <img src="<?php echo ($usuario->getImagem() != null) ? DIRIMG.$usuario->getImagem().'.jpg' : DIRIMG.'user.svg'; ?>" class="rounded-circle p-2 w-35" alt="Imagem de perfil">
+                <h4 class="p-2 font-weight-bold"><?php echo $usuario->getNome()." ".$usuario->getSobrenome(); ?> </h4>
             </div>
 
-            <div class="d-inline-block p-2">
-                <p><i class="fas fa-calendar-alt mr-1"></i>30/05/1996</p>
-                <p><i class="fas fa-venus-mars mr-1"></i>Masculino</p>
-                <p><i class="fas fa-mobile-alt mr-1"></i>55 99624-6352</p>
-                <p><i class="fas fa-envelope mr-1"></i>geovaninieswald@gmail.com</p>
-                <p><i class="fa fa-map mr-1"></i>Santa Rosa - RS</p>
-                <p><i class="fa fa-address-book mr-1"></i>Estudante de Ciência da Computação</p>
+            <div class="d-block p-2">
+                <?php echo ($usuario->getNascimento() != null) ? "<p><i class='fas fa-calendar-alt mr-1'></i>".date_format(date_create($usuario->getNascimento()), 'd/m/Y')."</p>" : ""; ?>
+                <?php echo ($usuario->getSexo() != null) ? "<p><i class='fas fa-venus-mars mr-1'></i>".(($usuario->getSexo() == "F") ? "Feminino" : "Masculino")."</p>" : ""; ?>
+                <?php echo ($usuario->getCelular() != null) ? "<p><i class='fas fa-mobile-alt mr-1'></i>".$usuario->getCelular()."</p>" : ""; ?>
+                <p><i class="fas fa-envelope mr-1"></i><?php echo $usuario->getEmail(); ?></p>
+                <?php echo ($usuario->getCidade() != null) ? "<p><i class='fa fa-map mr-1'></i>".$usuario->getCidade()."</p>" : ""; ?>
+                <?php echo ($usuario->getBio() != null) ? "<p class='mb-0' ><i class='fa fa-address-book mr-1'></i>".$usuario->getBio()."</p>" : ""; ?>
             </div>
+            <?php 
+                if (!$ehPerfilProprio) {
+                    echo "<div class='d-block p-2 text-right'>\n";
+                    echo "  <input type='hidden' id='idAlvo' value='".$usuario->getId()."'>\n";
+                    echo "  <input type='hidden' id='idUsuario' value='".$_SESSION['id']."'>\n";
+                    echo "  <button type='button' id='seguir' class='".(($voceSegue) ? 'seguindo-botao' : 'seguir-botao')."'>".(($voceSegue) ? 'Seguindo' : 'Seguir')."</button>\n";
+                    echo "</div>\n";
+                }
+            ?>
         </div>
 
         <div class="col-lg d-none d-lg-block espacamento"></div>

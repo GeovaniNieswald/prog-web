@@ -14,7 +14,7 @@ class Usuario {
     private $sexo;
     private $celular;
     private $imagem;
-    private $idCidade;
+    private $cidade;
     private $bio;
     private $ativo;
 
@@ -91,11 +91,11 @@ class Usuario {
 		return $this->imagem;
 	}
 
-    public function setIdCidade($idCidade){
-		$this->idCidade = $idCidade;
+    public function setCidade($cidade){
+		$this->cidade = $cidade;
 	}
-	public function getIdCidade(){
-		return $this->idCidade;
+	public function getCidade(){
+		return $this->cidade;
 	}
 
     public function setBio($bio){
