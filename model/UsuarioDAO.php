@@ -44,11 +44,15 @@ class UsuarioDAO extends ClassConexao {
     }
 
     public function consultarUsuarioPorId($id) {
-        return $this->consultarUsuario($id);
+        return $this->consultarUsuario($id, 'id');
     }
     
     public function consultarUsuarioPorEmail($email) {
-        return $this->consultarUsuario($email, false);
+        return $this->consultarUsuario($email, 'email');
+    }
+
+    public function consultarUsuarioPorUsuario($usuario) {
+        return $this->consultarUsuario($usuario, 'usuario');
     }
 
     public function consultarPermissaoPorIdUsuario($id, $cod_permissao) {
@@ -214,8 +218,18 @@ class UsuarioDAO extends ClassConexao {
         return ($prepare->rowCount() > 0);
     }
 
-    private function consultarUsuario($campo, $id = true) {
-        $sql = ($id) ? "SELECT * FROM usuario WHERE id = :campo" : "SELECT * FROM usuario WHERE email = :campo" ;
+    private function consultarUsuario($campo, $tipo) {
+        switch ($tipo) {
+            case 'id':
+                $sql = "SELECT * FROM usuario WHERE id = :campo";
+                break;
+            case 'email':
+                $sql = "SELECT * FROM usuario WHERE email = :campo";
+                break;
+            case 'usuario':
+                $sql = "SELECT * FROM usuario WHERE usuario = :campo";
+                break;
+        }
 
         $prepare = $this->db->prepare($sql);
 
@@ -241,6 +255,8 @@ class UsuarioDAO extends ClassConexao {
 
                 return $usuario;
             }
+        } else {
+            return false;
         }
     }
 }

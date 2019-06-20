@@ -271,7 +271,15 @@ ul {
     color: #E81919;
 }
 
+.cor-vermelha:hover {
+    color: #E81919;
+}
+
 .cor-verde {
+    color: #17bf63;
+}
+
+.cor-verde:hover {
     color: #17bf63;
 }
 

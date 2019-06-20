@@ -189,4 +189,44 @@ class FeedItemDAO extends ClassConexao {
             return -1;
         }
     }
+
+    public function editar($id, $conteudo) {
+        $sql = "UPDATE publicacao SET conteudo = :conteudo, data_hora = NOW() WHERE id = :id";
+
+        $prepare = $this->db->prepare($sql);
+
+        $prepare->bindValue(':conteudo', $conteudo);
+        $prepare->bindValue(':id', $id);
+
+        if ($prepare->execute()) {
+
+            $sql = "DELETE FROM compartilhamento WHERE id_publicacao = :id";
+            $prepare = $this->db->prepare($sql);
+            $prepare->bindValue(':id', $id);
+            $prepare->execute();
+
+            $sql = "DELETE FROM curtida WHERE id_publicacao = :id";
+            $prepare = $this->db->prepare($sql);
+            $prepare->bindValue(':id', $id);
+            $prepare->execute();
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function apagar($id) {
+        $sql = "DELETE FROM publicacao WHERE id = :id";
+
+        $prepare = $this->db->prepare($sql);
+
+        $prepare->bindValue(':id', $id);
+
+        if ($prepare->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

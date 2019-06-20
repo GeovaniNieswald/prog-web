@@ -1,10 +1,10 @@
 <?php 
     \Classes\ClassLayout::setHeadRestrito('user');
-    \Classes\ClassLayout::setHead('Feed - Poligno News', 'Página de feed', FALSE, TRUE); 
+    \Classes\ClassLayout::setHead('Feed - Poligno News', 'Página de feed', FALSE, 1); 
 ?>
 
 <div class="container-fluid p-0"> 
-    <navbar class="row fixed-top justify-content-center barra-top">
+    <nav class="row fixed-top justify-content-center barra-top">
         <div class="row justify-content-center navbar-wrapper">
             <div class="col col-lg-1 text-center">
                 <a href="<?php echo DIRPAGE.'home'; ?>"><img class="icone-32" src="<?php echo DIRICONE.'home.svg'; ?>" alt="Feed"></a>
@@ -69,7 +69,7 @@
                 </nav>
             </div>
         </div>				
-    </navbar>
+    </nav>
 
     <div id="feed-container" class="row justify-content-center container-feed">
         <div class="col-12 col-lg bg-white">
@@ -164,4 +164,4 @@
     </div>
 </div>
 
-<?php \Classes\ClassLayout::setFooter(TRUE); ?>
+<?php \Classes\ClassLayout::setFooter(1); ?>

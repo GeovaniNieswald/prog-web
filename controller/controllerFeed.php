@@ -7,6 +7,7 @@ $idPublicacao = (isset($_POST['idPublicacao'])) ? $_POST['idPublicacao'] : null;
 $idUsuario    = (isset($_POST['idUsuario'])) ? $_POST['idUsuario'] : null;
 $conteudo     = (isset($_POST['conteudo'])) ? $_POST['conteudo'] : null;
 $idCriador    = (isset($_POST['idCriador'])) ? $_POST['idCriador'] : null;
+$id           = (isset($_POST['id'])) ? $_POST['id'] : null;
 
 if ($tipo != null) {
     switch ($tipo) {
@@ -83,6 +84,34 @@ if ($tipo != null) {
                 ];
             }
 
+            break;
+        case "editar":
+            $resultado = $feedItemDB->editar($id, $conteudo);
+        
+            if ($resultado) {
+                $arrResponse = [
+                    "retorno"=>"success"
+                ];
+            } else {
+                $arrResponse = [
+                    "retorno"=>"erro"
+                ];
+            }
+            
+            break;
+        case "apagar":
+            $resultado = $feedItemDB->apagar($id);
+        
+            if ($resultado) {
+                $arrResponse = [
+                    "retorno"=>"success"
+                ];
+            } else {
+                $arrResponse = [
+                    "retorno"=>"erro"
+                ];
+            }
+            
             break;
     }
 

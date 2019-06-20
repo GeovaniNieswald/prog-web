@@ -139,6 +139,63 @@ function curtir(id, idPublicacao, idUsuario) {
     }
 }
 
+function apagar(id) {
+    var r = confirm("Deseja mesmo apagar a publicação?");
+
+    if (r) {
+        var dados = {};
+        dados.tipo = 'apagar';
+        dados.id = id;
+
+        $.ajax({
+            url: getRoot()+'controller/controllerFeed',
+            type: 'POST',
+            dataType: 'json',
+            data: dados,
+            success: function (response) {
+                if (response.retorno == 'success') {
+                    alert("Publicação apagada com sucesso!");
+                    window.location.reload();
+                } else {
+                    alert("Não foi possível apagar sua publicação!");
+                }
+            }
+        });        
+    }
+}
+
+function editar(id, conteudo) {
+    $('#editor-p').trumbowyg('html', conteudo);
+
+    document.getElementById("salvar").onclick = function () { editarP(id); };
+}
+
+function editarP(id) {
+    var r = confirm("Deseja mesmo editar a publicação? Isso excluira todos os compartilhamentos e curtidas da publicação!");
+
+    if (r) {
+        var dados = {};
+        dados.tipo     = 'editar';
+        dados.id       = id;
+        dados.conteudo = $('#editor-p').trumbowyg('html');
+
+        $.ajax({
+            url: getRoot()+'controller/controllerFeed',
+            type: 'POST',
+            dataType: 'json',
+            data: dados,
+            success: function (response) {
+                if (response.retorno == 'success') {
+                    alert("Publicação editada com sucesso!");
+                    window.location.reload();
+                } else {
+                    alert("Não foi possível editar sua publicação!");
+                }
+            }
+        });        
+    }
+}
+
 function posicionarBotaoFixo() {
     var divFixa = document.getElementById('botao-fixo');
     var divFeed = document.getElementById('feed-container');

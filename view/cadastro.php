@@ -5,11 +5,11 @@
 
 <div class="wrapper">
     <div class="container-fluid m-auto"> 
-        <navbar class="row fixed-top justify-content-center barra-top">
+        <nav class="row fixed-top justify-content-center barra-top">
             <div class="col text-center">
                 <img class="icone-32" src="<?php echo DIRICONE.'logo.svg'; ?>" alt="Logo">
             </div>
-        </navbar>
+        </nav>
 
         <div class="row justify-content-center pl-2 pr-2 container-cadastro">
             <div class="col-12 col-sm-11 col-md-9 col-lg-7 col-xl-4 bg-white p-4">		

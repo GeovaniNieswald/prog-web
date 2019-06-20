@@ -7,13 +7,23 @@
         echo "<script> (function() { window.location.href = '".DIRPAGE."404' }()); </script>";
     }
 
-    // buscar usuario 
+    use Model\UsuarioDAO;
 
-    \Classes\ClassLayout::setHead($_SESSION["nome"]." (@".$_SESSION["usuario"].") - Poligno News", 'Página de perfil', TRUE, FALSE); 
+    $usuarioDB = new UsuarioDAO();
+
+    $usuario = $usuarioDB->consultarUsuarioPorUsuario($usuarioParam);
+
+    if ($usuario == false) {
+        echo "<script> (function() { window.location.href = '".DIRPAGE."404' }()); </script>";
+    }
+
+    $ehPerfilProprio = ($_SESSION['id'] == $usuario->getId());
+
+    \Classes\ClassLayout::setHead($usuario->getNome()." (@".$usuario->getUsuario().") - Poligno News", 'Página de perfil', TRUE, 2); 
 ?>
 
 <div class="container-fluid">
-    <navbar class="row fixed-top justify-content-center barra-top">
+    <nav class="row fixed-top justify-content-center barra-top">
         <div class="row justify-content-center navbar-wrapper">
             <div class="col col-lg-1 text-center">
                 <a href="<?php echo DIRPAGE.'home'; ?>"><img class="icone-32" src="<?php echo DIRICONE.'home-off.svg'; ?>" alt="Feed"></a>
@@ -78,7 +88,7 @@
                 </nav>
             </div>
         </div>				
-    </navbar>
+    </nav>
 
     <div class="row justify-content-center container-feed">
         <div class="col-12 col-lg p-2 bg-white text-center">
@@ -108,7 +118,7 @@
 
                     <div class="row">
                         <ul class="col m-0">
-                            <?php \Classes\ClassRelacionamento::setSeguidores(0, TRUE); ?>
+                            <?php \Classes\ClassRelacionamento::setSeguidores($usuario->getId(), ($ehPerfilProprio) ? FALSE : TRUE); ?>
                         </ul>
                     </div>
 
@@ -126,7 +136,7 @@
 
                     <div class="row">
                         <ul class="col m-0">
-                            <?php \Classes\ClassRelacionamento::setSeguindo(0, TRUE); ?>
+                            <?php \Classes\ClassRelacionamento::setSeguindo($usuario->getId(), ($ehPerfilProprio) ? FALSE : TRUE); ?>
                         </ul>
                     </div>
 
@@ -141,27 +151,40 @@
     <div class="row justify-content-center mb-4 container-publi">
         <div class="col bg-white p-4">
             <div class="row text-center m-0">
-                <h3 class="font-weight-bold m-auto">Minhas Publicações</h3>
+                <h3 class="font-weight-bold m-auto">Publicações</h3>
             </div>
 
             <div class="row ml-0 mr-0 mt-4">
                 <table class="w-100 text-center borda-left-right" rules="all" frame="hsides">
                     <tr>
-                        <th>Id</th>
+                        <th>Data Hora</th>
                         <th>Resumo</th>
-                        <th>Data</th>
-                        <th>Ver</th>
+                        <?php echo ($ehPerfilProprio) ? "<th>Editar</th>" : ""; ?>                        
+                        <?php echo ($ehPerfilProprio) ? "<th>Apagar</th>" : ""; ?>                        
                     </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>Lorem Ipsum is simply dummy text of...</td>
-                        <td>05/04/2019</td>
-                        <td><a href="" class="link-azul"><i class="fas fa-external-link-alt"></i></a></td>
-                    </tr>
+                    <?php \Classes\ClassFeed::setPubliComps($usuario->getId(), ($ehPerfilProprio) ? TRUE : FALSE); ?>
                 </table>            
             </div>
         </div>
     </div>
 </div>
 
-<?php \Classes\ClassLayout::setFooter(); ?>
+<div class="modal fade pl-1 pr-1" id="myModal" role="dialog">
+    <div class="modal-dialog container-feed">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close mt-auto mb-auto ml-0 mr-0 p-0" data-dismiss="modal">&times;</button>
+                <h5 class="modal-title mt-auto mb-auto">Editar Publicação</h4>
+            </div>
+            <div class="modal-body">
+                <div id="editor-p"></div>
+            </div>
+                <div class="modal-footer">
+                    <button type="button" id="salvar" class="login-botao">Salvar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php \Classes\ClassLayout::setFooter(2); ?>

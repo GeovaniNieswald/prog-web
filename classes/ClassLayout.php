@@ -15,7 +15,7 @@ class ClassLayout {
     }
 
     # Setar as tags do head
-    public static function setHead($title, $description, $faPag = FALSE, $editor = FALSE) {
+    public static function setHead($title, $description, $faPag = FALSE, $editor = 0) {
         $bootstrap = DIRCSS.'bootstrap.min.css';
         $favicon   = DIRICONE.'favicon/';
         $estilo    = DIRCSS.'estilo.css';
@@ -47,7 +47,7 @@ class ClassLayout {
             $html .= "\n  <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.8.1/css/all.css' integrity='sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf' crossorigin='anonymous'>\n";
         }
 
-        if ($editor) {   
+        if ($editor == 1 || $editor == 2) {   
             $html .= "  <link rel='stylesheet' href='".$editorCss."trumbowyg.min.css'>\n";
         }
 
@@ -56,7 +56,7 @@ class ClassLayout {
         $html .= "  <title>$title</title>\n";
         $html .= "</head>\n";
 
-        if ($editor) {
+        if ($editor == 1) {
             $html .= "<body class='p-0' onload='posicionarBotaoFixo()' onresize='posicionarBotaoFixo()'>\n";
         } else {
             $html .= "<body>\n";
@@ -66,7 +66,7 @@ class ClassLayout {
     }
 
     # Setar as tags do footer
-    public static function setFooter($editor = FALSE) {
+    public static function setFooter($editor = 0) {
         $jquery        = DIRJS.'jquery-3.4.1.min.js';
         $bootstrap     = DIRJS.'bootstrap.min.js';
         $vanillaMasker = DIRJS.'vanilla-masker.min.js';
@@ -78,10 +78,10 @@ class ClassLayout {
         $html .= "<script type='text/javascript' src='$vanillaMasker'></script>\n";
         $html .= "<script type='text/javascript' src='$script'></script>\n\n";
 
-        if ($editor) {
+        if ($editor != 0) {
             $html .= "<script src='".$editorJS."trumbowyg.min.js'></script>\n";
             $html .= "<script type='text/javascript' src='".$editorJS."langs/pt_br.min.js'></script>\n";
-            $html .= "<script> $('#editor').trumbowyg({lang: 'pt_br'}); </script>\n";
+            $html .= ($editor == 1) ? "<script> $('#editor').trumbowyg({lang: 'pt_br'}); </script>\n" : "<script> $('#editor-p').trumbowyg({lang: 'pt_br'}); </script>\n";
         }
         
         $html .= "\n";

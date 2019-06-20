@@ -123,4 +123,40 @@ class ClassFeed {
 
         echo $html; 
     }
+
+    public static function setPubliComps($id, $ehPerfilProprio) {
+        $idUsuarioSistema = $id;
+
+        $html = "";
+
+        $feedItemDB = new Model\FeedItemDAO();
+
+        $lista = $feedItemDB->consultarItensPorId($id);
+        if ($lista != null) {
+            foreach ($lista as $feedItem) {
+                $publicacao    = $feedItem->isPublicacao();
+                
+                $id            = $feedItem->getId();
+                $dataHora      = $feedItem->getDataHora();
+                $conteudo      = $feedItem->getConteudo();
+
+                $conteudoAux   = $conteudo;
+
+                $conteudoLimpo = strip_tags($conteudo);
+
+                if ($publicacao == 1) {
+                    $html .= "<tr>\n";
+                    $html .= "  <td>".$dataHora."</td>\n";
+                    $html .= "  <td>".substr($conteudoLimpo, 0, 10)."...</td>\n";
+
+                    ($ehPerfilProprio) ? $html .= "  <td><a href='#' data-toggle='modal' data-target='#myModal' class='cor-verde' onclick=\"editar(".$id.", '".$conteudoAux."')\"><i class='fas fa-edit'></i></a></td>\n" : "";
+                    ($ehPerfilProprio) ? $html .= "  <td><a href='#' class='cor-vermelha' onclick=\"apagar(".$id.")\"><i class='fas fa-trash'></i></a></td>\n" : "";
+                    
+                    $html .= "</tr>\n";
+                } 
+            }
+        } 
+
+        echo $html; 
+    }
 }

@@ -108,9 +108,9 @@ CREATE TABLE compartilhamento (
     data_hora DATETIME NOT NULL,
     
     PRIMARY KEY (id),
-    CONSTRAINT fk_usuario_compartilhamento FOREIGN KEY (id_usuario) REFERENCES usuario(id),
-    CONSTRAINT fk_criador_compartilhamento FOREIGN KEY (id_criador) REFERENCES usuario(id),
-    CONSTRAINT fk_publicacao_compartilhamento FOREIGN KEY (id_publicacao) REFERENCES publicacao(id)
+    CONSTRAINT fk_usuario_compartilhamento FOREIGN KEY (id_usuario) REFERENCES usuario(id) ON DELETE CASCADE,
+    CONSTRAINT fk_criador_compartilhamento FOREIGN KEY (id_criador) REFERENCES usuario(id) ON DELETE CASCADE,
+    CONSTRAINT fk_publicacao_compartilhamento FOREIGN KEY (id_publicacao) REFERENCES publicacao(id) ON DELETE CASCADE
 );
 
 CREATE TABLE curtida (
@@ -119,6 +119,6 @@ CREATE TABLE curtida (
     id_publicacao INT NOT NULL,
     
     PRIMARY KEY (id),
-    CONSTRAINT fk_usuario_curtida FOREIGN KEY (id_usuario) REFERENCES usuario(id),
-    CONSTRAINT fk_publicacao_curtida FOREIGN KEY (id_publicacao) REFERENCES publicacao(id)
+    CONSTRAINT fk_usuario_curtida FOREIGN KEY (id_usuario) REFERENCES usuario(id) ON DELETE CASCADE,
+    CONSTRAINT fk_publicacao_curtida FOREIGN KEY (id_publicacao) REFERENCES publicacao(id) ON DELETE CASCADE
 );
