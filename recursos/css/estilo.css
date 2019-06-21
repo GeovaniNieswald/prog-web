@@ -418,5 +418,32 @@ ul {
     min-width: 150px;
 }
 
+/* --------- ↓↓ css página 404 ↓↓ ----------- */
+.p404 {
+    font-weight: bold;
+    color: blue;
+    text-align: center;
+    align-items: center;
+}
+
+.centro {
+    display: block;
+    align-items: center;
+    text-align: center;
+}
+
+.topo {
+    margin-top: 25px;
+    margin-bottom: 25px;
+    margin-left: auto;
+    margin-left: auto;
+}
+
+.tp404{
+    font-weight: bold;
+    font-size: 16pt;
+}
+/* --------- ↑↑ css página 404 ↑↑ ----------- */
+
 
 /* azul primário = 1b95e0     cinza primário = 637381    vermelho = E81919   compartilhar = 17bf63 */
