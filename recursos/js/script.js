@@ -401,7 +401,7 @@ if(myEle){
 
 var myEle2 = document.getElementById("celular");
 if(myEle2){
-    VMasker(document.querySelector("#celular")).maskPattern("(99) 999999999");
+    VMasker(document.querySelector("#celular")).maskPattern("(99) 99999-9999");
 }
 
 //Ajax do formulário de cadastro

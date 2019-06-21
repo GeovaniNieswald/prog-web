@@ -14,3 +14,8 @@ INSERT INTO permissoes (id_usuario, codigo_permissao) VALUES
 (1, 2),
 (2, 2),
 (3, 2);
+
+INSERT INTO relacionamento (id_seguidor, id_seguido) VALUES 
+(1,2),
+(3,1),
+(2,1);

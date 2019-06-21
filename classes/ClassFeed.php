@@ -27,7 +27,7 @@ class ClassFeed {
                 $idCriador            = $feedItem->getIdCriador();
                 $nomeCriador          = $feedItem->getNomeCriador();
                 $usuarioCriador       = $feedItem->getUsuarioCriador();
-                $imagemCriador        = ($feedItem->getImagemCriador() != null) ? DIRIMG.$feedItem->getImagemCriador().'.jpg' : DIRIMG.'user.svg' ;
+                $imagemCriador        = ($feedItem->getImagemCriador() != null) ? DIRIMG.$feedItem->getImagemCriador() : DIRIMG.'user.svg' ;
                 $idPublicacao         = $feedItem->getIdPublicacao();
                 $dataHora             = $feedItem->getDataHora();
                 $numLikes             = $feedItem->getNumLikes();
@@ -131,7 +131,7 @@ class ClassFeed {
 
         $feedItemDB = new Model\FeedItemDAO();
 
-        $lista = $feedItemDB->consultarItensPorId($id);
+        $lista = $feedItemDB->consultarItensPorId($id, true);
         if ($lista != null) {
             foreach ($lista as $feedItem) {
                 $publicacao    = $feedItem->isPublicacao();

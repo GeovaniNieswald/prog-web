@@ -19,7 +19,7 @@ class ClassRelacionamento {
             foreach ($lista as $relacionamento) {
                 $usuario = $usuarioDB->consultarUsuarioPorId($relacionamento->getIdSeguidor());
 
-                $imagem = ($usuario->getImagem() != null) ? DIRIMG.$usuario->getImagem().'.jpg' : DIRIMG.'user.svg' ;
+                $imagem = ($usuario->getImagem() != null) ? DIRIMG.$usuario->getImagem() : DIRIMG.'user.svg' ;
 
                 $html .= "<li>\n";
                 $html .= "  <a class='row border-b pt-2 pb-2 link fundo-hover' href='".$perfil.$usuario->getUsuario()."'>\n";
@@ -61,7 +61,7 @@ class ClassRelacionamento {
             foreach ($lista as $relacionamento) {
                 $usuario = $usuarioDB->consultarUsuarioPorId($relacionamento->getIdSeguido());
 
-                $imagem = ($usuario->getImagem() != null) ? DIRIMG.$usuario->getImagem().'.jpg' : DIRIMG.'user.svg' ;
+                $imagem = ($usuario->getImagem() != null) ? DIRIMG.$usuario->getImagem() : DIRIMG.'user.svg' ;
 
                 $html .= "<li>\n";
                 $html .= "  <a class='row border-b pt-2 pb-2 link fundo-hover' href='".$perfil.$usuario->getUsuario()."'>\n";

@@ -44,7 +44,7 @@ class UsuarioDAO extends ClassConexao {
     }
 
     public function editarUsuario(Usuario $usuario) {
-        $sql = "UPDATE usuario SET nome = :nome, sobrenome = :sobrenome, nascimento = :nascimento, sexo = :sexo, celular = :celular, imagem = :imagem, cidade = :cidade, bio = :bio WHERE email = :email";
+        $sql = ($usuario->getImagem() != null) ? "UPDATE usuario SET nome = :nome, sobrenome = :sobrenome, nascimento = :nascimento, sexo = :sexo, celular = :celular, imagem = :imagem, cidade = :cidade, bio = :bio WHERE email = :email" : "UPDATE usuario SET nome = :nome, sobrenome = :sobrenome, nascimento = :nascimento, sexo = :sexo, celular = :celular, cidade = :cidade, bio = :bio WHERE email = :email";
 
         $prepare = $this->db->prepare($sql);
 
@@ -53,7 +53,11 @@ class UsuarioDAO extends ClassConexao {
         $prepare->bindValue(':nascimento', $usuario->getNascimento());
         $prepare->bindValue(':sexo', $usuario->getSexo());
         $prepare->bindValue(':celular', $usuario->getCelular());
-        $prepare->bindValue(':imagem', $usuario->getImagem());
+
+        if ($usuario->getImagem() != null) {
+            $prepare->bindValue(':imagem', $usuario->getImagem());
+        }
+        
         $prepare->bindValue(':cidade', $usuario->getCidade());
         $prepare->bindValue(':bio', $usuario->getBio());
 

@@ -21,7 +21,7 @@ class ClassUpload {
         $this->usuarioDB = new UsuarioDAO();
 
         $this->tiposPermitidos = array('image/gif', 'image/jpeg', 'image/jpg', 'image/png');
-        $this->tamanhoPermitido = 1024 * 500; // 500 Kb
+        $this->tamanhoPermitido = 1024 * 2000; // 2000 Kb
 
         $this->arqName  = $arqName;
         $this->arqType  = $arqType;
