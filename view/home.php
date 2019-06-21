@@ -27,7 +27,7 @@
                     <ul>  
                         <li> 
                             <a href="#" class="navbar-user">
-                                <img src="<?php echo ($_SESSION['imagem'] != null) ? DIRIMG.$_SESSION['imagem'].'.jpg' : DIRIMG.'user.svg'; ?>" class="navbar-user-icon img-redonda-pequena" alt="Imagem de perfil">
+                                <img src="<?php echo ($_SESSION['imagem'] != null) ? DIRIMG.$_SESSION['imagem'] : DIRIMG.'user.svg'; ?>" class="navbar-user-icon img-redonda-pequena" alt="Imagem de perfil">
                                 <?php echo $_SESSION['nome'] ?>
                             </a>
                             <ul id="subMenu">
@@ -51,7 +51,7 @@
                 <nav class="menu">  
                     <ul>  
                         <li>
-                            <a href="#" class="navbar-user"><img src="<?php echo ($_SESSION['imagem'] != null) ? DIRIMG.$_SESSION['imagem'].'.jpg' : DIRIMG.'user.svg'; ?>" class="navbar-user-icon img-redonda-pequena" alt="Imagem de perfil"></a>
+                            <a href="#" class="navbar-user"><img src="<?php echo ($_SESSION['imagem'] != null) ? DIRIMG.$_SESSION['imagem'] : DIRIMG.'user.svg'; ?>" class="navbar-user-icon img-redonda-pequena" alt="Imagem de perfil"></a>
                             <ul id="subMenuP">
                                 <li onmouseover="hover('perfil', 0)" onmouseout="hoverOut('perfil', 0)">
                                     <a href="<?php echo DIRPAGE.'perfil/'.$_SESSION['usuario']; ?>" class="navbar-user">
@@ -79,7 +79,7 @@
 
             <div class="row border-b">
                 <div class="col-sm-2 d-none d-sm-flex ">
-                    <a href="<?php echo DIRPAGE.'perfil/'.$_SESSION['usuario']; ?>" class="m-auto link"><img class="img-redonda" src="<?php echo ($_SESSION['imagem'] != null) ? DIRIMG.$_SESSION['imagem'].'.jpg' : DIRIMG.'user.svg'; ?>" alt="Imagem de perfil"></a>
+                    <a href="<?php echo DIRPAGE.'perfil/'.$_SESSION['usuario']; ?>" class="m-auto link"><img class="img-redonda" src="<?php echo ($_SESSION['imagem'] != null) ? DIRIMG.$_SESSION['imagem'] : DIRIMG.'user.svg'; ?>" alt="Imagem de perfil"></a>
                 </div>
                 <div class="col-sm-10 d-none d-sm-inline p-0">
                     <div class="mt-3 mb-3 mr-3 pt-2 pb-2 pl-3 link input-r20" data-toggle="modal" data-target="#myModal">Qual a notícia?</div>
@@ -153,12 +153,13 @@
                 <button type="button" class="close mt-auto mb-auto ml-0 mr-0 p-0" data-dismiss="modal">&times;</button>
                 <h5 class="modal-title mt-auto mb-auto">Qual a notícia?</h4>
             </div>
+
             <div class="modal-body">
                 <div id="editor"></div>
             </div>
-                <div class="modal-footer">
-                    <button  onclick="publicar(<?php echo $_SESSION['id']; ?>)" type="button" class="login-botao">Publicar</button>
-                </div>
+            
+            <div class="modal-footer">
+                <button  onclick="publicar(<?php echo $_SESSION['id']; ?>)" type="button" class="login-botao">Publicar</button>
             </div>
         </div>
     </div>

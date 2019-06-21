@@ -35,11 +35,9 @@ class ClassMail {
             $this->mail->Subject = $assunto;
             $this->mail->Body    = $corpoEmail;
         
-            $this->mail->send();
-            echo 'Message has been sent';
+            return $this->mail->send();
         } catch (Exception $e) {
-            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+            return false;
         }
     }
-
 }

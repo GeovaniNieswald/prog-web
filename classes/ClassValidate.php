@@ -9,6 +9,7 @@ use ZxcvbnPhp\Zxcvbn;
 use Classes\ClassPassword;
 use Classes\ClassSessions;
 use Classes\ClassMail;
+use Classes\ClassUpload;
 
 class ClassValidate {
 
@@ -149,7 +150,7 @@ class ClassValidate {
                 "erros"=>$this->getErro()
             ];
         } else {
-            $this->mail->sendMail(
+            $resposta = $this->mail->sendMail(
                 $arrVar['email'], 
                 $arrVar['nome'], 
                 $arrVar['token'], 
@@ -160,23 +161,62 @@ class ClassValidate {
                 "
             );
 
+            if ($resposta) {
+                $arrResponse = [
+                    "retorno"=>"success",
+                    "erros"=>null
+                ];
+
+                $usuario = new Usuario();
+                $usuario->setNome($arrVar['nome']);
+                $usuario->setSobrenome($arrVar['sobrenome']);
+                $usuario->setEmail($arrVar['email']);
+                $usuario->setUsuario($arrVar['usuario']);
+                $usuario->setSenha($arrVar['hashSenha']);
+
+                $confirmation = new Confirmation();
+                $confirmation->setEmail($arrVar['email']);
+                $confirmation->setToken($arrVar['token']);
+
+                $this->usuarioDB->inserirUsuario($usuario, $confirmation);
+            } else {
+                $this->setErro("Não foi possível enviar o e-mail!");
+
+                $arrResponse = [
+                    "retorno"=>"erro",
+                    "erros"=>$this->getErro()
+                ];
+            }
+        }
+
+        return json_encode($arrResponse);
+    }
+
+    public function validateFinalEditar($arqName, $arqType, $arqSize, $arqTemp, $arqError, $arrVar) {
+        if (count($this->getErro()) > 0) {
             $arrResponse = [
-                "retorno"=>"success",
-                "erros"=>null
+                "retorno"=>"erro",
+                "erros"=>$this->getErro()
             ];
+        } else {
+            $upload = new ClassUpload($arqName, $arqType, $arqSize, $arqTemp, $arqError);
+            $resposta = $upload->fazerUpload($arrVar);
 
-            $usuario = new Usuario();
-            $usuario->setNome($arrVar['nome']);
-            $usuario->setSobrenome($arrVar['sobrenome']);
-            $usuario->setEmail($arrVar['email']);
-            $usuario->setUsuario($arrVar['usuario']);
-            $usuario->setSenha($arrVar['hashSenha']);
+            if ($resposta == "Perfil editado com sucesso!") {
+                $this->session->setSessions($arrVar['email'], $_SESSION["lembrar"]);
 
-            $confirmation = new Confirmation();
-            $confirmation->setEmail($arrVar['email']);
-            $confirmation->setToken($arrVar['token']);
+                $arrResponse = [
+                    "retorno"=>"success",
+                    "erros"=>null
+                ];
+            } else {
+                $this->setErro($resposta);
 
-            $this->usuarioDB->inserirUsuario($usuario, $confirmation);
+                $arrResponse = [
+                    "retorno"=>"erro",
+                    "erros"=>$this->getErro()
+                ];
+            }
         }
 
         return json_encode($arrResponse);
@@ -238,7 +278,7 @@ class ClassValidate {
                 "erros"=>$this->getErro()
             ];
         } else {
-            $this->mail->sendMail(
+            $resultado = $this->mail->sendMail(
                 $arrVar['email'], 
                 $arrVar['nome'], 
                 $arrVar['token'], 
@@ -249,16 +289,25 @@ class ClassValidate {
                 "
             );
 
-            $arrResponse = [
-                "retorno"=>"success",
-                "erros"=>null
-            ];
-            
-            $confirmation = new Confirmation();
-            $confirmation->setEmail($arrVar['email']);
-            $confirmation->setToken($arrVar['token']);
+            if ($resultado) {
+                $arrResponse = [
+                    "retorno"=>"success",
+                    "erros"=>null
+                ];
 
-            $this->usuarioDB->inserirConfirmation($confirmation);
+                $confirmation = new Confirmation();
+                $confirmation->setEmail($arrVar['email']);
+                $confirmation->setToken($arrVar['token']);
+
+                $this->usuarioDB->inserirConfirmation($confirmation);
+            } else {
+                $this->setErro("Não foi possível enviar e-mail!");
+
+                $arrResponse = [
+                    "retorno"=>"erro",
+                    "erros"=>$this->getErro()
+                ];
+            }
         }
 
         return json_encode($arrResponse);

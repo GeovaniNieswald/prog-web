@@ -318,6 +318,10 @@ ul {
     margin-bottom: 51px;
 }
 
+.mw-25 {
+    max-width: 25%;
+}
+
 .w-35 {
     width: 35%;
 }
@@ -401,5 +405,18 @@ ul {
     color: white !important;
 }
 /* ---------↑↑ menu perfil e sair ↑↑----------- */
+
+.image-upload>input {
+    display: none;
+}
+
+#imgPerfil:hover {
+    cursor: pointer;
+}
+
+.editar-campos {
+    min-width: 150px;
+}
+
 
 /* azul primário = 1b95e0     cinza primário = 637381    vermelho = E81919   compartilhar = 17bf63 */

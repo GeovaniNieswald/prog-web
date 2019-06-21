@@ -11,6 +11,13 @@ $token     = (isset($_POST['token'])) ? $_POST['token'] : bin2hex(random_bytes(6
 
 $lembrar   = (isset($_POST['lembrar'])) ? filter_input(INPUT_POST, 'lembrar') : null;
 
+$nascimento = (isset($_POST['nascimento'])) ? filter_input(INPUT_POST, 'nascimento', FILTER_SANITIZE_FULL_SPECIAL_CHARS) : null;
+$nascimento = ($nascimento != null) ? date('Y-m-d', strtotime(str_replace('/', '-', $nascimento))) : null;
+$sexo       = (isset($_POST['sexo'])) ? $_POST['sexo'] : null;
+$celular    = (isset($_POST['celular'])) ? $_POST['celular'] : null;
+$cidade     = (isset($_POST['cidade'])) ? $_POST['cidade'] : null;
+$bio        = (isset($_POST['bio'])) ? $_POST['bio'] : null;
+
 if (isset($_POST['senha'])) {
     $senha = $_POST['senha']; 
     $hashSenha = $objPass->passwordHash($senha);
@@ -26,5 +33,10 @@ $arrVar = [
     "email"=>$email,
     "senha"=>$senha,
     "hashSenha"=>$hashSenha,
-    "token"=>$token
+    "token"=>$token,
+    "nascimento"=>$nascimento,
+    "sexo"=>$sexo,
+    "celular"=>$celular,
+    "cidade"=>$cidade,
+    "bio"=>$bio
 ];

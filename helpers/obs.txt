@@ -15,3 +15,12 @@ LINUX:
 
 3º Salvar a alteração e reiniciar o servidor:
     sudo service apache2 restart
+
+---------------------------------------
+
+Para fazer upload de img 
+
+upload_tmp_dir    <- colocar um diretorio que o usuario tenha permissão (php.ini)
+
+remover ; do começo
+ex : upload_tmp_dir = /tmp

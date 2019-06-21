@@ -381,8 +381,10 @@ document.addEventListener("click", function(event) {
             subMenuP.classList.remove('subMenuVisible');            
         }
     } else {
-        subMenu.classList.remove('subMenuVisible');
-        subMenuP.classList.remove('subMenuVisible');            
+        if(subMenu && subMenuP) {
+            subMenu.classList.remove('subMenuVisible');
+            subMenuP.classList.remove('subMenuVisible');   
+        }
     }   
 });
 
@@ -392,7 +394,15 @@ function getRoot() {
     return root;
 }
 
-//https://youtu.be/qTDVv3Ddu7s?t=648 máscaras
+var myEle = document.getElementById("nascimento");
+if(myEle){
+    VMasker(document.querySelector("#nascimento")).maskPattern("99/99/9999");
+}
+
+var myEle2 = document.getElementById("celular");
+if(myEle2){
+    VMasker(document.querySelector("#celular")).maskPattern("(99) 999999999");
+}
 
 //Ajax do formulário de cadastro
 $("#formCadastro").on("submit", function(event) {
@@ -417,10 +427,11 @@ $("#formCadastro").on("submit", function(event) {
 
                 alert(msg);
             } else {
-                alert("Cadastro realizado com sucesso!");
+                alert("Cadastro realizado com sucesso, confirme seu cadastro no e-mail!");
+                window.location.href = getRoot()+'index';
             }
         }
-    });
+    });  
 });
 
 //Ajax do formulário de login
@@ -480,6 +491,7 @@ $("#formSenha").on("submit", function(event) {
                 alert(msg);
             } else {
                 alert("Redefinição de senha enviada com sucesso!");
+                window.location.href = getRoot()+'index';
             }
         }
     });
@@ -508,4 +520,54 @@ $("#formRedSenha").on("submit", function(event) {
             }
         }
     });
+});
+
+//Ajax do formulário de edição de perfil
+$("#formEditar").on("submit", function(event) {
+    event.preventDefault();
+
+    var formData = new FormData(this);
+
+    $.ajax({
+        url: getRoot()+'controller/controllerPerfil',
+        type: 'POST',
+        data: formData,
+        success: function (data) {
+            var response = JSON.parse(data);
+            
+            if (response.retorno == 'success') {
+                alert("Perfil editado com sucesso!");
+                window.location.reload();
+            } else {
+                var msg = "";
+
+                $.each(response.erros, function(key, value) {
+                    msg += value + '\n';
+                });
+
+                msg = msg.substr(0, (msg.length - 1));
+
+                alert(msg);
+            }
+        },
+        cache: false,
+        contentType: false,
+        processData: false
+    });
+});
+
+function readURL(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+      
+      reader.onload = function(e) {
+        $('#imgPerfil').attr('src', e.target.result);
+      }
+      
+      reader.readAsDataURL(input.files[0]);
+    }
+}
+
+$("#file-input").change(function() {
+    readURL(this);
 });

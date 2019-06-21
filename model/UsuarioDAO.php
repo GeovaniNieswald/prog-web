@@ -43,6 +43,25 @@ class UsuarioDAO extends ClassConexao {
         $this->inserirConfirmation($confirmation);
     }
 
+    public function editarUsuario(Usuario $usuario) {
+        $sql = "UPDATE usuario SET nome = :nome, sobrenome = :sobrenome, nascimento = :nascimento, sexo = :sexo, celular = :celular, imagem = :imagem, cidade = :cidade, bio = :bio WHERE email = :email";
+
+        $prepare = $this->db->prepare($sql);
+
+        $prepare->bindValue(':nome', $usuario->getNome());
+        $prepare->bindValue(':sobrenome', $usuario->getSobrenome());
+        $prepare->bindValue(':nascimento', $usuario->getNascimento());
+        $prepare->bindValue(':sexo', $usuario->getSexo());
+        $prepare->bindValue(':celular', $usuario->getCelular());
+        $prepare->bindValue(':imagem', $usuario->getImagem());
+        $prepare->bindValue(':cidade', $usuario->getCidade());
+        $prepare->bindValue(':bio', $usuario->getBio());
+
+        $prepare->bindValue(':email', $usuario->getEmail());
+
+        return $prepare->execute();
+    }
+
     public function consultarUsuarioPorId($id) {
         return $this->consultarUsuario($id, 'id');
     }
@@ -227,7 +246,7 @@ class UsuarioDAO extends ClassConexao {
                 $sql = "SELECT * FROM usuario WHERE email = :campo";
                 break;
             case 'usuario':
-                $sql = "SELECT USER.*, CONCAT(C.nome, ' - ', E.uf) AS cidade FROM usuario AS USER LEFT JOIN cidade AS C ON USER.id_cidade = C.id LEFT JOIN estado AS E ON C.id_estado = E.id WHERE usuario = :campo";
+                $sql = "SELECT * FROM usuario WHERE usuario = :campo";
                 break;
         }
 
@@ -248,12 +267,8 @@ class UsuarioDAO extends ClassConexao {
                 $usuario->setNascimento($dados->nascimento);                
                 $usuario->setSexo($dados->sexo);
                 $usuario->setCelular($dados->celular);
-                $usuario->setImagem($dados->imagem);
-                if ($tipo == 'usuario'){
-                    $usuario->setCidade($dados->cidade);
-                } else {
-                    $usuario->setCidade($dados->id_cidade);
-                }
+                $usuario->setImagem($dados->imagem);                
+                $usuario->setCidade($dados->cidade);                
                 $usuario->setBio($dados->bio);
                 $usuario->setAtivo($dados->ativo);
 

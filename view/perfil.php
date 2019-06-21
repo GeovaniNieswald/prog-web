@@ -51,7 +51,7 @@
                     <ul>  
                         <li> 
                             <a href="#" class="navbar-user">
-                                <img src="<?php echo ($_SESSION['imagem'] != null) ? DIRIMG.$_SESSION['imagem'].'.jpg' : DIRIMG.'user.svg'; ?>" class="navbar-user-icon img-redonda-pequena" alt="Imagem de perfil">
+                                <img src="<?php echo ($_SESSION['imagem'] != null) ? DIRIMG.$_SESSION['imagem'] : DIRIMG.'user.svg'; ?>" class="navbar-user-icon img-redonda-pequena" alt="Imagem de perfil">
                                 <?php echo $_SESSION['nome'] ?>
                             </a>
                             <ul id="subMenu">
@@ -75,7 +75,7 @@
                 <nav class="menu">  
                     <ul>  
                         <li>
-                            <a href="#" class="navbar-user"><img src="<?php echo ($_SESSION['imagem'] != null) ? DIRIMG.$_SESSION['imagem'].'.jpg' : DIRIMG.'user.svg'; ?>" class="navbar-user-icon img-redonda-pequena" alt="Imagem de perfil"></a>
+                            <a href="#" class="navbar-user"><img src="<?php echo ($_SESSION['imagem'] != null) ? DIRIMG.$_SESSION['imagem'] : DIRIMG.'user.svg'; ?>" class="navbar-user-icon img-redonda-pequena" alt="Imagem de perfil"></a>
                             <ul id="subMenuP">
                                 <li onmouseover="hover('perfil', 0)" onmouseout="hoverOut('perfil', 0)">
                                     <a href="<?php echo DIRPAGE.'perfil/'.$_SESSION['usuario']; ?>" class="navbar-user">
@@ -98,7 +98,7 @@
     <div class="row justify-content-center container-feed">
         <div class="col-12 col-lg p-2 bg-white text-center">
             <div class="mx-auto d-block">
-                <img src="<?php echo ($usuario->getImagem() != null) ? DIRIMG.$usuario->getImagem().'.jpg' : DIRIMG.'user.svg'; ?>" class="rounded-circle p-2 w-35" alt="Imagem de perfil">
+                <img src="<?php echo ($usuario->getImagem() != null) ? DIRIMG.$usuario->getImagem() : DIRIMG.'user.svg'; ?>" class="rounded-circle p-2 w-35" alt="Imagem de perfil">
                 <h4 class="p-2 font-weight-bold"><?php echo $usuario->getNome()." ".$usuario->getSobrenome(); ?> </h4>
             </div>
 
@@ -116,6 +116,10 @@
                     echo "  <input type='hidden' id='idAlvo' value='".$usuario->getId()."'>\n";
                     echo "  <input type='hidden' id='idUsuario' value='".$_SESSION['id']."'>\n";
                     echo "  <button type='button' id='seguir' class='".(($voceSegue) ? 'seguindo-botao' : 'seguir-botao')."'>".(($voceSegue) ? 'Seguindo' : 'Seguir')."</button>\n";
+                    echo "</div>\n";
+                } else {
+                    echo "<div class='d-block p-2 text-right'>\n";
+                    echo "  <button type='button' data-toggle='modal' data-target='#myModalEditar' class='login-botao'>Editar</button>\n";
                     echo "</div>\n";
                 }
             ?>
@@ -190,13 +194,94 @@
                 <button type="button" class="close mt-auto mb-auto ml-0 mr-0 p-0" data-dismiss="modal">&times;</button>
                 <h5 class="modal-title mt-auto mb-auto">Editar Publicação</h4>
             </div>
+
             <div class="modal-body">
                 <div id="editor-p"></div>
             </div>
-                <div class="modal-footer">
-                    <button type="button" id="salvar" class="login-botao">Salvar</button>
-                </div>
+
+            <div class="modal-footer">
+                <button type="button" id="salvar" class="login-botao">Salvar</button>
             </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade pl-1 pr-1" id="myModalEditar" role="dialog">
+    <div class="modal-dialog container-feed">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close mt-auto mb-auto ml-0 mr-0 p-0" data-dismiss="modal">&times;</button>
+                <h5 class="modal-title mt-auto mb-auto">Editar Perfil</h4>
+            </div>
+
+            <form id="formEditar" enctype="multipart/form-data" method="POST" action="<?php echo DIRPAGE.'controller/controllerPerfil'; ?>">
+                <div class="modal-body">
+                    <div class="row ml-0 mr-0 mb-4">
+                        <div class="image-upload p-2 m-auto mw-25 align-center">
+                            <label for="file-input" class="m-auto">
+                                <img id="imgPerfil" src="<?php echo ($usuario->getImagem() != null) ? DIRIMG.$usuario->getImagem() : DIRIMG.'user.svg'; ?>" class="rounded-circle w-100" alt="Imagem de perfil">
+                            </label>
+
+                            <input id="file-input" name="imagem" type="file">
+                        </div>
+                    </div>
+
+                    <div class="row ml-0 mr-0 mb-3">
+                        <div class="col-6 p-1">
+                            <p class="editar-campos m-0">Nome:</p> 
+                             
+                            <input class="login-dados w-100" type="text" name="nome" placeholder="Nome" value="<?php echo $usuario->getNome() ?>" required autofocus>
+                        </div>
+
+                        <div class="col-6 p-1">
+                            <p class="editar-campos m-0">Sobrenome:</p> 
+
+                            <input class="login-dados w-100" type="text" name="sobrenome" placeholder="Sobrenome" value="<?php echo $usuario->getSobrenome() ?>" required>
+                        </div>
+                    </div>
+
+                    <div class="row ml-0 mr-0 mb-3">
+                        <div class="col-6 p-1">
+                            <p class="editar-campos m-0">Nascimento:</p> 
+                             
+                            <input class="login-dados w-100" type="text" id="nascimento" name="nascimento" value="<?php echo $usuario->getNascimento() != null ? date("d/m/Y", strtotime($usuario->getNascimento())) : "" ?>">
+                        </div>
+
+                        <div class="col-6 p-1">
+                            <p class="editar-campos m-0">Sexo:</p> 
+                            
+                            <select class="login-dados w-100" name="sexo">
+                                <option value="">Selecione</option>
+                                <option value="M" <?php echo (($usuario->getSexo() == 'M') ? "selected" : "") ?>>Masculino</option>
+                                <option value="F" <?php echo (($usuario->getSexo() == 'F') ? "selected" : "") ?>>Feminino</option>
+                            </select>
+                        </div>                
+                    </div>
+
+                    <div class="row ml-0 mr-0 mb-3">
+                        <div class="col-6 p-1">
+                            <p class="editar-campos m-0">Celular:</p> 
+
+                            <input class="login-dados w-100" type="text" id="celular" name="celular" value="<?php echo $usuario->getCelular() ?>">
+                        </div>
+
+                        <div class="col-6 p-1">
+                            <p class="editar-campos m-0">Cidade:</p> 
+                            
+                            <input class="login-dados w-100" type="text" id="cidade" name="cidade" value="<?php echo $usuario->getCidade() ?>">
+                        </div>                
+                    </div>
+                    
+                    <div class="row ml-0 mr-0 mb-0">
+                        <textarea class="w-100" rows="5" name="bio" placeholder="Bio"><?php echo $usuario->getBio()?></textarea>
+                    </div>
+                </div>
+    
+                <div class="modal-footer">
+                    <input type="hidden" name="email" value="<?php echo $_SESSION['email']?>">
+                    <button type="submit" class="login-botao">Salvar</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
