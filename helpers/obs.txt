@@ -24,3 +24,8 @@ upload_tmp_dir    <- colocar um diretorio que o usuario tenha permissão (php.in
 
 remover ; do começo
 ex : upload_tmp_dir = /tmp
+
+
+------------------------------------
+
+Para cadastro de novo usuário é necessário adicionar um servidor de smtp
